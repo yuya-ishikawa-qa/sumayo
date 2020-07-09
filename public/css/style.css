@@ -1,0 +1,40 @@
+body{
+	margin: 0;
+}
+
+header div{
+	display: flex;
+	justify-content: space-between;
+}
+header img{
+	width:200px;
+}
+header ul{
+	width: 100vw;
+	overflow-x: scroll;
+}
+header ul li{
+	display: inline-block;
+	margin: 0 10px 0 0;
+}
+
+main#top img{
+	width: 100%;
+}
+
+main#top{
+	width: 100%;
+}
+main#top dl dd{
+	margin: 10px 0;
+	font-weight: bolder;
+}
+main#top dl dt{
+	display: flex;
+}
+main#top dl div.cont{
+	width: 80%;
+}
+main#top dl div.img{
+	width: 20%;
+}

@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/order_form', function () {
+    return view('order_form');
+});
+Route::get('/order_confirmation', function () {
+    return view('order_confirmation');
+});
+Route::get('/order_confirm', function () {
+    return view('order_confirm');
+});
