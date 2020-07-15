@@ -12,14 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 Route::get('/order_form', function () {
-    return view('order_form');
+	return view('order_form');
 });
 Route::get('/order_confirmation', function () {
-    return view('order_confirmation');
+	return view('order_confirmation');
 });
 Route::get('/order_confirm', function () {
-    return view('order_confirm');
+	return view('order_confirm');
+});
+Route::get('/order_list', function () {
+	return view('order_list');
+});
+Route::get('/order_detail', function () {
+	return view('order_detail');
+});
+Route::get('/order_edit', function () {
+	return view('order_edit');
 });

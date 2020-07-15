@@ -2,39 +2,119 @@ body{
 	margin: 0;
 }
 
-header div{
-	display: flex;
-	justify-content: space-between;
-}
-header img{
-	width:200px;
-}
-header ul{
-	width: 100vw;
-	overflow-x: scroll;
-}
-header ul li{
-	display: inline-block;
-	margin: 0 10px 0 0;
-}
-
-main#top img{
+/*注文情報入力画面・注文情報確認画面・注文情報詳細画面・注文情報編集画面*/
+main.info-area{
 	width: 100%;
+	padding: 0 5px;
 }
-
-main#top{
-	width: 100%;
-}
-main#top dl dd{
-	margin: 10px 0;
-	font-weight: bolder;
-}
-main#top dl dt{
+main.info-area div.item-area > div{
 	display: flex;
+	width: 100%;
+	align-items: center;
+	text-align: left;
 }
-main#top dl div.cont{
-	width: 80%;
-}
-main#top dl div.img{
+main.info-area div.item-area > div.item-list > div.img{
 	width: 20%;
 }
+main.info-area div.item-area > div.item-list > div.img > div{
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+}
+main.info-area div.item-area > div.item-list > div.img > div > img{
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+main.info-area div.item-area > div.item-list > div.title{
+	width: 30%;
+}
+main.info-area div.item-area > div.item-list > div.price{
+	width: 20%;
+}
+main.info-area div.item-area > div.item-list > div.quantity{
+	width: 10%;
+}
+main.info-area div.item-area > div.item-list > div.sub-total{
+	width: 20%;
+}
+main.info-area div.item-area > dl{
+	display: flex;
+	width: 80%;
+	margin: 50px 0 50px auto;
+	flex-wrap: wrap;
+}
+main.info-area div.item-area > dl > dt{
+	width: 50%;
+	text-align: left
+}
+main.info-area div.item-area > dl > dd{
+	width: 50%;
+	text-align: left;
+}
+
+main.info-area div.form-area{
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	text-align: left;
+}
+main.info-area div.form-area > div{
+	width: 100%;
+	padding: 0 20px 0 0;
+}
+main.info-area div.form-area > div > dl{
+	display: flex;
+	width: 100%;
+}
+main.info-area div.form-area > div > dl > dt{
+	width: 80px;
+}
+main.info-area div.form-area > div > dl > dt{
+	width: 120px;
+}
+main.info-area div.form-area > div > dl > dd{
+	width: calc(100% - 120px);
+}
+
+@media (min-width:500px) {
+	main.info-area div.form-area > div.half{
+		width: 50%;
+	}
+}
+
+/*注文情報入力画面*/
+main.confirm{
+	width: 100%;
+	padding: 0 5px;
+	text-align: right;
+}
+main.confirm > p{
+	width: 80%;
+	margin: 50px auto;
+	text-align: left;
+}
+
+/*予約一覧画面*/
+main.order-list{
+	width: 100%;
+	padding: 0 5px;
+	text-align: right;
+	box-sizing: border-box;
+}
+main.order-list div.order-area > div.order-item{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	text-align: left;
+}
+main.order-list div.order-area > div.order-item > div.time{
+	width: 20%;
+}
+main.order-list div.order-area > div.order-item > div.content{
+	width: 60%;
+}
+main.order-list div.order-area > div.order-item > div.operation{
+	width: 20%;
+}
+

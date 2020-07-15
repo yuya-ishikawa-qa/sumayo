@@ -18,11 +18,22 @@
 		</header>
 		<main class="info-area">
 			<div class="text-center">
-				<h3 class="login_title text-left d-inline-block mt-5">お客様情報入力</h3>
+				<h3 class="login_title text-left d-inline-block mt-5">情報編集</h3>
 			</div>
 
 			<form action="{!! url('/order_confirmation'); !!}">
 				<div class="form-area">
+
+					<div>
+						<dl>
+							<dt>ステータス</dt>
+							<dd><select class="custom-select my-1 mr-sm-2 col-sm-10 " id="">
+								<option value="1">注文</option>
+								<option value="2">受渡済</option>
+								</select>
+							</dd>
+						</dl>
+					</div>
 
 					<div>
 						<dl>
@@ -73,15 +84,15 @@
 
 					<div>
 						<dl>
-						<dt><label for="tel">電話番号</label></dt>
+							<dt><label for="tel">電話番号</label></dt>
 							<dd><input class="form-control" name="tel" type="tel" value="" id="tel" required></dd>
 						</dl>
 					</div>
 
 					<div>
 						<dl>
-						<dt><label for="mail">メールアドレス</label></dt>
-						<dd><input class="form-control" name="mail" type="mail" value="" id="mail" required></dd>
+							<dt><label for="mail">メールアドレス</label></dt>
+							<dd><input class="form-control" name="mail" type="mail" value="" id="mail" required></dd>
 						</dl>
 					</div>
 
