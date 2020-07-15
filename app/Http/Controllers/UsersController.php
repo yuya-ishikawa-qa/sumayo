@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -13,7 +14,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $users = User::orderBy('id', 'desc')->paginate(5);
+
+        return view('users.index', ['users' => $users]);
     }
 
     /**
@@ -54,9 +57,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('users.edit');
+        $user = User::findOrFail($id);
+        return view('users.edit', ['user' => $user ]);
     }
 
     /**
@@ -68,7 +72,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

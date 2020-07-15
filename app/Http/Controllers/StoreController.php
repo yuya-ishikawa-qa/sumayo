@@ -43,9 +43,19 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showStoreHoliday()
     {
-        //
+        return view('store.holiday');
+    }
+
+    public function showStoreTime()
+    {
+        return view('store.time');
+    }
+
+    public function showStoreInfo()
+    {
+        return view('store.store_info');
     }
 
     /**
@@ -54,29 +64,34 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit_time()
+    public function editTime()
     {
         return view('store.edit_time');
     }
 
-    public function edit_holiday()
+    public function editHoliday()
     {
         return view('store.edit_holiday');
     }
 
-    public function edit_category()
+    public function editCategory()
     {
         return view('store.edit_category');
     }
 
-    public function edit_store_info()
+    public function editStoreInfo()
     {
         return view('store.edit_store_info');
     }
 
-    public function edit_store_image()
+    public function editStoreLogo()
     {
-        return view('store.edit_store_image');
+        return view('store.edit_store_logo');
+    }
+
+    public function editStoreImages()
+    {
+        return view('store.edit_store_images');
     }
 
     /**

@@ -17,17 +17,40 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route::get('/login', 'Auth\LoginController@loginForm')->name('login');
+// Route::post('/login', 'Auth\LoginController@login')->name('login.post');
+// Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('signup');
+// Route::post('register', 'Auth\RegisterController@register')->name('signup.post');
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/store', 'StoreController@index')->name('store.top');
-Route::get('/store/edit_time', 'StoreController@edit_time');
-Route::get('/store/edit_holiday', 'StoreController@edit_holiday');
-Route::get('/store/edit_category', 'StoreController@edit_category');
-Route::get('/store/edit_store_info', 'StoreController@edit_store_info');
-Route::get('/store/edit_store_image', 'StoreController@edit_store_image');
+Route::group(['middleware' => 'auth'], function(){
+    
+    // 店舗関係処理
+    // TOP画面表示
+    Route::get('/store', 'StoreController@index')->name('store.top');
 
+    // 各詳細画面表示
+    Route::get('/store/holiday', 'StoreController@showStoreHoliday');
+    Route::get('/store/time', 'StoreController@showStoreTime');
+    Route::get('/store/info', 'StoreController@showStoreInfo');
 
-Route::get('/users', 'UsersController@index');
-Route::get('/users/1/edit', 'UsersController@edit');
+    // 各編集画面表示
+    Route::get('/store/edit/time', 'StoreController@editTime');
+    Route::get('/store/edit/holiday', 'StoreController@editHoliday');
+    Route::get('/store/edit/category', 'StoreController@editCategory');
+    Route::get('/store/edit/info', 'StoreController@editStoreInfo');
+    Route::get('/store/edit/logo', 'StoreController@editStoreLogo');
+    Route::get('/store/edit/images', 'StoreController@editStoreImages');
+
+    // ユーザー関係処理
+    Route::get('/users', 'UsersController@index')->name('users.top');
+    Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
+    Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
+    
+});
 
 

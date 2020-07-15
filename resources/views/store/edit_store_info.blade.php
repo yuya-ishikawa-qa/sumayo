@@ -95,7 +95,7 @@
     <!-- ボタン -->
     <div class="col text-center mt-3">
       <input type="submit" value="更新" class="btn btn-primary mr-3">
-      <a href="/store" class="btn btn-dark">戻る</a>
+      <a href="/store/info" class="btn btn-dark">戻る</a>
     </div>
   </form>
 

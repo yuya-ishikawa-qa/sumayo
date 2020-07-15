@@ -61,8 +61,8 @@
 
     <!-- 編集ボタン -->
     <div class="col text-center mt-3">
-      <input type="submit" value="営業時間更新" class="btn btn-primary">
-      <a href="/store" class="btn btn-dark">戻る</a>
+      <input type="submit" value="更新" class="btn btn-primary">
+      <a href="/store" class="btn btn-secondary">戻る</a>
     </div>
   </form>
 </div>
