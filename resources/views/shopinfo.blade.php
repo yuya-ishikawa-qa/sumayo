@@ -23,9 +23,8 @@
 
 
     <body>
-            ヘッダーあとで追加＠include("commons.header")
-
-戻るボタン？
+        @include('commons.header')
+        <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
 {{--  グーグル地図？  --}}
         {{--  <div class="container">
@@ -58,6 +57,6 @@
             
 
 
-
+            @include('commons.footer')
     </body>
 </html>

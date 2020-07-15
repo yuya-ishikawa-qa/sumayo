@@ -32,9 +32,24 @@ Route::get('/shopinfo', function () {
     return view('shopinfo');
 });
 
-// 店舗情報
+// 商品一覧(お店側)
 Route::get('/items', function () {
     return view('items');
+});
+
+// 商品詳細(お店側)
+Route::get('/items/detail', function () {
+    return view('item_detail');
+});
+
+// 商品編集(お店側)
+Route::get('/items/detail/edit', function () {
+    return view('item_edit');
+});
+
+// 商品登録(お店側)
+Route::get('/items/register', function () {
+    return view('item_register');
 });
 
 

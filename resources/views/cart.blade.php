@@ -23,90 +23,76 @@
 
 
     <body>
-            ヘッダーあとで追加＠include("commons.header")
+    @include('commons.header')
+        <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
-戻るボタン？ 
-
-<div class="container">
-<h1>カートの中身</h1>
-    <div class="card mb-3">
-        <div class="row no-gutters">
-            <div class="col-3">
-            <img src="image/food_image/1678376_s.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-9">
-            <div class="card-body">
-                <table>
-                    <tr>
-                    <td><p class="product-title">ナポリタン</p></td>
-                    <td align="right"><p class="sale-price">&yen;700</p></td>
-                    </tr>
-                    <form action="" method="post"><table border="0" cellspacing="4" cellpadding="0">
-                    <tr>
-                    <td>数量<input name="cart" type="text" value="1" size="5"></td>
-                    <td><input type="submit" value="変更"></td>
-                    <td><input type="submit" value="削除"></td>
-                    </tr>
-                    </table>
-                    <input type="hidden" name="cart" value="1">
-                    </form>
-                </table>
-            </div>
-            </div>
-        </div>
-    </div>
-    <div class="card mb-3">
-        <div class="row no-gutters">
-            <div class="col-3">
-                <img src="image/food_image/karaage.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-9">
-                <div class="card-body">
-                    <table>
-                        <tr>
-                        <td><p class="product-title">唐揚げ</p></td>
-                        <td align="right"><p class="sale-price">&yen;700</p></td>
-                        </tr>
-                        <form action="" method="post"><table border="0" cellspacing="4" cellpadding="0">
-                        <tr>
-                        <td>数量<input name="cart" type="text" value="1" size="5"></td>
-                        <td><input type="submit" value="変更"></td>
-                        <td><input type="submit" value="削除"></td>
-                        </tr>
+        <div class="container">
+        <h1>カートの中身</h1>
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-3">
+                    <img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-9">
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                            <td><p class="product-title">ナポリタン</p></td>
+                            <td align="right"><p class="sale-price">&yen;700</p></td>
+                            </tr>
+                            <form action="" method="post"><table border="0" cellspacing="4" cellpadding="0">
+                            <tr>
+                            <td>数量<input name="cart" type="text" value="1" size="5"></td>
+                            <td><input type="submit" value="変更"></td>
+                            <td><input type="submit" value="削除"></td>
+                            </tr>
+                            </table>
+                            <input type="hidden" name="cart" value="1">
+                            </form>
                         </table>
-                        <input type="hidden" name="cart" value="1">
-                        </form>
-                    </table>
+                    </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="card mt-0 mb-0">
-        <div class="row no-gutters">
-            <div class="col-3">
-            </div>
-            <div class="col-9">
-                <div class="card-body" style="text-align:right;">
-                <p class="total-sales-price">合計金額</p>
-                <p class="total-sales-price">&yen;00000</p>
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-3">
+                        <img src="{{ asset('storage/image/food_image/karaage.jpg') }}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-9">
+                        <div class="card-body">
+                            <table>
+                                <tr>
+                                <td><p class="product-title">唐揚げ</p></td>
+                                <td align="right"><p class="sale-price">&yen;700</p></td>
+                                </tr>
+                                <form action="" method="post"><table border="0" cellspacing="4" cellpadding="0">
+                                <tr>
+                                <td>数量<input name="cart" type="text" value="1" size="5"></td>
+                                <td><input type="submit" value="変更"></td>
+                                <td><input type="submit" value="削除"></td>
+                                </tr>
+                                </table>
+                                <input type="hidden" name="cart" value="1">
+                                </form>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-      
-
-    
-
-
-
-
-
-
-
-
-
+            <div class="card mt-0 mb-0">
+                <div class="row no-gutters">
+                    <div class="col-3">
+                    </div>
+                    <div class="col-9">
+                        <div class="card-body" style="text-align:right;">
+                        <p class="total-sales-price">合計金額</p>
+                        <p class="total-sales-price">&yen;00000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 {{--  注文に進む  --}}
@@ -116,12 +102,13 @@
 
 {{--  formとsubmitでセッションに商品情報追加すること  --}}
 
-</div>
+        </div>
 
 
 
 
-            フッターあとで追加＠include("commons.footer")
+    @include('commons.footer')
+
 
 {{--  数量変更の設定  --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
