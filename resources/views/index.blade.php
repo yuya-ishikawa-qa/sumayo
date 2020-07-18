@@ -207,7 +207,7 @@
         </div>
     </div>
             
-<!-- @include('commons.shop_footer') -->
+@include('commons.shop_footer')
 
 
 
