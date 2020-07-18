@@ -50,6 +50,7 @@ Route::get('/items/detail/edit', function () {
 // 商品登録(お店側)
 Route::get('/items/register', function () {
     return view('item_register');
+});
 
 Auth::routes();
 
