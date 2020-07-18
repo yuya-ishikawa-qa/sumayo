@@ -23,7 +23,7 @@
 
 
     <body>
-        @include('commons.header')
+        @include('commons.shop_header')
         <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
 {{--  グーグル地図？  --}}
@@ -57,6 +57,6 @@
             
 
 
-            @include('commons.footer')
+            @include('commons.shop_footer')
     </body>
 </html>

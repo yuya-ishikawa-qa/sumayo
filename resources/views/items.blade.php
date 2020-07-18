@@ -51,70 +51,70 @@
         </thead>
         <tbody>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td><a href="{{ url('/items/detail')}}">詳細</a></td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>
             <td>詳細</td>
             </tr>
             <tr>
-            <th scope="row"><img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
+            <th scope="row"><img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="img-fluid" alt="Responsive image"></th>
             <td>ナポリタン</td>
             <td>&yen;700</td>
             <td>販売中</td>

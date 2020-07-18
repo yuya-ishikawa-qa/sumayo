@@ -23,14 +23,14 @@
 
 
     <body>
-       @include('commons.header')
+       @include('commons.shop_header')
         <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
 {{--  商品画像  --}}
         <div class="container">
             <div class="row">
             
-                <img class="col-10 mb-2 img-fluid mx-auto d-block" src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt=""></a>
+                <img class="col-10 mb-2 img-fluid mx-auto d-block" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
 
                 <div class="product-title col-10"><h1>ナポリタン</h1></div>
                 <div class="product-description col-8"><p>昔懐かしのナポリタン</p></div>
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-       @include('commons.footer')
+       @include('commons.shop_footer')
 
 
 
