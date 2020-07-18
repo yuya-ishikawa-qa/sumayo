@@ -23,7 +23,7 @@
 
 
     <body>
-    @include('commons.header')
+    @include('commons.shop_header')
         <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
         <div class="container">
@@ -31,7 +31,7 @@
             <div class="card mb-3">
                 <div class="row no-gutters">
                     <div class="col-3">
-                    <img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" class="card-img" alt="...">
+                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="card-img" alt="...">
                     </div>
                     <div class="col-9">
                     <div class="card-body">
@@ -57,7 +57,7 @@
             <div class="card mb-3">
                 <div class="row no-gutters">
                     <div class="col-3">
-                        <img src="{{ asset('storage/image/food_image/karaage.jpg') }}" class="card-img" alt="...">
+                        <img src="{{ asset('image/food_image/karaage.jpg') }}" class="card-img" alt="...">
                     </div>
                     <div class="col-9">
                         <div class="card-body">
@@ -107,7 +107,7 @@
 
 
 
-    @include('commons.footer')
+    @include('commons.shop_footer')
 
 
 {{--  数量変更の設定  --}}

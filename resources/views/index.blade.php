@@ -73,7 +73,7 @@
        
     </head>
     <body>
-       @include('commons.header')
+       @include('commons.shop_header')
 
         <div class="container">
 {{--  トップ画面スライドショー  --}}
@@ -85,13 +85,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="{{ asset('storage/image/food_image/3183082_s.jpg') }}" alt="First slide" id="top_image">
+                        <img class="d-block w-100" src="{{ asset('image/food_image/3183082_s.jpg') }}" alt="First slide" id="top_image">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="{{ asset('storage/image/food_image/1678376_s.jpg') }}"  alt="Second slide" id="top_image">
+                        <img class="d-block w-100" src="{{ asset('image/food_image/1678376_s.jpg') }}"  alt="Second slide" id="top_image">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="{{ asset('storage/image/food_image/2200690_s.jpg') }}"  alt="Third slide" id="top_image">
+                        <img class="d-block w-100" src="{{ asset('image/food_image/2200690_s.jpg') }}"  alt="Third slide" id="top_image">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -133,7 +133,7 @@
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
                                     <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt=""></a>``
+                                        <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">ナポリタン</p>
                                     <p class="sale-price mb-0">&yen;700</p>
                                 </div>
@@ -143,7 +143,7 @@
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
                                     <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt=""></a>
+                                        <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">ナポリタン</p>
                                     <p class="sale-price mb-0">&yen;700</p>
                                 </div>
@@ -153,7 +153,7 @@
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
                                     <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt=""></a>
+                                        <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">ナポリタン</p>
                                     <p class="sale-price mb-0">&yen;700</p>
                                 </div>
@@ -163,7 +163,7 @@
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
                                     <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt=""></a>
+                                        <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">ナポリタン</p>
                                     <p class="sale-price mb-0">&yen;700</p>
                                 </div>
@@ -177,7 +177,7 @@
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
                                     <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('storage/image/food_image/karaage.jpg') }}" alt=""></a>
+                                        <img class="mb-2" src="{{ asset('image/food_image/karaage.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">唐揚げ</p>
                                     <p class="sale-price mb-0">&yen;700</p>
                                 </div>
@@ -187,7 +187,7 @@
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
                                     <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('storage/image/food_image/karaage.jpg') }}" alt=""></a>
+                                        <img class="mb-2" src="{{ asset('image/food_image/karaage.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">唐揚げ</p>
                                     <p class="sale-price mb-0">&yen;700</p>
                                 </div>
@@ -197,7 +197,7 @@
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
                                     <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('storage/image/food_image/karaage.jpg') }}" alt=""></a>
+                                        <img class="mb-2" src="{{ asset('image/food_image/karaage.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">唐揚げ</p>
                                     <p class="sale-price mb-0">&yen;700</p>
                                 </div>
@@ -207,12 +207,7 @@
         </div>
     </div>
             
-
-
-
-
-        
-    @include('commons.footer')
+@include('commons.shop_footer')
 
 
 
