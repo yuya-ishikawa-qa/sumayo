@@ -46,15 +46,15 @@
             <h2 class="text-center mt-2">商品詳細</h2>
             <div class="row">
                 <div class="col-4">
-                    <img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt="">
+                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="">
                     <p class="text-center">写真1</p>
                 </div>
                 <div class="col-4">
-                    <img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt="">
+                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="">
                     <p class="text-center">写真2</p>
                 </div>
                 <div class="col-4">
-                    <img src="{{ asset('storage/image/food_image/1678376_s.jpg') }}" alt="">
+                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="">
                     <p class="text-center">写真3</p>
                 </div>
             </div>
