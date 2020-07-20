@@ -18,6 +18,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('/css/store.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -62,5 +64,12 @@
         </main>
 
     </div>
+
+    @if (auth::check())
+        <div class="nav-bar">
+            @include('commons.footer')
+        </div>
+    @endif
+        
 </body>
 </html>
