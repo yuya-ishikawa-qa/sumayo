@@ -129,17 +129,7 @@
       </div>
     </div>
   </div>
-
-
-
-
 </div>
-
-<div class="nav-bar">
-  @include('commons.footer')
-</div>
-
-
 @endsection
 
 

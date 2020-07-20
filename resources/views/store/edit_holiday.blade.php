@@ -72,9 +72,4 @@
   
 </div>
 
-<div class="navbar">
-  @include('commons.footer')
-</div>
-
-
 @endsection

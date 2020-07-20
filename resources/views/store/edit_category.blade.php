@@ -49,6 +49,4 @@
   </form>
 </div>
 
-@include('commons.footer')
-
 @endsection
