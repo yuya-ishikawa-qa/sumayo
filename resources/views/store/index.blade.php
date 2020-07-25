@@ -17,7 +17,7 @@
         <div class="card-body">
           <h6 class="card-title">注文予約一覧</h6>
           <p class="card-text"></p>
-          <a href="#" class="btn btn-primary">表示</a>
+          <a href="{{ url('/order_list')}}" class="btn btn-primary">表示</a>
         </div>
       </div>
       
@@ -25,7 +25,7 @@
         <div class="card-body">
           <h6 class="card-title">過去注文履歴</h6>
           <p class="card-text"></p>
-          <a href="#" class="btn btn-primary">表示</a>
+          <a href="{{ url('/order_list')}}" class="btn btn-primary">表示</a>
         </div>
       </div>
   </div>
@@ -40,7 +40,7 @@
         <div class="card-body">
           <h6 class="card-title">商品一覧</h6>
           <p class="card-text"></p>
-          <a href="#" class="btn btn-primary">表示</a>
+          <a href="{{ url('/items')}}" class="btn btn-primary">表示</a>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
         <div class="card-body">
           <h6 class="card-title">商品登録</h6>
           <p class="card-text"></p>
-          <a href="#" class="btn btn-primary">登録画面へ</a>
+          <a href="{{ url('/items/register')}}" class="btn btn-primary">登録画面へ</a>
         </div>
       </div>
   </div>
