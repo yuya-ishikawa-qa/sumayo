@@ -13,7 +13,7 @@
   </div>
 
   <div class="card-group">
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">注文予約一覧</h6>
         <p class="card-text"></p>
@@ -21,7 +21,7 @@
       </div>
     </div>
     
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">過去注文履歴</h6>
         <p class="card-text"></p>
@@ -35,7 +35,7 @@
   </div>
 
   <div class="card-group">
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">商品一覧</h6>
         <p class="card-text"></p>
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="card border-primary text-center" class="pl-5" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">商品登録</h6>
         <p class="card-text"></p>
@@ -57,7 +57,7 @@
   </div>
 
   <div class="card-group">
-    <div class="card border-primary text-center" class="pl-5" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">店舗情報</h6>
         <p class="card-text"></p>
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">店舗営業時間</h6>
         <p class="card-text"></p>
@@ -75,7 +75,7 @@
   </div>
 
   <div class="card-group">
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">休日カレンダー</h6>
         <p class="card-text"></p>
@@ -89,7 +89,7 @@
   </div>
 
   <div class="card-group">
-    <div class="card border-primary text-center" class="pl-5" style="width: 10rem;">
+    <div class="card border-primary text-center" class="pl-5">
       <div class="card-body">
         <h6 class="card-title">スタッフ一覧</h6>
         <p class="card-text"></p>
@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">新規スタッフ登録</h6>
         <p class="card-text"></p>
@@ -111,7 +111,7 @@
   </div>
 
   <div class="card-group">
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">お店ロゴ画像</h6>
         <p class="card-text"></p>
@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    <div class="card border-primary text-center" style="width: 10rem;">
+    <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">オススメ商品画像</h6>
         <p class="card-text"></p>
