@@ -1,46 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>sumayo</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        {{--  Bootstrap  --}}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-
-        <!-- ＃リンクのスムーズスクロール -->
-        <script>
-        $(function(){
-            // #で始まるリンクをクリックしたら実行されます
-            $('a[href^="#"]').click(function() {
-            // スクロールの速度
-            var speed = 400; // ミリ秒で記述
-            var href= $(this).attr("href");
-            var target = $(href == "#" || href == "" ? 'html' : href);
-            var position = target.offset().top;
-            $('body,html').animate({scrollTop:position}, speed, 'swing');
-            return false;
-            });
-        });
-        </script>
-
-       
-        <style>
-        img{
-            max-width: 100%;
-            height: auto;   
-        }
-        </style>
-       
-    </head>
-    <body>
-        ヘッダーあとで追加＠include("commons.header")
-
+@extends('layouts.app')
+    
+@section('content')
 
         <div class="container">
 
@@ -48,15 +8,15 @@
 
             <div class="row">
                 <div class="col-4">
-                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="">
+                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="" id=item_edit_image>
                     <p class="text-center">写真1</p>
                 </div>
                 <div class="col-4">
-                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="">
+                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="" id=item_edit_image>
                     <p class="text-center">写真2</p>
                 </div>
                 <div class="col-4">
-                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="">
+                    <img src="{{ asset('image/food_image/1678376_s.jpg') }}" alt="" id=item_edit_image>
                     <p class="text-center">写真3</p>
                 </div>
             </div>
@@ -108,20 +68,5 @@
 
             </div>
         </div>
-    </div>
-
-
-            
-
-
-
-
         
-        フッターあとで追加＠include("commons.footer")
-
-
-
-
-
-    </body>
-</html>
+@endsection
