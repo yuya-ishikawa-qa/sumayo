@@ -1,81 +1,8 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('customer_layouts.customer_layouts')
+    
+@section('content')
 
-        <title>sumayo</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        {{--  Bootstrap  --}}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-
-        <!-- ＃リンクのスムーズスクロール -->
-        <script>
-        $(function(){
-            // #で始まるリンクをクリックしたら実行されます
-            $('a[href^="#"]').click(function() {
-            // スクロールの速度
-            var speed = 400; // ミリ秒で記述
-            var href= $(this).attr("href");
-            var target = $(href == "#" || href == "" ? 'html' : href);
-            var position = target.offset().top;
-            $('body,html').animate({scrollTop:position}, speed, 'swing');
-            return false;
-            });
-        });
-        </script>
-
-{{--  画像サイズ  --}}
-        <style>
-        img{
-            max-width: 100%;
-            height: auto;   
-        }
-        #top_image{
-            max-width: 345px;
-            height: 253px;   
-        }
-
-        ul{
-        display: table;
-        margin: 0 auto;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-        }
-        ul li{
-        display: table-cell;
-        min-width: 50px;
-        }
-        ul li a{
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-        text-decoration: none;
-        color: #555;
-        font-weight: bold;
-        }
-        ul li.{
-        background-color: #DEEBF7;
-        }
-        .category ul li a{
-        color: #555;
-        }
-        ul li:hover{
-        background-color: #FFF2CC;
-        }
-
-        </style>
-       
-    </head>
-    <body>
-       @include('commons.shop_header')
-
-        <div class="container">
+    <div class="container">
 {{--  トップ画面スライドショー  --}}
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -132,7 +59,17 @@
                         <div class="col-6 col-sm-4 col-lg-3">
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
-                                    <a class="product-thumbnail d-block" href="single-product.html">
+                                    <a class="product-thumbnail d-block" href="{{ url('/detail')}}">
+                                        <img  class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
+                                    <p class="product-title mb-0">ナポリタン</p>
+                                    <p class="sale-price mb-0">&yen;700</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6 col-sm-4 col-lg-3">
+                            <a href="{{ url('/detail')}}" class="stretched-link">
+                                <div class="card-body p-2">
+                                    <a class="product-thumbnail d-block" href="{{ url('/detail')}}">
                                         <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">ナポリタン</p>
                                     <p class="sale-price mb-0">&yen;700</p>
@@ -142,7 +79,7 @@
                         <div class="col-6 col-sm-4 col-lg-3">
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
-                                    <a class="product-thumbnail d-block" href="single-product.html">
+                                    <a class="product-thumbnail d-block" href="{{ url('/detail')}}">
                                         <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">ナポリタン</p>
                                     <p class="sale-price mb-0">&yen;700</p>
@@ -152,17 +89,7 @@
                         <div class="col-6 col-sm-4 col-lg-3">
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
-                                    <a class="product-thumbnail d-block" href="single-product.html">
-                                        <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
-                                    <p class="product-title mb-0">ナポリタン</p>
-                                    <p class="sale-price mb-0">&yen;700</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-lg-3">
-                            <a href="{{ url('/detail')}}" class="stretched-link">
-                                <div class="card-body p-2">
-                                    <a class="product-thumbnail d-block" href="single-product.html">
+                                    <a class="product-thumbnail d-block" href="{{ url('/detail')}}">
                                         <img class="mb-2" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">ナポリタン</p>
                                     <p class="sale-price mb-0">&yen;700</p>
@@ -176,7 +103,7 @@
                         <div class="col-6 col-sm-4 col-lg-3" id="2">
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
-                                    <a class="product-thumbnail d-block" href="single-product.html">
+                                    <a class="product-thumbnail d-block" href="{{ url('/detail')}}">
                                         <img class="mb-2" src="{{ asset('image/food_image/karaage.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">唐揚げ</p>
                                     <p class="sale-price mb-0">&yen;700</p>
@@ -186,7 +113,7 @@
                         <div class="col-6 col-sm-4 col-lg-3">
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
-                                    <a class="product-thumbnail d-block" href="single-product.html">
+                                    <a class="product-thumbnail d-block" href="{{ url('/detail')}}">
                                         <img class="mb-2" src="{{ asset('image/food_image/karaage.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">唐揚げ</p>
                                     <p class="sale-price mb-0">&yen;700</p>
@@ -196,7 +123,7 @@
                         <div class="col-6 col-sm-4 col-lg-3" >
                             <a href="{{ url('/detail')}}" class="stretched-link">
                                 <div class="card-body p-2">
-                                    <a class="product-thumbnail d-block" href="single-product.html">
+                                    <a class="product-thumbnail d-block" href="{{ url('/detail')}}">
                                         <img class="mb-2" src="{{ asset('image/food_image/karaage.jpg') }}" alt=""></a>
                                     <p class="product-title mb-0">唐揚げ</p>
                                     <p class="sale-price mb-0">&yen;700</p>
@@ -204,17 +131,13 @@
                             </a>
                         </div>
 
-        </div>
+            </div>
     </div>
+
+{{--  スライドショー用  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+{{--  カテゴリー移動  --}}
+<script src="{{ asset('js/smooth_link.js') }}" defer></script>
             
-@include('commons.shop_footer')
-
-
-
-{{--  トップ画面のスライドショー用  --}}
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    </body>
-</html>
+@endsection

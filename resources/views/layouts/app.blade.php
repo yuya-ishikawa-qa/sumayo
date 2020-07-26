@@ -62,6 +62,7 @@
         <main class="mt-4 mb-3">
             @yield('content')
         </main>
+
     </div>
 
     @if (auth::check())

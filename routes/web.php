@@ -107,3 +107,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
     
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
