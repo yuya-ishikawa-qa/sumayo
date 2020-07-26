@@ -1,35 +1,13 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('customer_layouts.customer_layouts')
+    
+@section('content')
 
-        <title>sumayo</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        {{--  Bootstrap  --}}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    </head>
-        <style>
-        a {
-           text-decoration: none;
-            color: #555;
-          }
-        </style>
-
-
-
-    <body>
-       @include('commons.shop_header')
+{{--  この戻るボタンはあとで綺麗にする  --}}
         <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
 {{--  商品画像  --}}
         <div class="container">
             <div class="row">
-            
                 <img class="col-10 mb-2 img-fluid mx-auto d-block" src="{{ asset('image/food_image/1678376_s.jpg') }}" alt=""></a>
 
                 <div class="product-title col-10"><h1>ナポリタン</h1></div>
@@ -39,13 +17,9 @@
 
 {{--  数量指定  --}}
                 <div class="col-12" align="center" id="count">
-
-
-                    
                     <button class="minus">－</button>
                     <input type="text" name="quantity" value="0" readonly class="number">
                     <button class="plus">＋</button>
-
                	</div>
 
 
@@ -61,16 +35,8 @@
                 </div>
 
 {{--  formとsubmitでセッションに商品情報追加すること  --}}
-
             </div>
         </div>
-
-       @include('commons.shop_footer')
-
-
-
-
-
 
 {{--  数量変更の設定  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -146,5 +112,6 @@
         });
     });
     </script>
-    </body>
-</html>
+
+
+@endsection
