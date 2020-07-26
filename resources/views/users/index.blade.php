@@ -19,8 +19,8 @@
     </thead>
     
     <tbody>
+    @foreach ($users as $key => $user)
       <tr>
-      @foreach ($users as $key => $user)
         <th scope="row">
           <div class="d-flex align-items-center">
             {{ $user->id }}
@@ -37,15 +37,16 @@
 
         <!-- 店長は削除ボタン無し -->
         <td>
+        @if( $user->id !== 1)
           <form action="/users/delete" method="post">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <button type="submit" class="btn btn-danger">削除</button>
           </form>
-          
+        @endif  
         </td>
-      @endforeach
       </tr>
+      @endforeach
     </tbody>
   </table>
 
@@ -54,7 +55,5 @@
   </div>
 
 </div>
-
-@include('commons.footer')
 
 @endsection

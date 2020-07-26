@@ -14,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->paginate(5);
+        $users = User::orderBy('id', 'asc')->paginate(5);
 
         return view('users.index', ['users' => $users]);
     }
@@ -26,7 +26,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -37,7 +37,34 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate_rules = [
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+
+        $validate_messages = [
+
+            'name.required'=>'名前を入力してください',
+            'name.max'=>'名前は50文字以内で入力してください',
+
+            'email.required'=>'メールアドレスを入力してください',
+            'email.max'=>'メールアドレスは255文字以内で入力してください',
+            'email.unique'=>'そのメールアドレスは既に登録されています',
+            
+            'password.required'=>'パスワードを入力してください',
+            'password.min'=>'パスワードは8文字以上の半角英数字で入力してください',
+            'password.confirmed'=>'パスワードは同じものを入力してください',
+            
+            ];
+        
+        $params = $this->validate($request, $validate_rules, $validate_messages);
+
+        User::create($params);
+
+        $users = User::orderBy('id', 'asc')->paginate(5);
+
+        return view('users.index', ['users' => $users]);
     }
 
     /**
