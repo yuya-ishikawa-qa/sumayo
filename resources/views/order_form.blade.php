@@ -1,8 +1,8 @@
 @extends('customer_layouts.customer_layouts')
-    
+
 @section('content')
 
-        <main class="info-area">
+        <div class="info-area">
             <div class="text-center">
                 <h3 class="login_title text-left d-inline-block mt-5">お客様情報入力</h3>
             </div>

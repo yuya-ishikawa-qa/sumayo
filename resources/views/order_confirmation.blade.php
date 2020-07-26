@@ -1,8 +1,7 @@
 @extends('customer_layouts.customer_layouts')
-    
-@section('content')
 
-        <main class="info-area">
+@section('content')
+        <div class="info-area">
             <div class="text-center">
                 <h3 class="login_title text-left d-inline-block mt-5">入力情報確認</h3>
             </div>
@@ -106,5 +105,5 @@
             </div>
             <a href="{!! url('/order_confirm'); !!}"><button class="btn btn-primary" type="submit">注文する</button></a>
             <a href="{!! url('/order_form'); !!}"><button class="btn btn-primary" type="submit">戻る</button></a>
-        </main>
+        </div>
 @endsection
