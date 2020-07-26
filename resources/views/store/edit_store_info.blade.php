@@ -99,10 +99,6 @@
     </div>
   </form>
 
-  <div class="nav-bar">
-    @include('commons.footer')  
-  </div>
-
 </div>
 
 

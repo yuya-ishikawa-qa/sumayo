@@ -43,9 +43,6 @@
       <a class="btn btn-secondary text-center" href="/store">戻る</a>
     </div>
 
-    <div class="nav-bar">
-      @include('commons.footer')  
-    </div>
   </div>
 
 @endsection

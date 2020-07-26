@@ -40,6 +40,4 @@
     <a class="btn btn-secondary text-center"href="/store">戻る</a>
   </div>
 
-@include('commons.footer')
-
 @endsection
