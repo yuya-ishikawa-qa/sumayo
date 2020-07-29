@@ -14,38 +14,23 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            // $table->bigIncrements('id');
-            // ?$table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
-            // $table->tinyInteger('itemcategories');
-            // $table->string('item_name',128);
-            // $table->bigIncrements('itemcategories');
-            // $table->bigIncrements('itemcategories');
-
-
-// store_id
-// itemcategoriies
-// item_name
-// is_selling
-// itemcategory_id
-// stock_sunday
-// stock_monday
-// stock_tuesday
-// stock_wednesday
-// stock_thursday
-// stock_friday
-// stock_saturday
-// price
-// tax
-// image
-// updated_at
-// created_at
-
-
-
-
-
-
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->string('item_name',128);
+            $table->text('description');
+            $table->boolean('is_selling');
+            $table->tinyInteger('item_category_id');
+            $table->unsignedMediumInteger('price')->default(0);
+            $table->unsignedTinyInteger('tax')->default(10);
+            $table->unsignedTinyInteger('stock_sunday')->default(0);
+            $table->unsignedTinyInteger('stock_monday')->default(0);
+            $table->unsignedTinyInteger('stock_tuesday')->default(0);
+            $table->unsignedTinyInteger('stock_wednesday')->default(0);
+            $table->unsignedTinyInteger('stock_thursday')->default(0);
+            $table->unsignedTinyInteger('stock_friday')->default(0);
+            $table->unsignedTinyInteger('stock_saturday')->default(0);
+            $table->string('path');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 
