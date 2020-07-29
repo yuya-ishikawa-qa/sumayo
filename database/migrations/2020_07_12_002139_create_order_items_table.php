@@ -15,7 +15,15 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedTinyInteger('quantity');
+            $table->string('item_name');
+            $table->unsignedInteger('price');
+            $table->unsignedTinyInteger('tax');
+            $table->string('image');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

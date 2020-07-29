@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateOperationTimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('operation_times', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('store_id')->default(1);
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('is_owner')->default(0);
-            $table->rememberToken();
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->integer('serve_range_time');
+            $table->integer('capacity');
             $table->timestamps();
         });
     }
@@ -33,6 +31,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('operation_times');
     }
 }
+
+
