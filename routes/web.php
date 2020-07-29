@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+
+
 Route::get('/order_form', function () {
     return view('order_form');
 });
@@ -104,7 +109,25 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users/create', 'UsersController@create')->name('users.create');
     Route::post('users', 'UsersController@store')->name('users.store');
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
-    Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
+    Route::put('/users/{id}/name', 'UsersController@updateUserName')->name('users.updateName');
+    Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
+    // Route::put('/users/{id}', 'UsersController@update')->name('users.update');
+
+    // メールアドレス変更確認メール処理
+    Route::post('/email', 'ChangeEmailController@sendChangeEmailLink');
+
+    // 新規メールアドレスに更新
+    Route::get("reset/{token}", "ChangeEmailController@reset");
+
+    // メール変更確認画面表示
+    Route::post('/email/message', 'ChangeEmailController@showMessage');
+
+
+    // Route::get('/testmail', function() {
+    //     Mail::to('test@test.com')->send(new TestMail);
+    //     return 'メール送信完了';
+    // });
+
     
 });
 Auth::routes();
