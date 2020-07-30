@@ -114,7 +114,7 @@ Route::group(['middleware' => 'auth'], function(){
     // Route::put('/users/{id}', 'UsersController@update')->name('users.update');
 
     // メールアドレス変更確認メール処理
-    Route::post('/email', 'ChangeEmailController@sendChangeEmailLink');
+    Route::post('/email/{id}', 'ChangeEmailController@sendChangeEmailLink')->name('email.update');
 
     // 新規メールアドレスに更新
     Route::get("reset/{token}", "ChangeEmailController@reset");

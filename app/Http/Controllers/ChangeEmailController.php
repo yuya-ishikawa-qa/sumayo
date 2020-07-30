@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ChangeEmailController extends Controller
 {
-    public function sendChangeEmailLink(Request $request) {
+    public function sendChangeEmailLink(Request $request, $id) {
+
         $new_email = $request->new_email;
 
         // トークン生成
@@ -26,8 +27,10 @@ class ChangeEmailController extends Controller
             config('app.key')
         );
 
+        $user = User::findOrFail($id);
+
         $params = [
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'new_email' => $new_email,
             'token' => $token,
         ];

@@ -37,7 +37,7 @@
     </div>
   </form>
 
-  <form action="{{ url('email') }}" method="POST" class="mt-5">
+  <form action="{{ route('email.update', ['id' => $user->id ]) }}" method="POST" class="mt-5">
     {{ csrf_field() }}
 
     <div class="form-group row ml-3">
