@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UsersController extends Controller
@@ -58,11 +59,12 @@ class UsersController extends Controller
             
             ];
         
-            
+        
         $params = $this->validate($request, $validate_rules, $validate_messages);
-
+        $params['password'] = Hash::make($request->password);
+    
         User::create($params);
-
+        
         $users = User::orderBy('id', 'asc')->paginate(5);
 
         return view('users.index', ['users' => $users]);
