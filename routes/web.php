@@ -111,8 +111,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
     Route::put('/users/{id}/name', 'UsersController@updateUserName')->name('users.updateName');
     Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
-    // Route::put('/users/{id}', 'UsersController@update')->name('users.update');
-
+    Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destory');
+    
     // メールアドレス変更確認メール処理
     Route::post('/email/{id}', 'ChangeEmailController@sendChangeEmailLink')->name('email.update');
 
