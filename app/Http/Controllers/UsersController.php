@@ -156,9 +156,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->delete();
-        $users = User::orderBy('id','asc')->paginate(5);
-
+        $user->delete();        
+        
         $message = $user->name . 'を削除しました。';
 
         return back()->with('flash_message', $message);
