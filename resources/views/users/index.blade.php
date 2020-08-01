@@ -8,6 +8,10 @@
     <h3>店員情報一覧</h3>
   </div>
 
+  <div>
+    <div class="alert "></div>
+  </div>
+
   <table class="table table-striped table-condensed">
     <thead>
       <tr>
@@ -38,7 +42,7 @@
         <!-- 店長は削除ボタン無し -->
         <td>
         @if( $user->id !== 1)
-          <form action="/users/delete" method="post">
+          <form action="{{ url('/users/{id}') }}" method="post">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <button type="submit" class="btn btn-danger">削除</button>
