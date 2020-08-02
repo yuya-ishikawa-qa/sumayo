@@ -88,32 +88,45 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function(){
     
     // 店舗関係処理
+
     // TOP画面表示
-    Route::get('/store', 'StoreController@index')->name('store.top');
+    Route::get('/stores', 'StoresController@index')->name('store.top');
 
     // 各詳細画面表示
-    Route::get('/store/holiday', 'StoreController@showStoreHoliday');
-    Route::get('/store/time', 'StoreController@showStoreTime');
-    Route::get('/store/info', 'StoreController@showStoreInfo');
+    Route::get('/stores/holiday', 'StoresController@showStoreHoliday');
+    Route::get('/stores/time', 'StoresController@showStoreTime');
+    Route::get('/stores/{id}/info', 'StoresController@showStoreInfo');
 
     // 各編集画面表示
-    Route::get('/store/edit/time', 'StoreController@editTime');
-    Route::get('/store/edit/holiday', 'StoreController@editHoliday');
-    Route::get('/store/edit/category', 'StoreController@editCategory');
-    Route::get('/store/edit/info', 'StoreController@editStoreInfo');
-    Route::get('/store/edit/logo', 'StoreController@editStoreLogo');
-    Route::get('/store/edit/images', 'StoreController@editStoreImages');
+    Route::get('/stores/edit/time', 'StoresController@editTime');
+    Route::get('/stores/edit/holiday', 'StoresController@editHoliday');
+    Route::get('/stores/edit/category', 'StoresController@editCategory');
+    Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo');
+    Route::get('/stores/edit/logo', 'StoresController@editStoreLogo');
+    Route::get('/stores/edit/images', 'StoresController@editStoreImages');
+
+    // 店舗情報更新処理
+    Route::put('/stores/{id}', 'StoresController@updateStoreInfos')->name('storeInfos.update');
 
     // ユーザー関係処理
-    Route::get('/users', 'UsersController@index')->name('users.top');
-    Route::get('/users/create', 'UsersController@create')->name('users.create');
-    Route::post('users', 'UsersController@store')->name('users.store');
-    Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
-    Route::put('/users/{id}/name', 'UsersController@updateUserName')->name('users.updateName');
-    Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
-    // Route::put('/users/{id}', 'UsersController@update')->name('users.update');
 
-    // メールアドレス変更確認メール処理
+    // 一覧表示
+    Route::get('/users', 'UsersController@index')->name('users.top');
+    
+    // 新規ユーザー登録
+    Route::post('users', 'UsersController@store')->name('users.store');
+    Route::get('/users/create', 'UsersController@create')->name('users.create');
+    
+    // 編集画面表示
+    Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
+
+    // ユーザー名更新
+    Route::put('/users/{id}/name', 'UsersController@updateUserName')->name('users.updateName');
+
+    // ユーザーパスワード更新
+    Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
+    
+    // メールアドレス変更用メール送信
     Route::post('/email/{id}', 'ChangeEmailController@sendChangeEmailLink')->name('email.update');
 
     // 新規メールアドレスに更新
@@ -121,13 +134,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     // メール変更確認画面表示
     Route::post('/email/message', 'ChangeEmailController@showMessage');
-
-
-    // Route::get('/testmail', function() {
-    //     Mail::to('test@test.com')->send(new TestMail);
-    //     return 'メール送信完了';
-    // });
-
     
 });
 Auth::routes();

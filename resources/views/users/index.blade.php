@@ -51,7 +51,7 @@
   </table>
 
   <div class="text-center">
-    <a href="/store"><button class="btn btn-secondary">戻る</button></a>
+    <a href="/stores"><button class="btn btn-secondary">戻る</button></a>
   </div>
 
 </div>
