@@ -23,6 +23,10 @@ class CreateStoresTable extends Migration
             $table->text('comment');
 
             $table->integer('earliest_receivable_time');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->integer('serve_range_time');
+            $table->integer('capacity');
 
             $table->string('logo')->nullable();
             $table->string('top_image1')->nullable();

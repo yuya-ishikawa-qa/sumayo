@@ -84,7 +84,7 @@
       <div class="card-body">
         <h6 class="card-title">店舗情報</h6>
         <p class="card-text"></p>
-        <a href="/stores/{{ $store->id }}/info" class="btn btn-primary">表示</a>
+        <a href="{{ route('storeInfo.show', ['id' => $store->id ]) }}" class="btn btn-primary">表示</a>
       </div>
     </div>
 
@@ -92,7 +92,7 @@
       <div class="card-body">
         <h6 class="card-title">店舗営業時間</h6>
         <p class="card-text"></p>
-        <a href="{{ url('/stores/time') }}" class="btn btn-primary">表示</a>
+        <a href="{{ route('storeTime.show', ['id' => $store->id ]) }}" class="btn btn-primary">表示</a>
       </div>
     </div>
   </div>

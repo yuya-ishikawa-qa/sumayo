@@ -56,15 +56,15 @@ class StoresController extends Controller
         return view('stores.holiday');
     }
 
-    public function showStoreTime()
+    public function showStoreTime($id)
     {
-        return view('stores.time');
+        $store = Store::findOrFail($id);
+        return view('stores.time', [ 'store' => $store ] );
     }
 
     public function showStoreInfo($id)
     {
         $store = Store::findOrFail($id);
-
         return view('stores.store_info', [ 'store' => $store ] );
     }
 
@@ -74,9 +74,10 @@ class StoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editTime()
+    public function editTime($id)
     {
-        return view('stores.edit_time');
+        $store = Store::findOrFail($id);
+        return view('stores.edit_time', ['store' => $store]);
     }
 
     public function editHoliday()
@@ -117,7 +118,12 @@ class StoresController extends Controller
         //
     }
 
-    public function updateStoreInfos(Request $request, $id)
+    public function updateStoreInfo(Request $request, $id)
+    {
+        //
+    }
+
+    public function updateStoreTime(Request $request, $id)
     {
         //
     }

@@ -88,19 +88,20 @@ Route::group(['middleware' => 'auth'], function(){
 
     // 各詳細画面表示
     Route::get('/stores/holiday', 'StoresController@showStoreHoliday');
-    Route::get('/stores/time', 'StoresController@showStoreTime');
-    Route::get('/stores/{id}/info', 'StoresController@showStoreInfo');
+    Route::get('/stores/{id}/time', 'StoresController@showStoreTime')->name('storeTime.show');
+    Route::get('/stores/{id}/info', 'StoresController@showStoreInfo')->name('storeInfo.show');
 
     // 各編集画面表示
-    Route::get('/stores/edit/time', 'StoresController@editTime');
+    Route::get('/stores/{id}/edit/time', 'StoresController@editTime')->name('storeTime.edit');
+    Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo')->name('storeInfo.edit');
     Route::get('/stores/edit/holiday', 'StoresController@editHoliday');
     Route::get('/stores/edit/category', 'StoresController@editCategory');
-    Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo');
     Route::get('/stores/edit/logo', 'StoresController@editStoreLogo');
     Route::get('/stores/edit/images', 'StoresController@editStoreImages');
 
     // 店舗情報更新処理
-    Route::put('/stores/{id}', 'StoresController@updateStoreInfos')->name('storeInfos.update');
+    Route::put('/stores/{id}/time', 'StoresController@updateStoreTime')->name('storeTime.update');
+    Route::put('/stores/{id}/info', 'StoresController@updateStoreInfo')->name('storeInfo.update');
 
     // ユーザー関係処理
 

@@ -39,8 +39,8 @@
     </div>
 
     <div class="row justify-content-center mb-5">
-      <a class="btn btn-primary text-center mr-2" href="/stores/{{ $store->id }}/edit/info">編集画面</a>
-      <a class="btn btn-secondary text-center" href="/stores">戻る</a>
+      <a class="btn btn-primary text-center mr-2" href="{{ route('storeInfo.edit', ['id' => $store->id ]) }}">編集画面</a>
+      <a class="btn btn-secondary text-center" href="{{ url('/stores') }}">戻る</a>
     </div>
 
   </div>
