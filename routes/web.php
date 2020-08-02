@@ -77,12 +77,6 @@ Route::get('/items/register', function () {
 });
 
 Auth::routes();
-
-// Route::get('/login', 'Auth\LoginController@loginForm')->name('login');
-// Route::post('/login', 'Auth\LoginController@login')->name('login.post');
-// Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('signup');
-// Route::post('register', 'Auth\RegisterController@register')->name('signup.post');
-
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'], function(){
@@ -127,6 +121,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
     
     // メールアドレス変更用メール送信
+    Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
+    
+    // メールアドレス変更確認メール処理
     Route::post('/email/{id}', 'ChangeEmailController@sendChangeEmailLink')->name('email.update');
 
     // 新規メールアドレスに更新
@@ -134,8 +131,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     // メール変更確認画面表示
     Route::post('/email/message', 'ChangeEmailController@showMessage');
+
+    // ユーザー削除
+    Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destory');
     
 });
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
