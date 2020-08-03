@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Store;
 use Illuminate\Http\Request;
 
-class StoreController extends Controller
+
+class StoresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,10 @@ class StoreController extends Controller
      */
     public function index()
     {
-        return view('store.index');
+        // 店舗情報取得
+        $store = Store::all()->first();
+
+        return view('stores.index', [ 'store' => $store ]);
     }
 
     /**
@@ -45,17 +50,19 @@ class StoreController extends Controller
      */
     public function showStoreHoliday()
     {
-        return view('store.holiday');
+        return view('stores.holiday');
     }
 
-    public function showStoreTime()
+    public function showStoreTime($id)
     {
-        return view('store.time');
+        $store = Store::findOrFail($id);
+        return view('stores.time', [ 'store' => $store ] );
     }
 
-    public function showStoreInfo()
+    public function showStoreInfo($id)
     {
-        return view('store.store_info');
+        $store = Store::findOrFail($id);
+        return view('stores.store_info', [ 'store' => $store ] );
     }
 
     /**
@@ -64,34 +71,36 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editTime()
+    public function editTime($id)
     {
-        return view('store.edit_time');
+        $store = Store::findOrFail($id);
+        return view('stores.edit_time', ['store' => $store]);
     }
 
     public function editHoliday()
     {
-        return view('store.edit_holiday');
+        return view('stores.edit_holiday');
     }
 
     public function editCategory()
     {
-        return view('store.edit_category');
+        return view('stores.edit_category');
     }
 
-    public function editStoreInfo()
+    public function editStoreInfo($id)
     {
-        return view('store.edit_store_info');
+        $store = Store::findOrFail($id);
+        return view('stores.edit_store_info', ['store' => $store]);
     }
 
     public function editStoreLogo()
     {
-        return view('store.edit_store_logo');
+        return view('stores.edit_store_logo');
     }
 
     public function editStoreImages()
     {
-        return view('store.edit_store_images');
+        return view('stores.edit_store_images');
     }
 
     /**
@@ -102,6 +111,16 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    {
+        //
+    }
+
+    public function updateStoreInfo(Request $request, $id)
+    {
+        //
+    }
+
+    public function updateStoreTime(Request $request, $id)
     {
         //
     }

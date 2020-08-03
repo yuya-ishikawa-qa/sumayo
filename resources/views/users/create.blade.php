@@ -61,14 +61,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="row mb-0">
+                            <div class="col text-center">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('登録') }}
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <div class="text-center mt-2">
+                        <a href="{{ url('stores') }}"><button class="btn btn-secondary">戻る</button></a>
+                    </div>
                 </div>
             </div>
         </div>

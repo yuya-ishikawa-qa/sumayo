@@ -67,7 +67,7 @@
     <input type="submit" value="休日更新" class="btn btn-primary">
   </div>
   <div>
-    <a href="/store/holiday" class="btn btn-secondary">戻る</a>
+    <a href="/stores/holiday" class="btn btn-secondary">戻る</a>
   </div>
   
 </div>
