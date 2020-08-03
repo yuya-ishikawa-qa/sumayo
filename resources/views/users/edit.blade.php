@@ -25,10 +25,10 @@
       </label>
       <div class="col">
         <input type="text" id="name" name="name" class="form-control" value="{{ $user->name }}">
-        @if($errors->has('name'))
-			    @foreach($errors->get('name') as $message)
-			    	<p>{{ $message }}</p>
-			    @endforeach
+        @if ($errors->has('name'))
+          <span role="alert" class="text-danger">
+            <strong>{{ $errors->first('name') }}</strong>
+          </span>
 		    @endif 
       </div>
       <div class=" mr-2 text-center">
@@ -50,10 +50,10 @@
       <label for="email" class="col-xs-2 col-form-label">Email (変更後)</label>
       <div class="col">
         <input type="email" id="email" name="new_email" class="form-control" placeholder="変更したいメールアドレス">
-        @if($errors->has('email'))
-			    @foreach($errors->get('email') as $message)
-			    	<p>{{ $message }}</p>
-			    @endforeach
+        @if ($errors->has('new_email'))
+          <span role="alert" class="text-danger">
+            <strong>{{ $errors->first('new_email') }}</strong>
+          </span>
 		    @endif
       </div>
     </div>
@@ -73,10 +73,10 @@
       </label>
       <div class="col">
         <input type="password" id="password" name="password" class="form-control">
-        @if($errors->has('password'))
-			    @foreach($errors->get('password') as $message)
-			    	<p>{{ $message }}</p>
-			    @endforeach
+        @if ($errors->has('password'))
+          <span role="alert" class="text-danger">
+            <strong>{{ $errors->first('password') }}</strong>
+          </span>
 		    @endif
       </div>
     </div>
