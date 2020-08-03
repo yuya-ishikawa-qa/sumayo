@@ -2,11 +2,12 @@
 
 @section('content')
 <div class="container">
+
   <div class="text-center pt-3 mb-4">
-    <h2>店舗画像管理</h2>
+    <h2>店舗ロゴ</h2>
   </div>
 
-  <form action="" method="post">
+  <form action="/" method="post">
     {{ csrf_field() }}
 
     <div class="form-group text-center mb-4">
@@ -18,7 +19,7 @@
  
     <div class="text-center mb-4">
       <input type="submit" value="送信" class="btn btn-primary">
-      <a href="/store"><button class="btn btn-secondary">戻る</button></a>
+      <a href="/stores"><button class="btn btn-secondary">戻る</button></a>
     </div>
 
   </form>
