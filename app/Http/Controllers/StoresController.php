@@ -15,11 +15,8 @@ class StoresController extends Controller
      */
     public function index()
     {
-        // 今回は1店舗だけなのでDBより id = 1 を設定
-        $id = 1;
-
         // 店舗情報取得
-        $store = Store::findOrFail($id);
+        $store = Store::all()->first();
 
         return view('stores.index', [ 'store' => $store ]);
     }
