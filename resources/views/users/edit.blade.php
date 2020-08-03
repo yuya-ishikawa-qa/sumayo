@@ -84,6 +84,12 @@
       <input type="submit" class="btn btn-primary" value="パスワード変更">
     </div>
   </form>
+
+  <div class="text-center mt-5">
+    <a href="{{ url('/users') }}"><button class="btn btn-secondary">戻る</button></a>
+  </div>
+
+
 </div>
 
 @endsection
