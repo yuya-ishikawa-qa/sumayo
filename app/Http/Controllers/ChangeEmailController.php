@@ -64,6 +64,7 @@ class ChangeEmailController extends Controller
             $message = 'メールアドレスを更新しました！';
             
             return view('emails.notificationChangeEmail', ['message' => $message]);
+            
         } else {
 
             // レコードが存在していた場合削除

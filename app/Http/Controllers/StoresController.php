@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Store;
+use App\Http\Requests\StoreInfoRequest;
+
 use Illuminate\Http\Request;
 
 
@@ -115,9 +117,24 @@ class StoresController extends Controller
         //
     }
 
-    public function updateStoreInfo(Request $request, $id)
+    public function updateStoreInfo(StoreInfoRequest $request, $id)
     {
-        //
+        // 店舗情報取得
+        $store = Store::findOrFail($id);
+
+        // 店舗情報更新
+        $store['name'] = $request->name;
+        $store['phone'] = $request->phone;
+        $store['postcode'] = $request->postcode;
+        $store['address'] = $request->address;
+        $store['comment'] = $request->comment;
+        $store->save();
+
+        // 更新メッセージ
+        session()->flash('flash_message', '店舗情報の更新が完了しました');
+
+        return view('stores.store_info', ['store' => $store]);
+
     }
 
     public function updateStoreTime(Request $request, $id)
