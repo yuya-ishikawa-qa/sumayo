@@ -12,12 +12,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\ChangeEmailRequest;
 
 
 class ChangeEmailController extends Controller
 {
-    public function sendChangeEmailLink(Request $request, $id) {
+    public function sendChangeEmailLink(ChangeEmailRequest $request, $id) {
 
+        // 新規メールアドレス取得
         $new_email = $request->new_email;
 
         // トークン生成
@@ -27,15 +29,20 @@ class ChangeEmailController extends Controller
             config('app.key')
         );
 
+        // ユーザー情報取得
         $user = User::findOrFail($id);
 
+        // 情報を配列化
         $params = [
             'user_id' => $user->id,
             'new_email' => $new_email,
             'token' => $token,
         ];
         
+        // EmailResetモデルに書き込み
         $email_reset = EmailReset::create($params);    
+
+        // トークンをメールにて送信
         $email_reset->sendEmailResetNotification($token);
 
         return back()->with('flash_message', '確認メールを送信しました、メールを確認してください。');
@@ -44,6 +51,7 @@ class ChangeEmailController extends Controller
 
     public function reset(Request $request, $token)
     {
+
         $email_resets = DB::table('email_resets')
             ->where('token', $token)
             ->first();

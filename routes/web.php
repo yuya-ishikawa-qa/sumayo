@@ -109,8 +109,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users', 'UsersController@index')->name('users.top');
     
     // 新規ユーザー登録
-    Route::post('users', 'UsersController@store')->name('users.store');
     Route::get('/users/create', 'UsersController@create')->name('users.create');
+    Route::post('/users', 'UsersController@store')->name('users.store');
     
     // 編集画面表示
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
