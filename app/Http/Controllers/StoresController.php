@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Store;
-use App\Http\Requests\StoreInfoRequest;
+use App\Http\Requests\StoreInfosRequest;
+use App\Http\Requests\StoreTimesRequest;
+
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -117,7 +120,7 @@ class StoresController extends Controller
         //
     }
 
-    public function updateStoreInfo(StoreInfoRequest $request, $id)
+    public function updateStoreInfo(StoreInfosRequest $request, $id)
     {
         // 店舗情報取得
         $store = Store::findOrFail($id);
@@ -137,9 +140,33 @@ class StoresController extends Controller
 
     }
 
-    public function updateStoreTime(Request $request, $id)
+    public function updateStoreTime(StoreTimesRequest $request, $id)
     {
-        //
+        // 店舗情報情報取得
+        $store = Store::findOrFail($id);
+
+        
+        // 店舗情報更新
+        $store['earliest_receivable_time'] = $request->earliest_receivable_time;
+
+        $start_time = $request->start_hour . ':' . $request->start_min;
+        $store_start_time = new Carbon($start_time);
+        $store['start_time'] = $store_start_time->format('H:i');
+
+        $end_time = $request->end_hour . ':' . $request->end_min;
+        $store_end_time = new Carbon($end_time);
+        $store['end_time'] = $store_end_time->format('H:i');
+
+        $store['serve_range_time'] = $request->serve_range_time;
+        $store['capacity'] = $request->capacity;
+        
+        $store->save();
+        
+        // 更新メッセージ
+        session()->flash('flash_message', '店舗営業時間の更新が完了しました');
+
+        return view('stores.time', ['store' => $store]);
+
     }
 
     /**

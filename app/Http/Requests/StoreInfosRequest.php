@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreInfoRequest extends FormRequest
+class StoreInfosRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,7 @@ class StoreInfoRequest extends FormRequest
             'postcode' => 'required|regex:/^[0-9]{3}-[0-9]{4}$/',
             'address' => 'required',
             'comment' => 'required',
+            
         ];
     }
 
@@ -49,7 +50,7 @@ class StoreInfoRequest extends FormRequest
             'address.required' => '住所を入力してください',
 
             'comment.required' => 'コメントを入力してください',
-            
+    
         ];
     }
 
