@@ -29,47 +29,17 @@ Route::get('/order_edit', function () {
     return view('order_edit');
 });
 
-// お客さんカスタマー購入画面
+// TOP(客側)
+Route::get('/', 'CustomerItemsController@index');
+// 商品詳細(客側)
+Route::get('/detail', 'CustomerItemsController@showDetail');
+// // 商品詳細(客側)
+// Route::get('/detail/{id}', 'CustomerItemsController@showDetail');
+// カート情報(客側)
+Route::get('/cart', 'CustomerItemsController@showCart');
+// 店舗情報(客側)
+Route::get('/shopinfo', 'CustomerItemsController@showShopinfo');
 
-// TOP
-Route::get('/', function () {
-    return view('index');
-});
-
-// 商品詳細
-Route::get('/detail', function () {
-    return view('detail');
-});
-
-// カート情報
-Route::get('/cart', function () {
-    return view('cart');
-});
-
-// 店舗情報
-Route::get('/shopinfo', function () {
-    return view('shopinfo');
-});
-
-// 商品一覧(お店側)
-Route::get('/items', function () {
-    return view('items');
-});
-
-// 商品詳細(お店側)
-Route::get('/items/detail', function () {
-    return view('item_detail');
-});
-
-// 商品編集(お店側)
-Route::get('/items/detail/edit', function () {
-    return view('item_edit');
-});
-
-// 商品登録(お店側)
-Route::get('/items/register', function () {
-    return view('item_register');
-});
 
 Auth::routes();
 
@@ -105,6 +75,26 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('users', 'UsersController@store')->name('users.store');
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
     Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
+
+    // 商品一覧(店舗側)
+    Route::get('/items', 'ItemsController@index');
+    // Route::post('/items', 'ItemsController@create');
+
+    // 商品詳細(店舗側)
+    Route::get('/items/detail/', 'ItemsController@showItemsDetail');
+
+    // 商品編集(店舗側)
+    Route::post('/items/detail/edit', 'ItemsController@editItemsDetail');
+
+    // // 商品詳細(店舗側)
+    // Route::get('/items/detail/{id}', 'ItemsController@showItemsDetail');
+    
+    // // 商品編集(店舗側)
+    // Route::post('/items/detail/{id}/edit', 'ItemsController@editItemsDetail');
+
+    // 商品登録(店舗側)
+    Route::get('/items/register', 'ItemsController@store');
+    Route::post('/items', 'ItemsController@create');
     
 });
 Auth::routes();
