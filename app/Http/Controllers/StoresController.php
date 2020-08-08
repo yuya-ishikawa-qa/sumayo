@@ -27,27 +27,6 @@ class StoresController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -115,22 +94,17 @@ class StoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     public function updateStoreInfo(StoreInfosRequest $request, $id)
     {
         // 店舗情報取得
         $store = Store::findOrFail($id);
 
-        // 店舗情報更新
-        $store['name'] = $request->name;
-        $store['phone'] = $request->phone;
-        $store['postcode'] = $request->postcode;
-        $store['address'] = $request->address;
-        $store['comment'] = $request->comment;
+        // // 店舗情報更新
+        $store->name = $request->name;
+        $store->phone = $request->phone;
+        $store->postcode = $request->postcode;
+        $store->address = $request->address;
+        $store->comment = $request->comment;
         $store->save();
 
         // 更新メッセージ
@@ -147,18 +121,19 @@ class StoresController extends Controller
 
         
         // 店舗情報更新
-        $store['earliest_receivable_time'] = $request->earliest_receivable_time;
+        $store->earliest_receivable_time = $request->earliest_receivable_time;
+
 
         $start_time = $request->start_hour . ':' . $request->start_min;
         $store_start_time = new Carbon($start_time);
-        $store['start_time'] = $store_start_time->format('H:i');
+        $store->start_time = $store_start_time->format('H:i');
 
         $end_time = $request->end_hour . ':' . $request->end_min;
         $store_end_time = new Carbon($end_time);
-        $store['end_time'] = $store_end_time->format('H:i');
+        $store->end_time = $store_end_time->format('H:i');
 
-        $store['serve_range_time'] = $request->serve_range_time;
-        $store['capacity'] = $request->capacity;
+        $store->serve_range_time = $request->serve_range_time;
+        $store->capacity = $request->capacity;
         
         $store->save();
         
@@ -167,16 +142,5 @@ class StoresController extends Controller
 
         return view('stores.time', ['store' => $store]);
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
