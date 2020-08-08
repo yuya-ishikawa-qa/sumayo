@@ -28,12 +28,12 @@ class CreateStoresTable extends Migration
             $table->integer('serve_range_time');
             $table->integer('capacity');
 
+            # 店舗画像関係は今後必須だが、画像追加機能を作成するまでは一旦nullable()で実装。
+            
             $table->string('logo')->nullable();
             $table->string('top_image1')->nullable();
             $table->string('top_image2')->nullable();
             $table->string('top_image3')->nullable();
-
-            # 店舗画像関係は今後必須だが、画像追加機能を作成するまでは一旦nullable()で実装。
 
             $table->timestamps();
 

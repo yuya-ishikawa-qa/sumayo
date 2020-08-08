@@ -2,6 +2,12 @@
 
 @section('content')
 
+  @if (session('flash_message'))
+    <div class="text-center alert alert-success">
+        {{ session('flash_message') }}
+    </div>
+  @endif
+
   <div class="container">
     <div class="text-center pt-2 mb-4">
       <h2>1.店舗情報</h2>

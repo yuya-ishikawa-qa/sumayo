@@ -16,6 +16,13 @@
       <label for="name" class="col-xs-4 col-form-label ml-3 mr-2">店舗名</label>
       <div class="col">
         <input type="text" id="name" name="name" class="form-control" value="{{ $store->name }}">
+        @if($errors->has('name'))
+          <div>
+            <span class="text-danger">
+              <strong>{{ $errors->first('name') }}</strong>
+            </span>
+          </div>
+        @endif
       </div>
     </div>
 
@@ -24,6 +31,13 @@
       <label for="phone" class="col-xs-4 col-form-label ml-3 mr-2">電話番号</label>
       <div class="col">
         <input type="text" id="phone" name="phone" class="form-control" value="{{ $store->phone }}">
+        @if($errors->has('phone'))
+          <div>
+            <span class="text-danger">
+              <strong>{{ $errors->first('phone') }}</strong>
+            </span>
+          </div>
+        @endif
       </div>
     </div>
 
@@ -32,6 +46,13 @@
       <label for="postcode" class="col-xs-4 col-form-label ml-3 mr-2">郵便番号</label>
       <div class="col">
         <input type="text" id="postcode" name="postcode" class="form-control" value="{{ $store->postcode }}">
+        @if($errors->has('postcode'))
+          <div>
+            <span class="text-danger">
+              <strong>{{ $errors->first('postcode') }}</strong>
+            </span>
+          </div>
+        @endif
       </div>
     </div>
 
@@ -40,13 +61,27 @@
       <label for="address" class="col-xs-4 col-form-label ml-3 mr-2">都道府県</label>
       <div class="col">
         <input type="text" id="address" name="address" class="form-control" value="{{ $store->address }}">
+        @if($errors->has('address'))
+          <div>
+            <span class="text-danger">
+              <strong>{{ $errors->first('address') }}</strong>
+            </span>
+          </div>
+        @endif
       </div>
     </div>
 
     <!-- 店舗説明用コメント -->
     <div class="form-group ml-3">
       <label for="comment">店舗説明用コメント</label>
-      <textarea id="comment" class="form-control" rows="8">{{$store->comment}}</textarea>
+      <textarea id="comment" class="form-control" name="comment" rows="8">{{$store->comment}}</textarea>
+      @if($errors->has('comment'))
+        <div>
+          <span class="text-danger">
+            <strong>{{ $errors->first('comment') }}</strong>
+          </span>
+        </div>
+      @endif
     </div>
 
     <!-- ボタン -->

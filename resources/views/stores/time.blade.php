@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+@if (session('flash_message'))
+  <div class="text-center alert alert-success">
+      {{ session('flash_message') }}
+  </div>
+@endif
+
 <div class="container">
 
   <div class="text-center mb-3">
@@ -20,10 +28,17 @@
     </div>
   </div>
 
+  <!-- 予約単位時間 -->
+  <div class="row text-center mb-4">
+    <div class="col">
+    予約単位時間 :　{{ $store->serve_range_time }} [分]
+    </div>
+  </div>
+
   <!-- 予約受入人数 -->
   <div class="row text-center mb-4">
     <div class="col">
-    注文可能数 :　{{ $store->capacity }} [オーダー/時間]
+    予約可能数 :　{{ $store->capacity }} [件/<strong class="text-danger">単位時間</strong>]
     </div>
   </div>
 
