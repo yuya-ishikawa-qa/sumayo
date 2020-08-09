@@ -22,9 +22,7 @@ class ItemsController extends Controller
         $items = Items::orderBy('updated_at', 'desc')->get();
 
         return view('items',["items" => $items,
-        // 'path' => $path 
-        // str_replace('public/', 'storage/', 
-        // ,$post->path
+
         ]);
     }
     
@@ -74,7 +72,6 @@ class ItemsController extends Controller
             
             
             // 内容の受け取って変数に入れる
-            // return view('item_register');
             $item_name = $request->input('item_name');
             $price = $request->input('price');
             $tax = $request->input('tax');
@@ -92,15 +89,6 @@ class ItemsController extends Controller
             $path = $request->input('path');
             
             // 在庫一括入力された場合
-            // if($request->input('stock_all') >= 0 ){
-            //     $stock_sunday = $stock_all;
-            //     $stock_monday = $stock_all;
-            //     $stock_tuesday = $stock_all;
-            //     $stock_wednesday = $stock_all;
-            //     $stock_thursday = $stock_all;
-            //     $stock_friday = $stock_all;
-            //     $stock_saturday = $stock_all;
-            // } 
             if( isset($stock_all) ){
                 $stock_sunday = $stock_all;
                 $stock_monday = $stock_all;
@@ -110,42 +98,17 @@ class ItemsController extends Controller
                 $stock_friday = $stock_all;
                 $stock_saturday = $stock_all;
             } 
-            // else {
-            //     $stock_sunday = 0;
-            //     $stock_monday = 0;
-            //     $stock_tuesday = 0;
-            //     $stock_wednesday = 0;
-            //     $stock_thursday = 0;
-            //     $stock_friday = 0;
-            //     $stock_saturday = 0;
-            // }
-    // dd($stock_sunday);
             
             if($request->hasFile('path')) { 
                 //ファイル名取得
                 $filename = $request->file('path')->getClientOriginalName();
-                //storage\app\images に画像が保存されました
-                // $request->images->storeAs('path',date("Ymd").'_'.$filename);
-                //DBに登録するパス
-                // $member->image = date("Ymd").'_'.$filename;
                 $path = $request->path->storeAs('items',date("Y-m-d H:i:s").'_'.$filename);
 
             } else {
                 $path = "";
             }
-
-        // $post->path = $request->path->storeAs('public/post_images', '_'. '.jpg');
-        // $path = $request->path->storeAs('public/','{{ $request->path }}', '_'. '.jpg');
-        // $path = $request->path->storeAs('public/','{{ $request->path }}.jpg');
-        // $path = $request->path->storeAs('items/',date("Ymd").'_'.$filename);
-
-
         
         // データベーステーブルitems内容を入れる
-        // 確認してOKなら全項目追加
-        // Items::insert(["item_name" => $item_name,
-        // "price"  => $price,
-        // "is_selling"  => $is_selling,]); 
         Items::insert([
             "item_name" => $item_name,
             "price"  => $price, 
@@ -160,30 +123,14 @@ class ItemsController extends Controller
             "stock_thursday"  => $stock_thursday, 
             "stock_friday"  => $stock_friday, 
             "stock_saturday"  => $stock_saturday, 
-
-
-
             "path"  => $path
             ]); 
         
-        // $items = Items::all(); // 全データの取り出し
+        // データの取り出し
         $items = Items::orderBy('updated_at', 'desc')->get();
 
-        
-
-        // 変数をビューに渡す
-        // return view('items',["items" => $items]);
         return redirect()->to('/items');
 
-
-        // ["item_name" => $item_name,
-        // "price"  => $price
-        // ]);
-        // return view('items')->with([
-        // "item_name" => $item_name,
-        // "price"  => $price,
-        // "is_selling"  => $is_selling,
-        // ]);
     }
 
     /**
@@ -192,19 +139,8 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
-
-    // // 商品一覧(お店側)
-    // public function showItems()
-    // {
-    //     return view('items');
-    // }
 
     // 商品詳細(お店側)
-    // public function showItemsDetail($id)
     public function showItemsDetail($id)
     {
          // レコード検索
@@ -220,19 +156,12 @@ class ItemsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // // 商品編集(お店側)
-    // public function edit($id)
-    // {
-    //     return view('item_edit');
-    // }
-
      // 商品編集(お店側)
     public function edit($id)
     {
         
         // レコード検索
         $item = Items::find($id);
-
 
         // 結果をビューに渡す
         return view('item_edit')->with('item',$item);
@@ -247,8 +176,6 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
 
          // バリデーションチェック
          $request->validate([
@@ -275,28 +202,13 @@ class ItemsController extends Controller
          //レコードを検索
         $item = Items::find($id);
       
-        // else {
-        //     $stock_sunday = 0;
-        //     $stock_monday = 0;
-        //     $stock_tuesday = 0;
-        //     $stock_wednesday = 0;
-        //     $stock_thursday = 0;
-        //     $stock_friday = 0;
-        //     $stock_saturday = 0;
-        // }
-// dd($stock_sunday);
-        
-
         //値を代入
-        // $item['item_name'] = $request->item_name;
         $item->item_name = $request->item_name;
         $item->description = $request->description;
         $item->is_selling = $request->is_selling;
         $item->item_category_id = $request->item_category_id;
         $item->price = $request->price;
         $item->tax = $request->tax;
-
-        // dd($request->stock_all);
 
         if( isset($request->stock_all) ){
             $item->stock_sunday = $request->stock_all;
@@ -316,22 +228,6 @@ class ItemsController extends Controller
             $item->stock_saturday = $request->stock_saturday;
         }
         
-        // dd($item->stock_sunday);
-
-// if( isset($request->stock_sunday, $request->stock_monday, $request->stock_tuesday, $request->stock_wednesday, $request->stock_thursday, $request->stock_friday,  $request->stock_saturday)) {
-
-//      $item->stock_sunday = $request->stock_sunday;
-//      $item->stock_monday = $request->stock_monday;
-//      $item->stock_tuesday = $request->stock_tuesday;
-//      $item->stock_wednesday = $request->stock_wednesday;
-//      $item->stock_thursday = $request->stock_thursday;
-//      $item->stock_friday = $request->stock_friday;
-//      $item->stock_saturday = $request->stock_saturday;
-//  }
-
-        // dd($item->stock_sunday);
-
-
     if($request->hasFile('path')) { 
         if($item->path != $request->path) {
             $filename = $request->file('path')->getClientOriginalName();
@@ -342,26 +238,7 @@ class ItemsController extends Controller
     } else {
         $item->path == $request->path;
     }
-// dd($item->path);
-
-        // if($request->hasFile('path')) { 
-        //     //ファイル名取得
-        //     $filename = $request->file('path')->getClientOriginalName();
-        //     //storage\app\images に画像が保存されました
-        //     // $request->images->storeAs('path',date("Ymd").'_'.$filename);
-        //     //DBに登録するパス
-        //     // $member->image = date("Ymd").'_'.$filename;
-        //     $item->path = $request->path->storeAs('items',date("Y-m-d H:i:s").'_'.$filename);
-
-        // } else {
-        //     $item->path = "";
-        // }
-
-
-
-
-
-        // $item->path = $request->path;
+    
         //保存（更新）
         $item->save();
         //リダイレクト

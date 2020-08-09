@@ -11,6 +11,7 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
+        // Itemsテーブルへのseeding情報
         DB::table('items')->insert([
             [
                 'item_name' => 'ナポリタン',

@@ -90,13 +90,6 @@ Route::group(['middleware' => 'auth'], function(){
     // 商品情報削除(店舗側)
     Route::post('/items/destroy/{id}', 'ItemsController@destroy');
 
-
-    // // 商品詳細(店舗側)
-    // Route::get('/items/detail/{id}', 'ItemsController@showItemsDetail');
-    
-    // // 商品編集(店舗側)
-    // Route::post('/items/detail/{id}/edit', 'ItemsController@editItemsDetail');
-
     // 商品登録(店舗側)
     Route::get('/items/register', 'ItemsController@create');
     Route::post('/items/store', 'ItemsController@store');

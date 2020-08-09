@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// CustoreItemsモデル使用
+// CustomerItemsモデル使用
 use\app\CustomerItems;
 
 class CustomerItemsController extends Controller
