@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOperationTimesTable extends Migration
+class CreateEmailResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateOperationTimesTable extends Migration
      */
     public function up()
     {
-        Schema::create('operation_times', function (Blueprint $table) {
+        Schema::create('email_resets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('store_id')->default(1);
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->integer('serve_range_time');
-            $table->integer('capacity');
+            $table->integer('user_id')->comment('メールアドレスを更新したユーザーID');
+            $table->string('new_email')->comment('ユーザーが新規に設定したメールアドレス');
+            $table->string('token');
             $table->timestamps();
         });
     }
@@ -31,8 +29,6 @@ class CreateOperationTimesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('operation_times');
+        Schema::dropIfExists('email_resets');
     }
 }
-
-

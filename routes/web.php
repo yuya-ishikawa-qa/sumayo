@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+
+
 Route::get('/order_form', function () {
     return view('order_form');
 });
@@ -42,37 +47,42 @@ Route::get('/shopinfo', 'CustomerItemsController@showShopinfo');
 
 
 Auth::routes();
-
-// Route::get('/login', 'Auth\LoginController@loginForm')->name('login');
-// Route::post('/login', 'Auth\LoginController@login')->name('login.post');
-// Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('signup');
-// Route::post('register', 'Auth\RegisterController@register')->name('signup.post');
-
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'], function(){
     
     // 店舗関係処理
+
     // TOP画面表示
-    Route::get('/store', 'StoreController@index')->name('store.top');
+    Route::get('/stores', 'StoresController@index')->name('store.top');
 
     // 各詳細画面表示
-    Route::get('/store/holiday', 'StoreController@showStoreHoliday');
-    Route::get('/store/time', 'StoreController@showStoreTime');
-    Route::get('/store/info', 'StoreController@showStoreInfo');
+    Route::get('/stores/holiday', 'StoresController@showStoreHoliday');
+    Route::get('/stores/{id}/time', 'StoresController@showStoreTime')->name('storeTime.show');
+    Route::get('/stores/{id}/info', 'StoresController@showStoreInfo')->name('storeInfo.show');
 
     // 各編集画面表示
-    Route::get('/store/edit/time', 'StoreController@editTime');
-    Route::get('/store/edit/holiday', 'StoreController@editHoliday');
-    Route::get('/store/edit/category', 'StoreController@editCategory');
-    Route::get('/store/edit/info', 'StoreController@editStoreInfo');
-    Route::get('/store/edit/logo', 'StoreController@editStoreLogo');
-    Route::get('/store/edit/images', 'StoreController@editStoreImages');
+    Route::get('/stores/{id}/edit/time', 'StoresController@editTime')->name('storeTime.edit');
+    Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo')->name('storeInfo.edit');
+    Route::get('/stores/edit/holiday', 'StoresController@editHoliday');
+    Route::get('/stores/edit/category', 'StoresController@editCategory');
+    Route::get('/stores/edit/logo', 'StoresController@editStoreLogo');
+    Route::get('/stores/edit/images', 'StoresController@editStoreImages');
+
+    // 店舗情報更新処理
+    Route::put('/stores/{id}/time', 'StoresController@updateStoreTime')->name('storeTime.update');
+    Route::put('/stores/{id}/info', 'StoresController@updateStoreInfo')->name('storeInfo.update');
 
     // ユーザー関係処理
+
+    // 一覧表示
     Route::get('/users', 'UsersController@index')->name('users.top');
+    
+    // 新規ユーザー登録
     Route::get('/users/create', 'UsersController@create')->name('users.create');
-    Route::post('users', 'UsersController@store')->name('users.store');
+    Route::post('/users', 'UsersController@store')->name('users.store');
+    
+    // 編集画面表示
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
     Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
 
@@ -93,8 +103,26 @@ Route::group(['middleware' => 'auth'], function(){
     // 商品登録(店舗側)
     Route::get('/items/register', 'ItemsController@create');
     Route::post('/items/store', 'ItemsController@store');
+
+    // ユーザー名更新
+    Route::put('/users/{id}/name', 'UsersController@updateUserName')->name('users.updateName');
+
+    // ユーザーパスワード更新
+    Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
+    
+    // メールアドレス変更用メール送信
+    Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
+    
+    // メールアドレス変更確認メール処理
+    Route::post('/email/{id}', 'ChangeEmailController@sendChangeEmailLink')->name('email.update');
+
+    // 新規メールアドレスに更新
+    Route::get("reset/{token}", "ChangeEmailController@reset");
+
+    // メール変更確認画面表示
+    Route::post('/email/message', 'ChangeEmailController@showMessage');
+
+    // ユーザー削除
+    Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destory');
     
 });
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

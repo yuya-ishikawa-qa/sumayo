@@ -7,7 +7,7 @@
     <h2>オススメ商品画像</h2>
   </div>
 
-  <form action="" method="post">
+  <form action="#" method="post">
     {{ csrf_field() }}
     
     <div class="form-group text-center mb-4">
@@ -33,7 +33,9 @@
 
     <div class="text-center mb-4">
       <input type="submit" value="送信" class="btn btn-primary">
-      <a href="/store"><button class="btn btn-secondary">戻る</button></a>
+    </div>
+    <div class="text-center">
+      <a href="/stores"><button class="btn btn-secondary">戻る</button></a>
     </div>
 
   </form>

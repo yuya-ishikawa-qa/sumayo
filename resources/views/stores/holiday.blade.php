@@ -123,9 +123,9 @@
   </table>
   
   <div class="col text-center mt-3">
-    <a href="/store/edit/holiday" class="btn btn-primary">休日編集画面へ</a>
+    <a href="/stores/edit/holiday" class="btn btn-primary">休日編集画面へ</a>
 
-    <a href="/store" class="btn btn-secondary">戻る</a>
+    <a href="/stores" class="btn btn-secondary">戻る</a>
   </div>
 
 </div>
