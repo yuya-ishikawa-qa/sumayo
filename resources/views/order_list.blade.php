@@ -4,7 +4,7 @@
 <div class="order-list">
     <div class="search">
         <form>
-            <input class="form-control" name="test" type="date" value="2020/07/15" id="last_name">
+            <input class="form-control" name="test" type="date" value="2020-07-15" id="last_name">
             <button class="btn btn-primary" type="button">前</button>
             <button class="btn btn-primary" type="button">今日</button>
             <button class="btn btn-primary" type="button">次</button>
@@ -18,30 +18,45 @@
                 <div class="title">内容</div>
                 <div class="operation"></div>
             </div>
+            @foreach ($orders as $key => $order)
+            @php
+
+            $customer = $order->customer()->first();
+            $orderitems = $order->orderitems()->orderBy('id', 'asc')->get();
+
+            @endphp
+
+            @if($key % 2 === 0)
+            <div class="order-item">
+            @else
             <div class="order-item bg-secondary">
-                <div class="time">11:00</div>
-                <div class="content">阪江光希<br>
-                    <span class="bg-info">受取済</span>合計1,620円<br>
-                    唐揚げ弁当×2<br>
-                    ハンバーグ弁当×1
+            @endif
+                <div class="time">{{ $order->recieved_time }}</div>
+                <div class="content">{{ $customer->last_name }} {{ $customer->first_name }}<br>
+                    @if($order->order_status == 1)
+                    <span class="bg-info">受取前</span>
+                    @elseif($order->order_status == 2)
+                    <span class="bg-info">受取済</span>
+                    @elseif($order->order_status == 3)
+                    <span class="bg-info">破棄</span>
+                    @endif
+
+                    合計{{ $order->order_total_price }}円<br>
+                    @foreach ($orderitems as $k => $item)
+                    @if($orderitems->count() === $k)
+                    {{ $item->item_name }}×{{ $item->quantity }}
+                    @else
+                    {{ $item->item_name }}×{{ $item->quantity }}<br>
+                    @endif
+                    @endforeach
                 </div>
                 <div class="operation">
-                    <button>詳細確認</button><br>
+                    <a href="/orders/{{$order->id}}/show"><button type="button">詳細確認</button></a><br>
                     <label><input type="checkbox">完了</label>
                 </div>
             </div>
-            <div class="order-item bg-secondary">
-                <div class="time">11:00</div>
-                <div class="content">佐藤太郎<br>
-                    <span class="bg-info">受取済</span>合計1,620円<br>
-                    唐揚げ弁当×2<br>
-                    ハンバーグ弁当×1
-                </div>
-                <div class="operation">
-                    <button>詳細確認</button><br>
-                    <label><input type="checkbox">完了</label>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </form>
 </div>

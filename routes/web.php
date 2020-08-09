@@ -19,15 +19,6 @@ Route::get('/order_confirmation', function () {
 Route::get('/order_confirm', function () {
     return view('order_confirm');
 });
-Route::get('/order_list', function () {
-    return view('order_list');
-});
-Route::get('/order_detail', function () {
-    return view('order_detail');
-});
-Route::get('/order_edit', function () {
-    return view('order_edit');
-});
 
 // お客さんカスタマー購入画面
 
@@ -81,7 +72,7 @@ Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'], function(){
-    
+
     // 店舗関係処理
     // TOP画面表示
     Route::get('/store', 'StoreController@index')->name('store.top');
@@ -105,7 +96,14 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('users', 'UsersController@store')->name('users.store');
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
     Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
-    
+
+    // 注文管理関係処理
+    Route::get('/orders/', 'OrdersController@index');
+    Route::get('/orders/{id}/show', 'OrdersController@show');
+    Route::get('/orders/edit', 'OrdersController@update');
+    Route::get('/orders/update', 'OrdersController@update');
+    Route::get('/orders/{id}/destroy', 'OrdersController@destroy');
+
 });
 Auth::routes();
 
