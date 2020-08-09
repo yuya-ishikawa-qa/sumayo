@@ -81,10 +81,15 @@ Route::group(['middleware' => 'auth'], function(){
     // Route::post('/items', 'ItemsController@create');
 
     // 商品詳細(店舗側)
-    Route::get('/items/detail/', 'ItemsController@showItemsDetail');
+    Route::get('/items/detail/{id}', 'ItemsController@showItemsDetail');
 
     // 商品編集(店舗側)
-    Route::post('/items/detail/edit', 'ItemsController@editItemsDetail');
+    Route::get('/items/edit/{id}', 'ItemsController@edit');
+    Route::post('/items/update/{id}', 'ItemsController@update');
+
+    // 商品情報削除(店舗側)
+    Route::post('/items/destroy/{id}', 'ItemsController@destroy');
+
 
     // // 商品詳細(店舗側)
     // Route::get('/items/detail/{id}', 'ItemsController@showItemsDetail');
@@ -93,8 +98,8 @@ Route::group(['middleware' => 'auth'], function(){
     // Route::post('/items/detail/{id}/edit', 'ItemsController@editItemsDetail');
 
     // 商品登録(店舗側)
-    Route::get('/items/register', 'ItemsController@store');
-    Route::post('/items', 'ItemsController@create');
+    Route::get('/items/register', 'ItemsController@create');
+    Route::post('/items/store', 'ItemsController@store');
     
 });
 Auth::routes();

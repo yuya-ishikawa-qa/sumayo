@@ -21,7 +21,6 @@ class CreateItemsTable extends Migration
             $table->tinyInteger('item_category_id')->default(0);
             $table->unsignedMediumInteger('price')->default(0);
             $table->unsignedTinyInteger('tax')->default(10);
-            $table->unsignedTinyInteger('stock_all')->default(0);
             $table->unsignedTinyInteger('stock_sunday')->default(0);
             $table->unsignedTinyInteger('stock_monday')->default(0);
             $table->unsignedTinyInteger('stock_tuesday')->default(0);
@@ -32,6 +31,7 @@ class CreateItemsTable extends Migration
             $table->string('path')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->softDeletes();
         });
     }
 

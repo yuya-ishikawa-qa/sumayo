@@ -12,13 +12,14 @@
 @endif
 
 <div class="container">
-  <form action="/items" method="POST" enctype="multipart/form-data">
+<a href="{{ url('/store')}}">TOP画面へ</a>
+  <form action="/items/store" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
       <table class="table">
         <tbody>
           <tr>
-            <th scope="row">商品名
+            <th scope="row ">商品名
               <br>＊必須
             </th>
             <td>
@@ -26,14 +27,15 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">画像
+            <th scope="row ">画像
               <br>＊必須
             </th>
             <td>
               <input type="file" name="path" value="{{old('path')}}"/>
+            </td>
           </tr>
           <tr>
-            <th scope="row">商品カテゴリー
+            <th scope="row ">商品カテゴリー
             </th>
             <td>
               <select class="form-control" name="item_category_id">
@@ -51,7 +53,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">商品説明
+            <th scope="row ">商品説明
               <br>＊必須
             </th>
             <td>
@@ -60,7 +62,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">販売状況
+            <th scope="row ">販売状況
             </th>
             <td>
               <select class="form-control" name="is_selling">
@@ -72,7 +74,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">価格 (円)
+            <th scope="row ">価格 (円)
               <br>＊必須
             </th>
             <td>
@@ -80,14 +82,14 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">消費税 (％)
+            <th scope="row ">消費税 (％)
             </th>
             <td>
               <input name="tax"  class="form-control" type="text" value="10">
             </td>
           </tr>
           <tr>
-            <th scope="row">在庫数
+            <th scope="row ">在庫数
               <br>＊必須
             </th>
             <td>
@@ -103,52 +105,52 @@
 
           <!-- 表示非表示切り替え -->
           <tr id="secondBox">
-            <th scope="row">月曜日
+            <th scope="row ">月曜日
             </th>
             <td>
-              <input name="stock_monday"  class="form-control" type="text">
+              <input name="stock_monday"  class="form-control" type="text" value="0" >
             </td>
           </tr>
           <tr id="thirdBox">
-            <th scope="row">火曜日
+            <th scope="row ">火曜日
             </th>
             <td>
-              <input name="stock_tuesday"  class="form-control" type="text">
+              <input name="stock_tuesday"  class="form-control" type="text" value="0">
             </td>
           </tr>
           <tr id="fourthBox">
-            <th scope="row">水曜日
+            <th scope="row ">水曜日
             </th>
             <td>
-              <input name="stock_wednesday"  class="form-control" type="text">
+              <input name="stock_wednesday"  class="form-control" type="text" value="0">
             </td>
           </tr>
           <tr id="fifthBox">
-            <th scope="row">木曜日
+            <th scope="row ">木曜日
             </th>
             <td>
-              <input name="stock_thursday"  class="form-control" type="text">
+              <input name="stock_thursday"  class="form-control" type="text" value="0">
             </td>
           </tr>
           <tr id="sixthBox">
-            <th scope="row">金曜日
+            <th scope="row ">金曜日
             </th>
             <td>
-              <input name="stock_friday"  class="form-control" type="text">
+              <input name="stock_friday"  class="form-control" type="text" value="0">
             </td>
           </tr>
           <tr id="seventhBox">
-            <th scope="row">土曜日
+            <th scope="row ">土曜日
             </th>
             <td>
-              <input name="stock_saturday"  class="form-control" type="text">
+              <input name="stock_saturday"  class="form-control" type="text" value="0">
             </td>
           </tr>
           <tr id="eighthBox">
-            <th scope="row">日曜日
+            <th scope="row ">日曜日
             </th>
             <td>
-              <input name="stock_sunday"  class="form-control" type="text">
+              <input name="stock_sunday"  class="form-control" type="text" value="0">
             </td>
           </tr>
         </tbody>
