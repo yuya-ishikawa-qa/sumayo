@@ -96,12 +96,16 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo')->name('storeInfo.edit');
     Route::get('/stores/edit/holiday', 'StoresController@editHoliday');
     Route::get('/stores/edit/category', 'StoresController@editCategory');
-    Route::get('/stores/edit/logo', 'StoresController@editStoreLogo');
-    Route::get('/stores/edit/images', 'StoresController@editStoreImages');
+    Route::get('/stores/{id}/edit/logo', 'StoresController@editStoreLogo')->name('storeLogo.edit');
+    Route::get('/stores/{id}/edit/images', 'StoresController@editStoreImages')->name('storeImages.edit');
 
     // 店舗情報更新処理
     Route::put('/stores/{id}/time', 'StoresController@updateStoreTime')->name('storeTime.update');
     Route::put('/stores/{id}/info', 'StoresController@updateStoreInfo')->name('storeInfo.update');
+
+    // 店舗画像更新処理
+    Route::post('stores/{id}/logo', 'StoresController@uploadStoreLogo')->name('storeLogo.upload');
+    Route::post('stores/{id}/images', 'StoresController@updateStoreImages')->name('storeImages.upload');
 
     // ユーザー関係処理
 

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Store;
 use App\Http\Requests\StoreInfosRequest;
 use App\Http\Requests\StoreTimesRequest;
+use App\Http\Requests\StoreLogosRequest;
 
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class StoresController extends Controller
 {
@@ -77,14 +78,16 @@ class StoresController extends Controller
         return view('stores.edit_store_info', ['store' => $store]);
     }
 
-    public function editStoreLogo()
+    public function editStoreLogo($id)
     {
-        return view('stores.edit_store_logo');
+        $store = Store::findOrFail($id);
+        return view('stores.edit_store_logo', ['store' => $store]);
     }
 
-    public function editStoreImages()
+    public function editStoreImages($id)
     {
-        return view('stores.edit_store_images');
+        $store = Store::findOrFail($id);
+        return view('stores.edit_store_images', ['store' => $store]);
     }
 
     /**
@@ -141,6 +144,55 @@ class StoresController extends Controller
         session()->flash('flash_message', '店舗営業時間の更新が完了しました');
 
         return view('stores.time', ['store' => $store]);
+
+    }
+
+    public function uploadStoreLogo(storeLogosRequest $request, $id) {
+
+        if ($request->file('logo')->isValid([])) {
+
+            // 画像の保存
+            $path = $request->file('logo')->store('/'); 
+            Storage::move($path, 'public/storeLogo/' . $path);
+
+            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            $store = Store::findOrFail($id);
+            Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
+
+            //新規画像ファイル名保存(or上書き)
+            $store->logo = $path;
+            $store->save();
+        
+            return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
+
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors();
+        }
+
+    }
+
+    public function uploadStoreImages(storeImagesRequest $request, $id) {
+
+        if ($request->file('logo')->isValid([])) {
+
+            // 画像の保存
+            $path = $request->file('logo')->store('/'); 
+            Storage::move($path, 'public/storeLogo/' . $path);
+
+            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            $store = Store::findOrFail($id);
+            Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
+
+            //新規画像ファイル名保存(or上書き)
+            $store->logo = $path;
+            $store->save();
+        
+            return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
+
+        }
 
     }
 }

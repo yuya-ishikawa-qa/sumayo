@@ -33,12 +33,12 @@
 
     <div class="text-center mb-4">
       <input type="submit" value="送信" class="btn btn-primary">
-    </div>
-    <div class="text-center">
+    </div> 
+  </form>
+  <div class="text-center">
       <a href="/stores"><button class="btn btn-secondary">戻る</button></a>
     </div>
 
-  </form>
 </div>
 
 @endsection
