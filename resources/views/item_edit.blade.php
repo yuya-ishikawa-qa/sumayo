@@ -1,14 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<!-- エラーメッセージ。なければ表示しない -->
-@if ($errors->any())
-<ul>
-    @foreach($errors->all() as $error)
-    <li>{{ $error }}
-    </li>
-    @endforeach
-</ul>
-@endif
+
 <div class="container">
     <a href="{{ url('/stores')}}">TOP画面へ
     </a>
@@ -25,6 +17,13 @@
             </th>
             <td>
                 <input name="item_name" class="form-control" type="text" value="{{$item->item_name}}">
+                @if($errors->has('item_name'))
+                    <div>
+                        <span class="text-danger">
+                        <strong>{{ $errors->first('item_name') }}</strong>
+                        </span>
+                    </div>
+                @endif
             </td>
             </tr>
             <tr>
@@ -63,6 +62,13 @@
             <td>
                 <textarea name="description" class="form-control">{{$item->description}}
                 </textarea>
+                @if($errors->has('description'))
+                    <div>
+                        <span class="text-danger">
+                        <strong>{{ $errors->first('description') }}</strong>
+                        </span>
+                    </div>
+                @endif
             </td>
             </tr>
             <tr>
@@ -83,6 +89,13 @@
             </th>
             <td>
                 <input name="price"  class="form-control" type="text" value="{{$item->price}}">
+                @if($errors->has('price'))
+                    <div>
+                        <span class="text-danger">
+                        <strong>{{ $errors->first('price') }}</strong>
+                        </span>
+                    </div>
+                @endif
             </td>
             </tr>
             <tr>
@@ -94,7 +107,6 @@
             </tr>
             <tr>
             <th scope="row">在庫数
-                <br>＊必須
             </th>
             <td>
                 <label>
