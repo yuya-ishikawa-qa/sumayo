@@ -17,10 +17,10 @@
       <div class="card-body">
         <h6 class="card-title">注文予約一覧</h6>
         <p class="card-text"></p>
-        <a href="{{ url('/order_list')}}" class="btn btn-primary">表示</a>
+          <a href="{{route('orders.index')}}" class="btn btn-primary">表示</a>
       </div>
     </div>
-    
+
     <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">過去注文履歴</h6>

@@ -3,11 +3,17 @@
 @section('content')
 <div class="order-list">
     <div class="search">
-        <form>
-            <input class="form-control" name="test" type="date" value="2020-07-15" id="last_name">
-            <button class="btn btn-primary" type="button">前</button>
-            <button class="btn btn-primary" type="button">今日</button>
-            <button class="btn btn-primary" type="button">次</button>
+        <form action="{{route('orders.index')}}" method="get">
+            <input name="date" class="form-control" type="date" value="{{ $search_date->format('Y-m-d') }}">
+            @php
+            $search_date->modify('- 1 days');
+            @endphp
+            <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $search_date->format('Y-m-d') }}">前</button>
+            <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $today->format('Y-m-d') }}">今日</button>
+            @php
+            $search_date->modify('+ 2 days');
+            @endphp
+            <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $search_date->format('Y-m-d') }}">次</button>
         </form>
     </div>
     <form action="{!! url('/order_detail'); !!}">
@@ -33,15 +39,8 @@
             @endif
                 <div class="time">{{ $order->recieved_time }}</div>
                 <div class="content">{{ $customer->last_name }} {{ $customer->first_name }}<br>
-                    @if($order->order_status == 1)
-                    <span class="bg-info">受取前</span>
-                    @elseif($order->order_status == 2)
-                    <span class="bg-info">受取済</span>
-                    @elseif($order->order_status == 3)
-                    <span class="bg-info">破棄</span>
-                    @endif
-
-                    合計{{ $order->order_total_price }}円<br>
+                    <span class="bg-info">{{ $order_status_list[$order->order_status] }}</span>
+                    合計{{ number_format($order->order_total_price) }}円<br>
                     @foreach ($orderitems as $k => $item)
                     @if($orderitems->count() === $k)
                     {{ $item->item_name }}×{{ $item->quantity }}
@@ -51,7 +50,7 @@
                     @endforeach
                 </div>
                 <div class="operation">
-                    <a href="/orders/{{$order->id}}/show"><button type="button">詳細確認</button></a><br>
+                    <a href="{{route('orders.show',['id' => $order->id])}}"><button type="button">詳細確認</button></a><br>
                     <label><input type="checkbox">完了</label>
                 </div>
             </div>
@@ -60,4 +59,7 @@
         </div>
     </form>
 </div>
+<script>
+
+</script>
 @endsection

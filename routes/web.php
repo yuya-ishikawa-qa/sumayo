@@ -98,11 +98,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
 
     // 注文管理関係処理
-    Route::get('/orders/', 'OrdersController@index');
-    Route::get('/orders/{id}/show', 'OrdersController@show');
-    Route::get('/orders/edit', 'OrdersController@update');
-    Route::get('/orders/update', 'OrdersController@update');
-    Route::get('/orders/{id}/destroy', 'OrdersController@destroy');
+    Route::resource('orders', 'OrdersController',['only' => ['index','show','update']]);
 
 });
 Auth::routes();

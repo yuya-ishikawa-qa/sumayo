@@ -10,25 +10,89 @@ use App\OrderItem;
 
 class OrdersController extends Controller
 {
-    public function index()
-    {
-        $orders = Order::orderBy('recieved_date','asc')->paginate(50);;
+    const order_status_list = [
+        1 => '受取前',
+        2 => '受取済',
+        3 => '破棄',
+    ];
 
-        return view('order_list', [
+    public function index(Request $request)
+    {
+        # 日付チェック
+        $input_date = '';
+        $today = $search_date = null;
+
+        if(!empty($request->input('date_btn'))){
+            $input_date = $request->input('date_btn');
+        }elseif(!empty($request->input('date'))){
+            $input_date = $request->input('date');
+        }
+
+        $today = date_create(date("Y-m-d"));
+        if (strptime($input_date, '%Y-%m-%d')) {
+            list($Y, $m, $d) = explode('-', $input_date);
+
+            if(checkdate($m, $d, $Y) === true) {
+                $search_date = date_create($input_date);
+            }else{
+                # 当日を検索
+                $search_date = date_create(date("Y-m-d"));
+            }
+        }elseif(strptime($input_date, '%Y/%m/%d')){
+            list($Y, $m, $d) = explode('/', $input_date);
+
+            if(checkdate($m, $d, $Y) === true) {
+                $search_date = date_create($input_date);
+            }else{
+                # 当日を検索
+                $search_date = date_create(date("Y-m-d"));
+            }
+        }else{
+            # 当日を検索
+            $search_date = date_create(date("Y-m-d"));
+        }
+
+        $orders = Order::where('recieved_date', $search_date->format('Y-m-d'))->orderBy('recieved_date','asc')->paginate(50);;
+
+        return view('orders/index', [
             'orders' => $orders,
+            'today' => $today,
+            'search_date' => $search_date,
+            'order_status_list' => self::order_status_list,
         ]);
     }
 
     public function show($id)
     {
-        $orders = Order::where('id', $id)->orderBy('recieved_date','asc');
-        return view('order_detail');
+
+        $orders = Order::find([$id]);
+
+        if($orders->count() === 1){
+            foreach( $orders as $value){
+                $order = $value;
+                $customer = $value->customer()->first();
+                $orderitems = $value->orderitems()->orderBy('id', 'asc')->get();
+            }
+
+
+            $sub_total = $tax_total = 0; #初期化
+            $recieved_date = date_create($order->recieved_date);
+
+            return view('orders/detail', [
+                'order' => $order,
+                'customer' => $customer,
+                'orderitems' => $orderitems,
+                'sub_total' => $sub_total,
+                'tax_total' => $tax_total,
+                'recieved_date' => $recieved_date,
+            ]);
+        }else{
+            # 表示できる情報がないため注文一覧へ遷移
+            return $this->index();
+        }
+
     }
 
-    public function edit()
-    {
-        return view('order_edit');
-    }
 
     public function update()
     {
@@ -37,6 +101,6 @@ class OrdersController extends Controller
 
     public function destroy()
     {
-        return view('order_list');
+        return view('order/index');
     }
 }
