@@ -12,7 +12,7 @@
 @endif
 
 <div class="container">
-<a href="{{ url('/store')}}">TOP画面へ</a>
+<a href="{{ url('/stores')}}">TOP画面へ</a>
   <form action="/items/store" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <a href="{{ url('/store')}}">TOP画面へ</a>
+    <a href="{{ url('/stores')}}">TOP画面へ</a>
     <h2 class="text-center mt-2">商品詳細</h2>
     <div class="row">
         <div class="col-5 mx-auto d-block mb-2">

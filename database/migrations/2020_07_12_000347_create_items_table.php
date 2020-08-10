@@ -28,7 +28,7 @@ class CreateItemsTable extends Migration
             $table->unsignedTinyInteger('stock_thursday')->default(0);
             $table->unsignedTinyInteger('stock_friday')->default(0);
             $table->unsignedTinyInteger('stock_saturday')->default(0);
-            $table->string('path')->nullable();
+            $table->string('path')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->softDeletes();

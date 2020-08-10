@@ -10,7 +10,7 @@
 </ul>
 @endif
 <div class="container">
-    <a href="{{ url('/store')}}">TOP画面へ
+    <a href="{{ url('/stores')}}">TOP画面へ
     </a>
     <h2 class="text-center mt-2">商品情報編集
     </h2>

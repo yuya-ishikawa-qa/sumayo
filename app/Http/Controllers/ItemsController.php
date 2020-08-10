@@ -102,7 +102,7 @@ class ItemsController extends Controller
             if($request->hasFile('path')) { 
                 //ファイル名取得
                 $filename = $request->file('path')->getClientOriginalName();
-                $path = $request->path->storeAs('items',date("Y-m-d H:i:s").'_'.$filename);
+                $path = $request->path->storeAs('items',date("Y-m-d_H:i:s").'_'.$filename);
 
             } else {
                 $path = "";
