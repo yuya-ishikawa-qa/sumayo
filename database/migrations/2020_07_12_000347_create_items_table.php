@@ -16,9 +16,9 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('item_name',128);
-            $table->text('description');
-            $table->boolean('is_selling');
-            $table->tinyInteger('item_category_id');
+            $table->text('description')->nullable();
+            $table->boolean('is_selling')->default(0);
+            $table->tinyInteger('item_category_id')->default(0);
             $table->unsignedMediumInteger('price')->default(0);
             $table->unsignedTinyInteger('tax')->default(10);
             $table->unsignedTinyInteger('stock_sunday')->default(0);
@@ -28,9 +28,10 @@ class CreateItemsTable extends Migration
             $table->unsignedTinyInteger('stock_thursday')->default(0);
             $table->unsignedTinyInteger('stock_friday')->default(0);
             $table->unsignedTinyInteger('stock_saturday')->default(0);
-            $table->string('path');
+            $table->string('path')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->softDeletes();
         });
     }
 
