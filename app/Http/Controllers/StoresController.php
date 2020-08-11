@@ -6,6 +6,8 @@ use App\Store;
 use App\Http\Requests\StoreInfosRequest;
 use App\Http\Requests\StoreTimesRequest;
 use App\Http\Requests\StoreLogosRequest;
+use App\Http\Requests\StoreImagesRequest;
+
 
 use Carbon\Carbon;
 
@@ -147,7 +149,7 @@ class StoresController extends Controller
 
     }
 
-    public function uploadStoreLogo(storeLogosRequest $request, $id) {
+    public function uploadStoreLogo(StoreLogosRequest $request, $id) {
 
         if ($request->file('logo')->isValid([])) {
 
@@ -174,25 +176,69 @@ class StoresController extends Controller
 
     }
 
-    public function uploadStoreImages(storeImagesRequest $request, $id) {
+    public function uploadStoreImages(StoreImagesRequest $request, $id) {
 
-        if ($request->file('logo')->isValid([])) {
+        if ($request->hasFile('top_images')) {
 
-            // 画像の保存
-            $path = $request->file('logo')->store('/'); 
-            Storage::move($path, 'public/storeLogo/' . $path);
-
-            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            // 全画像リセット
             $store = Store::findOrFail($id);
-            Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
-
-            //新規画像ファイル名保存(or上書き)
-            $store->logo = $path;
+            Storage::disk('local')->delete('public/storeImages/'.$store->top_image1);
+            Storage::disk('local')->delete('public/storeImages/'.$store->top_image2);
+            Storage::disk('local')->delete('public/storeImages/'.$store->top_image3);
+            
+            // 全画像ファイル名リセット
+            $store->top_image1 = null;
+            $store->top_image2 = null;
+            $store->top_image3 = null;
             $store->save();
-        
-            return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
 
+            // カウント用変数初期化
+            $i=0;
+            
+            // 画像更新処理
+            foreach ($request->file('top_images') as $top_image ) {
+
+                // カウント用変数
+                $i++;
+            
+                if ($i === 1) {
+
+                    // 画像1の保存
+                    $path1 = $top_image->store('/'); 
+                    Storage::move($path1, 'public/storeImages/' . $path1);
+
+                    //画像1 ファイル名格納
+                    $store->top_image1 = $path1;
+                }
+                
+                if ($i === 2) {
+
+                    // 画像2の保存
+                    $path2 = $top_image->store('/'); 
+                    Storage::move($path2, 'public/storeImages/' . $path2);
+
+                    //画像2 ファイル名格納
+                    $store->top_image2 = $path2;
+                }
+
+                if ($i === 3) {
+
+                    // 画像3の保存
+                    $path3 = $top_image->store('/'); 
+                    Storage::move($path3, 'public/storeImages/' . $path3);
+
+                    //画像3 ファイル名格納
+                    $store->top_image3 = $path3;
+                }
+
+                // 画像名更新
+                $store->save();
+            }
+
+            return back()->with('flash_message', '店舗用トップ画像の投稿が完了しました');    
         }
 
+        // 添付がない場合のエラーメッセージ
+        return back()->with('error_message', '画像をアップロードしてください');
     }
 }
