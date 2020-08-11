@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 // CustomerItemsモデル使用
-use\app\CustomerItems;
+use\App\Items;
+use\App\Store;
 
 class CustomerItemsController extends Controller
 {
@@ -16,16 +17,19 @@ class CustomerItemsController extends Controller
      */
 
     // TOP
-    public function index(Request $request)
+    public function index()
     {
         // モデルできたらこっち使う
+        $items = Items::all();
+
+        $store = Store::all();
         // $items = CustomerItems::orderBy('id','desc');
         
         // return view('index', [
         //     'items' => $items,
         // ]);
 
-        return view('index');
+        return view('index',['items' => $items, 'store' => $store]);
     }
 
     /**
@@ -62,9 +66,12 @@ class CustomerItemsController extends Controller
 
     // 商品詳細
     // public function showDetail(Request $request,Item $item,$id)
-    public function showDetail()
+    public function showDetail($id)
     {
-        return view('detail');
+             // レコード検索
+             $item = Items::find($id);
+             // 結果をビューに渡す
+             return view('detail')->with('item',$item);
 
         // $items = CustomerItems::findOrFail($id);
         // return view('detail')->with([
@@ -78,10 +85,13 @@ class CustomerItemsController extends Controller
     {
         return view('cart');
     }
+
     // 店舗情報
     public function showShopinfo()
     {
-        return view('shopinfo');
+        $store = Store::all();
+
+        return view('shopinfo',['store' => $store]);
     }
 
     /**

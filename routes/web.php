@@ -37,7 +37,7 @@ Route::get('/order_edit', function () {
 // TOP(客側)
 Route::get('/', 'CustomerItemsController@index');
 // 商品詳細(客側)
-Route::get('/detail', 'CustomerItemsController@showDetail');
+Route::get('/detail/{id}', 'CustomerItemsController@showDetail');
 // // 商品詳細(客側)
 // Route::get('/detail/{id}', 'CustomerItemsController@showDetail');
 // カート情報(客側)
