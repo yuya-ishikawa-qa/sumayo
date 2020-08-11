@@ -9,7 +9,10 @@
         <div class="container">
             <div class="row">
                 <img class="col-10 mb-2 img-fluid mx-auto d-block" src=
-        @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/{{$item->path}}" @endif id=item_detail_image alt=""></a>
+                @if ( $item->path == null) "/storage/items/no_image.png" 
+                @else "/storage/{{$item->path}}" 
+                @endif 
+                id=item_detail_image alt="">
 
                 <div class="product-title col-10"><h1>{{ $item->item_name }}</h1></div>
                 <div class="product-description col-8"><p>{{ $item->description }}</p></div>

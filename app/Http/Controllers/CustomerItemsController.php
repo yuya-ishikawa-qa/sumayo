@@ -19,15 +19,8 @@ class CustomerItemsController extends Controller
     // TOP
     public function index()
     {
-        // モデルできたらこっち使う
         $items = Items::all();
-
         $store = Store::all();
-        // $items = CustomerItems::orderBy('id','desc');
-        
-        // return view('index', [
-        //     'items' => $items,
-        // ]);
 
         return view('index',['items' => $items, 'store' => $store]);
     }
@@ -65,21 +58,20 @@ class CustomerItemsController extends Controller
     }
 
     // 商品詳細
-    // public function showDetail(Request $request,Item $item,$id)
     public function showDetail($id)
     {
-             // レコード検索
-             $item = Items::find($id);
-             // 結果をビューに渡す
-             return view('detail')->with('item',$item);
+        // お客さん画面の全ページできたらこっちで↓headerのlogoが表示できるようにする
+        //     $item = Items::find($id);
+        //     $store = Store::all();
+        //     return view('detail',['item' => $item, 'store' => $store]);
 
-        // $items = CustomerItems::findOrFail($id);
-        // return view('detail')->with([
-        //     'items' => $items
-        // ]);
+             // レコード検索
+            $item = Items::find($id);
+             // 結果をビューに渡す
+             return view('detail',['item' => $item]);
 
     }
-    // カートに追加のコントローラー必要？
+
     // カート情報
     public function showCart()
     {
@@ -91,6 +83,7 @@ class CustomerItemsController extends Controller
     {
         $store = Store::all();
 
+        // 結果をビューに渡す
         return view('shopinfo',['store' => $store]);
     }
 

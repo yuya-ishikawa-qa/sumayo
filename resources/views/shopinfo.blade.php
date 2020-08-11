@@ -11,7 +11,7 @@
         @foreach ($store as $store)
             <h1 class="col-12 mt-3 mb-3">{{ $store->name }}</h1>
             <p class="col-4">営業時間</p>
-            <p class="col-8">{{ $store->start_time }}-{{ $store->end_time }}</p>
+            <p class="col-8">{{ substr($store->start_time, 0, 5) }}-{{ substr($store->end_time, 0, 5) }}</p>
 
             {{--  定休日は後で  --}}
             <p class="col-4">定休日</p>

@@ -4,6 +4,7 @@
 
     <div class="container">
 {{--  トップ画面スライドショー  --}}
+{{--  トップ画面保存が実装されたらDBから情報持ってくる  --}}
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -37,7 +38,7 @@
                 <div class="row">
             @foreach ($store as $store)
                     <h1 class="col-sm-12">{{ $store->name }}</h1>
-                    <p class="col-8 mb-0">営業時間  {{ $store->start_time }}-{{ $store->end_time }}</p>
+                    <p class="col-8 mb-0">営業時間  {{ substr($store->start_time, 0, 5) }}-{{ substr($store->end_time, 0, 5) }}</p>
                     <a href="{{ url('/shopinfo')}}" class="col-4">店舗詳細</a>
                     {{--  <p class="col-8 mt-0">今月の定休日 : 3日/5日/15日</p>  --}}
                     @endforeach
@@ -57,17 +58,18 @@
 {{--  商品一覧  --}}
             <div class="row mt-3">
             @isset($items)
-
             @php $i = 1 @endphp
+                @php $a=1 @endphp
             @while ($i < 5)
-            @foreach ($items as $item)
-          
-            @if($item->item_category_id == 1)<h3 class="col-12 mt-2" id="1">おすすめ</h3>@endif
-            @if($item->item_category_id == 2)<h3 class="col-12 mt-2" id="2">a</h3>@endif
-            @if($item->item_category_id == 3)<h3 class="col-12 mt-2" id="3">v</h3>@endif
-            @if($item->item_category_id == 4)<h3 class="col-12 mt-2" id="4">r</h3>@endif
-            @break
-            @endforeach
+{{--  商品ごとのカテゴリー表示が未完成なので修正する  --}}
+                @foreach ($items as $item)
+                @if($item->item_category_id == 1)<h3 class="col-12 mt-2" id="1">おすすめ</h3>@endif
+                @if($item->item_category_id == 2)<h3 class="col-12 mt-2" id="2">a</h3>@endif
+                @if($item->item_category_id == 3)<h3 class="col-12 mt-2" id="3">v</h3>@endif
+                @if($item->item_category_id == 4)<h3 class="col-12 mt-2" id="4">r</h3>@endif
+                @break
+                @php $a++ @endphp
+                @endforeach
 
             @foreach ($items as $item)
             @if($item->item_category_id == $i)
@@ -92,6 +94,45 @@
             @endwhile
 
             @endisset
+            
+            {{--  一番近かった  --}}
+            {{--  @isset($items)
+            @php $i = 1 @endphp
+                @php $a=1 @endphp
+            @while ($i < 5)
+
+                @foreach ($items as $item)
+                @if($item->item_category_id == 1)<h3 class="col-12 mt-2" id="1">おすすめ</h3>@endif
+                @if($item->item_category_id == 2)<h3 class="col-12 mt-2" id="2">a</h3>@endif
+                @if($item->item_category_id == 3)<h3 class="col-12 mt-2" id="3">v</h3>@endif
+                @if($item->item_category_id == 4)<h3 class="col-12 mt-2" id="4">r</h3>@endif
+                @break
+                @php $a++ @endphp
+                @endforeach
+
+            @foreach ($items as $item)
+            @if($item->item_category_id == $i)
+            <div class="col-6 col-sm-4 col-lg-3">
+                <a class="stretched-link">
+                <div class="card-body p-2">
+                    <a class="product-thumbnail d-block" href='/detail/{{$item->id}}'>
+                    <img src=
+                        @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/{{$item->path}}" @endif
+                    class="img-fluid" alt="items_list_image" id="items_list_image">
+                    </a>
+                    <p class="product-title mb-0">{{ $item->item_name }}
+                    </p>
+                    <p class="sale-price mb-0">&yen;{{ $item->price }}
+                    </p>
+                </div>
+                </a>
+            </div>
+            @endif
+            @endforeach
+            @php $i++ @endphp
+            @endwhile
+
+            @endisset  --}}
             {{--  @isset($items)
 
             
