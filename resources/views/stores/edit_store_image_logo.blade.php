@@ -6,8 +6,14 @@
     <h2>店舗画像管理</h2>
   </div>
 
-  <form action="#" method="post">
+  <form action="{{ route('storeLogo.upload') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
+
+    @isset ($filename)
+    <div>
+        <img src="{{ asset('storage/' . $filename) }}">
+    </div>
+    @endisset
 
     <div class="form-group text-center mb-4">
       <label class="control-label">店舗ロゴ画像(サイト上部)</label>
