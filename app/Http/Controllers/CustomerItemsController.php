@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 // CustomerItemsモデル使用
-use\app\CustomerItems;
+use\App\Items;
+use\App\Store;
 
 class CustomerItemsController extends Controller
 {
@@ -16,16 +17,12 @@ class CustomerItemsController extends Controller
      */
 
     // TOP
-    public function index(Request $request)
+    public function index()
     {
-        // モデルできたらこっち使う
-        // $items = CustomerItems::orderBy('id','desc');
-        
-        // return view('index', [
-        //     'items' => $items,
-        // ]);
+        $items = Items::all();
+        $store = Store::all();
 
-        return view('index');
+        return view('index',['items' => $items, 'store' => $store]);
     }
 
     /**
@@ -61,27 +58,33 @@ class CustomerItemsController extends Controller
     }
 
     // 商品詳細
-    // public function showDetail(Request $request,Item $item,$id)
-    public function showDetail()
+    public function showDetail($id)
     {
-        return view('detail');
+        // お客さん画面の全ページできたらこっちで↓headerのlogoが表示できるようにする
+        //     $item = Items::find($id);
+        //     $store = Store::all();
+        //     return view('detail',['item' => $item, 'store' => $store]);
 
-        // $items = CustomerItems::findOrFail($id);
-        // return view('detail')->with([
-        //     'items' => $items
-        // ]);
+             // レコード検索
+            $item = Items::find($id);
+             // 結果をビューに渡す
+             return view('detail',['item' => $item]);
 
     }
-    // カートに追加のコントローラー必要？
+
     // カート情報
     public function showCart()
     {
         return view('cart');
     }
+
     // 店舗情報
     public function showShopinfo()
     {
-        return view('shopinfo');
+        $store = Store::all();
+
+        // 結果をビューに渡す
+        return view('shopinfo',['store' => $store]);
     }
 
     /**
