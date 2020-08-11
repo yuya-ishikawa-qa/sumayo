@@ -114,7 +114,7 @@
         <div class="card-body">
         <h6 class="card-title">お店ロゴ画像</h6>
         <p class="card-text"></p>
-        <a href="{{ url('/stores/edit/logo') }}" class="btn btn-primary">登録画面へ</a>
+        <a href="{{ route('storeLogo.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
 
         </div>
     </div>
@@ -123,7 +123,7 @@
         <div class="card-body">
         <h6 class="card-title">オススメ商品画像</h6>
         <p class="card-text"></p>
-        <a href="{{ url('/stores/edit/images') }}" class="btn btn-primary">登録画面へ</a>
+        <a href="{{ route('storeImages.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
       </div>
     </div>
 </div>
