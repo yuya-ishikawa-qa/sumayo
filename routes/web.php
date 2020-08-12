@@ -75,7 +75,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     // 店舗画像更新処理
     Route::post('stores/{id}/logo', 'StoresController@uploadStoreLogo')->name('storeLogo.upload');
-    Route::post('stores/{id}/images', 'StoresController@updateStoreImages')->name('storeImages.upload');
+    Route::post('stores/{id}/images', 'StoresController@uploadStoreImages')->name('storeImages.upload');
 
     // ユーザー関係処理
 

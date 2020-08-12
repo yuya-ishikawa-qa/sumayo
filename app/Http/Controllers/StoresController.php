@@ -6,6 +6,8 @@ use App\Store;
 use App\Http\Requests\StoreInfosRequest;
 use App\Http\Requests\StoreTimesRequest;
 use App\Http\Requests\StoreLogosRequest;
+use App\Http\Requests\StoreImagesRequest;
+
 
 use Carbon\Carbon;
 
@@ -147,7 +149,7 @@ class StoresController extends Controller
 
     }
 
-    public function uploadStoreLogo(storeLogosRequest $request, $id) {
+    public function uploadStoreLogo(StoreLogosRequest $request, $id) {
 
         if ($request->file('logo')->isValid([])) {
 
@@ -174,25 +176,39 @@ class StoresController extends Controller
 
     }
 
-    public function uploadStoreImages(storeImagesRequest $request, $id) {
+    public function uploadStoreImages(StoreImagesRequest $request, $id) {
 
-        if ($request->file('logo')->isValid([])) {
+        if ($request->hasFile('top_images')) {
 
-            // 画像の保存
-            $path = $request->file('logo')->store('/'); 
-            Storage::move($path, 'public/storeLogo/' . $path);
-
-            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
             $store = Store::findOrFail($id);
-            Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
 
-            //新規画像ファイル名保存(or上書き)
-            $store->logo = $path;
-            $store->save();
+            // 全画像&全画像ファイル名リセット処理
+            for ($i = 1; $i <= 3; $i++) {
+
+                Storage::disk('local')->delete('public/storeImages/'.$store->{'top_image'.$i});
+                $store->{'top_image'.$i} = null;
+            }
+
+            $store->save();            
         
-            return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
+            // 新規画像投稿処理
+            foreach ($request->file('top_images') as $key => $top_image ) {
 
+                // 新規画像 保存
+                $path = $top_image->store('/'); 
+                Storage::move($path, 'public/storeImages/' . $path);
+                
+                //新規画像 ファイル名格納
+                $store->$key = $path;
+            }
+
+            // 新規画像 ファイル名更新
+            $store->save();
+
+            return back()->with('flash_message', '店舗用トップ画像の投稿が完了しました');    
         }
 
+        // 添付がない場合のエラーメッセージ
+        return back()->with('error_message', '画像を添付してください');
     }
 }
