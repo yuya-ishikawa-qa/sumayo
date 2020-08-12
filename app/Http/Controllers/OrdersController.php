@@ -77,7 +77,7 @@ class OrdersController extends Controller
             $sub_total = $tax_total = 0; #初期化
             $recieved_date = date_create($order->recieved_date);
 
-            return view('orders/detail', [
+            return view('orders/show', [
                 'order' => $order,
                 'customer' => $customer,
                 'orderitems' => $orderitems,
@@ -106,7 +106,7 @@ class OrdersController extends Controller
 
             $recieved_date = date_create($order->recieved_date);
 
-            return view('orders/update', [
+            return view('orders/edit', [
                 'order' => $order,
                 'customer' => $customer,
                 'orderitems' => $orderitems,
