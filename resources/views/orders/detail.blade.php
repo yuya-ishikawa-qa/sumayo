@@ -46,6 +46,13 @@
 
         <div>
             <dl>
+                <dt>ステータス</dt>
+                <dd>{{ $order_status_list[$order->order_status] }}</dd>
+            </dl>
+        </div>
+
+        <div>
+            <dl>
                 <dt>受取日</dt>
                 <dd>{{ $recieved_date->format('Y年m月d日') }}</dd>
             </dl>
@@ -89,25 +96,26 @@
         <div>
             <dl>
                 <dt><label for="tel">電話番号</label></dt>
-                <dd>{{ $customer->last_name }}</dd>
+                <dd>{{ $customer->tel }}</dd>
             </dl>
         </div>
 
         <div>
             <dl>
                 <dt><label for="mail">メールアドレス</label></dt>
-                <dd>{{ $customer->last_name }}</dd>
+                <dd>{{ $customer->mail }}</dd>
             </dl>
         </div>
 
         <div>
             <dl>
                 <dt><label for="remark">備考</label></dt>
-                <dd>{{ $order->recieved_time }}</dd>
+                <dd>{{ $order->comment }}</dd>
             </dl>
         </div>
+
     </div>
-    <a href="/orders/{id}/update"><button class="btn btn-primary" type="submit">編集</button></a>
-    <a href="/orders"><button class="btn btn-primary" type="submit">戻る</button></a>
+    <a href="{{route('orders.edit',['id' => $order->id])}}"><button class="btn btn-primary" type="submit">編集</button></a>
+    <a href="{{route('orders.index',['date' => $recieved_date->format('Y-m-d')])}}"><button class="btn btn-primary" type="submit">戻る</button></a>
 </div>
 @endsection

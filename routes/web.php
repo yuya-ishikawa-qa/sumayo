@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
 
     // 注文管理関係処理
-    Route::resource('orders', 'OrdersController',['only' => ['index','show','update']]);
+    Route::resource('orders', 'OrdersController',['only' => ['index','show','edit','update']]);
 
 });
 Auth::routes();

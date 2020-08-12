@@ -14,6 +14,7 @@ class OrderItem extends Model
         'price',
         'tax',
         'image',
+        'comment',
     ];
 
     public function orderitems()

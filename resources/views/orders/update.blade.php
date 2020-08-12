@@ -6,15 +6,30 @@
         <h3 class="login_title text-left d-inline-block mt-5">情報編集</h3>
     </div>
 
-    <form action="{!! url('/order_confirmation'); !!}">
+    <form action="{{route('orders.update',['id' => $order->id])}}" method="post">
+        {{csrf_field()}}
+        {{ method_field('PUT')}}
         <div class="form-area">
+            <div>
+                <dl>
+                    <dt>id</dt>
+                    <dd>{{ $order->id }}</dd>
+                </dl>
+            </div>
+
 
             <div>
                 <dl>
                     <dt>ステータス</dt>
-                    <dd><select class="custom-select my-1 mr-sm-2 col-sm-10 " id="">
-                        <option value="1">注文</option>
-                        <option value="2">受渡済</option>
+                    <dd>
+                        <select name="order_status" class="custom-select my-1 mr-sm-2 col-sm-10 " id="">
+                        @foreach($order_status_list as $key => $value)
+                        @if((!empty($request->order_status) && $request->order_status == $key) || old('value') == $key )
+                        <option value = "{{ $key }}" selected>{{ $value }}</option>
+                        @else
+                        <option value = "{{ $key }}">{{ $value }}</option>
+                        @endif
+                        @endforeach
                         </select>
                     </dd>
                 </dl>
@@ -22,74 +37,69 @@
 
             <div>
                 <dl>
-                    <dt><label for="test">受取日</label></dt>
-                    <dd><input class="form-control" name="test" type="date" value="text" id="last_name" required></dd>
+                    <dt>受取日</dt>
+                    <dd>{{ $recieved_date->format('Y年m月d日') }}</dd>
                 </dl>
             </div>
 
             <div>
                 <dl>
                     <dt>受け取り時間</dt>
-                    <dd><select class="custom-select my-1 mr-sm-2 col-sm-10 " id="">
-                        <option value="1">11:00</option>
-                        <option value="2">11:30</option>
-                        <option value="3">12:00</option>
-                        </select>
-                    </dd>
+                    <dd>{{ $order->recieved_time }}</dd>
                 </dl>
             </div>
 
             <div class="half">
                 <dl>
                     <dt><label for="last_name">姓</label></dt>
-                    <dd><input class="form-control" name="last_name" type="text" value="text" id="last_name" required></dd>
+                    <dd>{{ $customer->last_name }}</dd>
                 </dl>
             </div>
 
             <div class="half">
                 <dl>
                     <dt><label for="last_name">名</label></dt>
-                    <dd><input class="form-control" name="first_name" type="text" value="" id="first_name" required></dd>
+                    <dd>{{ $customer->first_name }}</dd>
                 </dl>
             </div>
 
             <div class="half">
                 <dl>
-                    <dt><label for="last_name_kana">姓（カナ）</label></dt>
-                    <dd><input class="form-control" name="last_name_kana" type="text" value="" id="last_name_kana"></dd>
+                    <dt>姓（カナ）</dt>
+                    <dd>{{ $customer->last_name_kana }}</dd>
                 </dl>
             </div>
 
             <div class="half">
                 <dl>
                     <dt><label for="first_name_kana">名（カナ）</label></dt>
-                    <dd><input class="form-control" name="first_name_kana" type="text" value="" id="first_name_kana"></dd>
+                    <dd>{{ $customer->first_name_kana }}</dd>
                 </dl>
             </div>
 
             <div>
                 <dl>
                     <dt><label for="tel">電話番号</label></dt>
-                    <dd><input class="form-control" name="tel" type="tel" value="" id="tel" required></dd>
+                    <dd>{{ $customer->tel }}</dd>
                 </dl>
             </div>
 
             <div>
                 <dl>
                     <dt><label for="mail">メールアドレス</label></dt>
-                    <dd><input class="form-control" name="mail" type="mail" value="" id="mail" required></dd>
+                    <dd>{{ $customer->mail }}</dd>
                 </dl>
             </div>
 
             <div>
                 <dl>
-                    <dt><label for="remark">備考</label></dt>
-                    <dd><textarea class="form-control" name="remark" value="" id="remark"></textarea></dd>
+                    <dt><label for="comment">備考</label></dt>
+                    <dd><textarea class="form-control" name="comment" id="comment">{{ $order->comment }}</textarea></dd>
                 </dl>
             </div>
         </div>
         <button class="btn btn-primary" type="submit">更新</button>
     </form>
-    <a><button class="btn btn-primary" type="submit">戻る</button></a>
+    <a href="{{route('orders.show',['id' => $order->id])}}"><button class="btn btn-primary" type="submit">戻る</button></a>
 </div>
 @endsection

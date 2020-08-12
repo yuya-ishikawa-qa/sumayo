@@ -74,7 +74,6 @@ class OrdersController extends Controller
                 $orderitems = $value->orderitems()->orderBy('id', 'asc')->get();
             }
 
-
             $sub_total = $tax_total = 0; #初期化
             $recieved_date = date_create($order->recieved_date);
 
@@ -85,6 +84,34 @@ class OrdersController extends Controller
                 'sub_total' => $sub_total,
                 'tax_total' => $tax_total,
                 'recieved_date' => $recieved_date,
+                'order_status_list' => self::order_status_list,
+            ]);
+        }else{
+            # 表示できる情報がないため注文一覧へ遷移
+            return $this->index();
+        }
+    }
+
+    public function edit($id)
+    {
+
+        $orders = Order::find([$id]);
+
+        if($orders->count() === 1){
+            foreach( $orders as $value){
+                $order = $value;
+                $customer = $value->customer()->first();
+                $orderitems = $value->orderitems()->orderBy('id', 'asc')->get();
+            }
+
+            $recieved_date = date_create($order->recieved_date);
+
+            return view('orders/update', [
+                'order' => $order,
+                'customer' => $customer,
+                'orderitems' => $orderitems,
+                'recieved_date' => $recieved_date,
+                'order_status_list' => self::order_status_list,
             ]);
         }else{
             # 表示できる情報がないため注文一覧へ遷移
@@ -93,14 +120,19 @@ class OrdersController extends Controller
 
     }
 
-
-    public function update()
+    public function update($id, Request $request)
     {
 
+        $params = $request->validate([
+            'order_status' => 'required',
+            'comment' => '',
+        ]);
+
+        $post = Order::findOrFail($id);
+        $post->fill($params)->save();
+
+        return redirect()->route('orders.show',['id' => $id]);
     }
 
-    public function destroy()
-    {
-        return view('order/index');
-    }
+
 }
