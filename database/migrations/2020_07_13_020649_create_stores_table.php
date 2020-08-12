@@ -16,18 +16,24 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->string('store_name');
-            $table->string('store_phone');
-            $table->string('store_postcode');
-            $table->string('store_address');
-            $table->text('store_comment');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('postcode');
+            $table->string('address');
+            $table->text('comment');
 
             $table->integer('earliest_receivable_time');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->integer('serve_range_time');
+            $table->integer('capacity');
 
-            $table->string('store_logo');
-            $table->string('store_image1');
-            $table->string('store_image2');
-            $table->string('store_image3');
+            # 店舗画像関係は今後必須だが、画像追加機能を作成するまでは一旦nullable()で実装。
+            
+            $table->string('logo')->nullable();
+            $table->string('top_image1')->nullable();
+            $table->string('top_image2')->nullable();
+            $table->string('top_image3')->nullable();
 
             $table->timestamps();
 
