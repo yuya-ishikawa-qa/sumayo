@@ -180,65 +180,35 @@ class StoresController extends Controller
 
         if ($request->hasFile('top_images')) {
 
-            // 全画像リセット
             $store = Store::findOrFail($id);
-            Storage::disk('local')->delete('public/storeImages/'.$store->top_image1);
-            Storage::disk('local')->delete('public/storeImages/'.$store->top_image2);
-            Storage::disk('local')->delete('public/storeImages/'.$store->top_image3);
-            
-            // 全画像ファイル名リセット
-            $store->top_image1 = null;
-            $store->top_image2 = null;
-            $store->top_image3 = null;
-            $store->save();
 
-            // カウント用変数初期化
-            $i=0;
-            
-            // 画像更新処理
-            foreach ($request->file('top_images') as $top_image ) {
+            // 全画像&全画像ファイル名リセット処理
+            for ($i = 1; $i <= 3; $i++) {
 
-                // カウント用変数
-                $i++;
-            
-                if ($i === 1) {
-
-                    // 画像1の保存
-                    $path1 = $top_image->store('/'); 
-                    Storage::move($path1, 'public/storeImages/' . $path1);
-
-                    //画像1 ファイル名格納
-                    $store->top_image1 = $path1;
-                }
-                
-                if ($i === 2) {
-
-                    // 画像2の保存
-                    $path2 = $top_image->store('/'); 
-                    Storage::move($path2, 'public/storeImages/' . $path2);
-
-                    //画像2 ファイル名格納
-                    $store->top_image2 = $path2;
-                }
-
-                if ($i === 3) {
-
-                    // 画像3の保存
-                    $path3 = $top_image->store('/'); 
-                    Storage::move($path3, 'public/storeImages/' . $path3);
-
-                    //画像3 ファイル名格納
-                    $store->top_image3 = $path3;
-                }
-
-                // 画像名更新
-                $store->save();
+                Storage::disk('local')->delete('public/storeImages/'.$store->{'top_image'.$i});
+                $store->{'top_image'.$i} = null;
             }
+
+            $store->save();            
+        
+            // 新規画像投稿処理
+            foreach ($request->file('top_images') as $key => $top_image ) {
+
+                // 新規画像 保存
+                $path = $top_image->store('/'); 
+                Storage::move($path, 'public/storeImages/' . $path);
+                
+                //新規画像 ファイル名格納
+                $store->$key = $path;
+            }
+
+            // 新規画像 ファイル名更新
+            $store->save();
 
             return back()->with('flash_message', '店舗用トップ画像の投稿が完了しました');    
         }
 
         // 添付がない場合のエラーメッセージ
-        return back()->with('error_message', '画像をアップロードしてください');
+        return back()->with('error_message', '画像を添付してください');
     }
 }
