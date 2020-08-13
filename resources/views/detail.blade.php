@@ -5,6 +5,10 @@
 {{--  この戻るボタンはあとで綺麗にする  --}}
         <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
+        @if (session('flash_message'))
+        <div style="color:red">{{ session('flash_message') }}</div>
+        @endif
+
 {{--  商品画像  --}}
         <div class="container">
             <div class="row">

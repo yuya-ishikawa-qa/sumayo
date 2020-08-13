@@ -10,6 +10,10 @@ $item_total = $tax_total = 0;
 
 <div class="container">
     <h1>カートの中身</h1>
+    @if (session('flash_message'))
+    <div style="color:red">{{ session('flash_message') }}</div>
+    @endif
+
     @if(is_array(session()->get('cart')) && count(session()->get('cart')) > 0)
     @foreach(session()->get('cart') as $key => $value)
     @php

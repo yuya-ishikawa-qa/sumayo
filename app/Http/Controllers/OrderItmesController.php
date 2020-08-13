@@ -45,6 +45,7 @@ class OrderItmesController extends Controller
             session(['cart' => $cart]);
         }else{
             # 追加する数量が不明のため商品詳細画面を表示する
+            \Session::flash('flash_message', '※数量が不正な値です');
             return redirect()->route('detail',['id' => $id]);
         }
 
@@ -80,11 +81,14 @@ class OrderItmesController extends Controller
 
             # カートに商品を戻す
             session(['cart' => $cart]);
+
+            # カート画面表示
+            return redirect()->route('cart.index');
+        }else{
+            # エラーメッセージと共にカート画面表示
+            \Session::flash('flash_message', '※数量が不正な値です');
+            return redirect()->route('cart.index');
         }
-
-        # カート画面表示
-        return redirect()->route('cart.index');
-
     }
 
     public function destroy($post_id)
