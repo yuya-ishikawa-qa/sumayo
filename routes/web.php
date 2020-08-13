@@ -24,15 +24,6 @@ Route::get('/order_confirmation', function () {
 Route::get('/order_confirm', function () {
     return view('order_confirm');
 });
-Route::get('/order_list', function () {
-    return view('order_list');
-});
-Route::get('/order_detail', function () {
-    return view('order_detail');
-});
-Route::get('/order_edit', function () {
-    return view('order_edit');
-});
 
 // TOP(客側)
 Route::get('/', 'CustomerItemsController@index');
@@ -50,7 +41,7 @@ Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'], function(){
-    
+
     // 店舗関係処理
 
     // TOP画面表示
@@ -81,11 +72,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     // 一覧表示
     Route::get('/users', 'UsersController@index')->name('users.top');
-    
+
     // 新規ユーザー登録
     Route::get('/users/create', 'UsersController@create')->name('users.create');
     Route::post('/users', 'UsersController@store')->name('users.store');
-    
+
     // 編集画面表示
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
     Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
@@ -113,10 +104,10 @@ Route::group(['middleware' => 'auth'], function(){
 
     // ユーザーパスワード更新
     Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
-    
+
     // メールアドレス変更用メール送信
     Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
-    
+
     // メールアドレス変更確認メール処理
     Route::post('/email/{id}', 'ChangeEmailController@sendChangeEmailLink')->name('email.update');
 
@@ -128,5 +119,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     // ユーザー削除
     Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destory');
-    
+
+    // 注文管理関係処理
+    Route::resource('orders', 'OrdersController',['only' => ['index','show','edit','update']]);
+
 });

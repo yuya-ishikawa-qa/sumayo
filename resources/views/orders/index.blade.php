@@ -3,7 +3,8 @@
 @section('content')
 <div class="order-list">
     <div class="search">
-        <form action="{{route('orders.index')}}" method="get">
+        <form id="search_form" action="{{route('orders.index')}}" method="get">
+            {{csrf_field()}}
             <input id="date" name="date" class="form-control" type="date" value="{{ $search_date->format('Y-m-d') }}">
             @php
             $search_date->modify('- 1 days');
@@ -59,12 +60,12 @@
         </div>
     </form>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
     $(document).ready(function() {
         $('#date').change(function() {
-            var form = $(this).parents().find("form");
-            $(form).submit;
+            var form = $(this).parents().find('form#search_form');
+            $(form).submit();
         });
     });
 

@@ -14,27 +14,31 @@
             <div class="quantity">数量</div>
             <div class="sub-total">小計</div>
         </div>
+        @foreach ($orderitems as $k => $item)
+        @php
+        $price_total = 0; #初期化
+        $price_total = $item->price * $item->quantity;
+        $sub_total += $price_total* $item->quantity;
+        $tax_total += $price_total* $item->quantity * $item->tax / 100 ;
+        @endphp
+
         <div class="item-list">
             <div class="img"><div><img src="{{ asset('img/IMG_1506-1.jpg') }}" alt=""></div></div>
-            <div class="title">唐揚げ弁当</div>
-            <div class="price">500円</div>
-            <div class="quantity">2個</div>
-            <div class="sub-total">1,000円</div>
+            <div class="title">{{ $item->item_name }}</div>
+            <div class="price">{{ $item->price }}円 （{{ $item->tax }}%）</div>
+            <div class="quantity">{{ $item->quantity }}個</div>
+            <div class="sub-total">{{ number_format($price_total) }}円</div>
         </div>
-        <div class="item-list">
-            <div class="img"><div><img src="{{ asset('img/3P9A0329-560x373.jpg') }}" alt=""></div></div>
-            <div class="title">ハンバーグ弁当</div>
-            <div class="price">500円</div>
-            <div class="quantity">１個</div>
-            <div class="sub-total">500円</div>
-        </div>
+
+        @endforeach
+
         <dl>
             <dt>商品小計</dt>
-            <dd>1,500円</dd>
+            <dd>{{ number_format($sub_total) }}円</dd>
             <dt>消費税</dt>
-            <dd>120円</dd>
+            <dd>{{ number_format($tax_total) }}円</dd>
             <dt>商品合計</dt>
-            <dd>1,620円</dd>
+            <dd>{{ number_format($order->order_total_price) }}円</dd>
         </dl>
     </div>
 
@@ -42,68 +46,76 @@
 
         <div>
             <dl>
+                <dt>ステータス</dt>
+                <dd>{{ $order_status_list[$order->order_status] }}</dd>
+            </dl>
+        </div>
+
+        <div>
+            <dl>
                 <dt>受取日</dt>
-                <dd>2020年8月1日</dd>
+                <dd>{{ $recieved_date->format('Y年m月d日') }}</dd>
             </dl>
         </div>
 
         <div>
             <dl>
                 <dt>受け取り時間</dt>
-                <dd>11:00</dd>
+                <dd>{{ $order->recieved_time }}</dd>
             </dl>
         </div>
 
         <div class="half">
             <dl>
                 <dt><label for="last_name">姓</label></dt>
-                <dd>阪江</dd>
+                <dd>{{ $customer->last_name }}</dd>
             </dl>
         </div>
 
         <div class="half">
             <dl>
                 <dt><label for="last_name">名</label></dt>
-                <dd>光希</dd>
+                <dd>{{ $customer->first_name }}</dd>
             </dl>
         </div>
 
         <div class="half">
             <dl>
                 <dt>姓（カナ）</dt>
-                <dd>サカエ</dd>
+                <dd>{{ $customer->last_name_kana }}</dd>
             </dl>
         </div>
 
         <div class="half">
             <dl>
                 <dt><label for="first_name_kana">名（カナ）</label></dt>
-                <dd>ミキ</dd>
+                <dd>{{ $customer->first_name_kana }}</dd>
             </dl>
         </div>
 
         <div>
             <dl>
                 <dt><label for="tel">電話番号</label></dt>
-                <dd>0120-00-1111</dd>
+                <dd>{{ $customer->tel }}</dd>
             </dl>
         </div>
 
         <div>
             <dl>
                 <dt><label for="mail">メールアドレス</label></dt>
-                <dd>sample@sample.jp</dd>
+                <dd>{{ $customer->mail }}</dd>
             </dl>
         </div>
 
         <div>
             <dl>
                 <dt><label for="remark">備考</label></dt>
-                <dd>これはテストです</dd>
+                <dd>{{ $order->comment }}</dd>
             </dl>
         </div>
+
     </div>
-    <a href="{!! url('/order_edit'); !!}"><button class="btn btn-primary" type="submit">編集</button></a>
-    <a href="{!! url('/order_form'); !!}"><button class="btn btn-primary" type="submit">戻る</button></a>
+    <a href="{{route('orders.edit',['id' => $order->id])}}"><button class="btn btn-primary" type="submit">編集</button></a>
+    <a href="{{route('orders.index',['date' => $recieved_date->format('Y-m-d')])}}"><button class="btn btn-primary" type="submit">戻る</button></a>
 </div>
 @endsection
