@@ -9,7 +9,7 @@
 /* 商品一覧画像 */
 div > a > img.mb-2{
     max-width: 100%;
-    height: auto;   
+    height: auto;
 }
 
 /* カテゴリー */
@@ -39,6 +39,8 @@ nav ul li:hover{
 background-color: #FFF2CC;
 }
 
-
-
+/* カート */
+table#item-detail form{
+    display: inline;
+}
 
