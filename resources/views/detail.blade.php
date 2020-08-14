@@ -24,7 +24,7 @@
 
                     <div class="product-title col-10"><h1>{{ $item->item_name }}</h1></div>
                     <div class="product-description col-8"><p>{{ $item->description }}</p></div>
-                    <div class="sale-price col-4"><p>&yen;{{ $item->price }}</p></div>
+                    <div class="sale-price col-4"><p>&yen;{{ $item->price }}（税抜）</p></div>
 
                     {{--  数量指定  --}}
                     <div class="col-12" align="center" id="count">
