@@ -26,15 +26,16 @@ Route::get('/order_confirm', function () {
 });
 
 // TOP(客側)
-Route::get('/', 'CustomerItemsController@index');
+Route::get('/', 'CustomerItemsController@index')->name('top');
 // 商品詳細(客側)
-Route::get('/detail/{id}', 'CustomerItemsController@showDetail');
-// // 商品詳細(客側)
-// Route::get('/detail/{id}', 'CustomerItemsController@showDetail');
+Route::get('/detail/{id}', 'CustomerItemsController@showDetail')->name('detail');
 // カート情報(客側)
 Route::get('/cart', 'CustomerItemsController@showCart');
 // 店舗情報(客側)
 Route::get('/shopinfo', 'CustomerItemsController@showShopinfo');
+
+// カート関連処理
+Route::resource('cart', 'OrderItmesController',['only' => ['index','store','update','destroy']]);
 
 
 Auth::routes();
