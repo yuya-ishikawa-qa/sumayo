@@ -30,7 +30,12 @@ $item_total = $tax_total = 0;
     <div class="card mb-3">
         <div class="row no-gutters">
             <div class="col-3">
-                <img src="{{ asset('image/food_image/1678376_s.jpg') }}" class="card-img" alt="...">
+                @if ( $item->path == null)
+                <img src= "/storage/items/no_image.png" class="img-fluid" alt="items_list_image" id="items_list_image">
+                @else
+                <img src="/storage/{{$item->path}}"
+                class="img-fluid" alt="items_list_image" id="items_list_image">
+                @endif
             </div>
             <div class="col-9">
                 <div class="card-body">
@@ -74,13 +79,13 @@ $item_total = $tax_total = 0;
             <div class="col-3">
                 <div class="card-body" style="text-align:right;">
                     <p class="total-sales-price">消費税</p>
-                    <p class="total-sales-price">&yen;{{ number_format($tax_total) }}</p>
+                    <p class="total-sales-price">&yen;{{ number_format(ceil($tax_total)) }}</p>
                 </div>
             </div>
             <div class="col-3">
                 <div class="card-body" style="text-align:right;">
                     <p class="total-sales-price">合計金額</p>
-                    <p class="total-sales-price">&yen;{{ number_format($item_total + $tax_total) }}</p>
+                    <p class="total-sales-price">&yen;{{ number_format($item_total + ceil($tax_total)) }}</p>
                 </div>
             </div>
         </div>
