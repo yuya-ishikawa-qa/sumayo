@@ -18,8 +18,8 @@
         @php
         $price_total = 0; #初期化
         $price_total = $item->price * $item->quantity;
-        $sub_total += $price_total* $item->quantity;
-        $tax_total += $price_total* $item->quantity * $item->tax / 100 ;
+        $sub_total += $price_total;
+        $tax_total += $item->price * $item->tax / 100 * $item->quantity;
         @endphp
 
         <div class="item-list">
@@ -36,7 +36,7 @@
             <dt>商品小計</dt>
             <dd>{{ number_format($sub_total) }}円</dd>
             <dt>消費税</dt>
-            <dd>{{ number_format($tax_total) }}円</dd>
+            <dd>{{ number_format(ceil($tax_total)) }}円</dd>
             <dt>商品合計</dt>
             <dd>{{ number_format($order->order_total_price) }}円</dd>
         </dl>
