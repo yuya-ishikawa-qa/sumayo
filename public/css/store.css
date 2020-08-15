@@ -1,0 +1,32 @@
+.nav-bar {
+  padding-top:200px;
+}
+
+/* 商品一覧(店舗側) */
+#items_list_detail_link {
+    text-decoration: none;
+    color: #555;
+    }
+
+#items_list_image {
+    width: 35px;
+    height: auto;
+}
+
+/* 商品登録(店舗側) */
+#item_register_image{
+    max-width: 100%;
+    height: auto;   
+}
+
+/* 商品詳細(店舗側) */
+#item_detail_image{
+    max-width: 100%;
+    height: auto;   
+}
+
+/* 商品編集(店舗側) */
+#item_edit_image{
+    max-width: 100%;
+    height: auto;   
+}
