@@ -23,6 +23,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- V-Calender -->
+    <link rel='stylesheet' href='https://unpkg.com/v-calendar/lib/v-calendar.min.css'>
+    <script src='https://unpkg.com/v-calendar'></script>
 </head>
 <body>
     <div id="app">

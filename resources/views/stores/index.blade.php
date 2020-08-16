@@ -102,7 +102,7 @@
       <div class="card-body">
         <h6 class="card-title">休日カレンダー</h6>
         <p class="card-text"></p>
-        <a href="{{ url('/stores/holiday') }}" class="btn btn-primary">表示</a>
+        <a href="{{ route('storeCalendar.edit', ['id' => $store->id ]) }}" class="btn btn-primary">表示</a>
       </div>
     </div>
   </div>
