@@ -23,7 +23,8 @@ class CalendarWeekDay {
 	}
 
 	function renderDayOfTheWeek() {
-
+		
+		Carbon::setLocale('ja');
 		return $this->carbon->isoFormat("DD日(ddd)");
 	}
 }
