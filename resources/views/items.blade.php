@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <a class="btn btn-secondary rounded-pill btn-lg col-10 mt-3" href="{{ url('/items/register')}}" role="button">商品登録
         </a>
-        <a class="btn btn-secondary rounded-pill btn-lg col-10 mt-3" href="{{ url('/register-category')}}" role="button">カテゴリー名変更
-        </a>
+        {{--  <a class="btn btn-secondary rounded-pill btn-lg col-10 mt-3" href="{{ url('/register-category')}}" role="button">カテゴリー名変更
+        </a>  --}}
     </div>
     <p class="col-12 text-center mt-3 mb-0">商品一覧
     </p>
@@ -32,8 +32,12 @@
         <tr>
             <th scope="row">
             <img src=
-                @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/{{$item->path}}" @endif
+                @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
             class="img-fluid" alt="items_list_image" id="items_list_image">
+            {{--  publicディレクトリが重複してる
+            <img src=
+                @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/public/items/{{$item->path}}" @endif
+            class="img-fluid" alt="items_list_image" id="items_list_image">  --}}
             </th>
             <td>{{ $item->item_name }}
             </td>

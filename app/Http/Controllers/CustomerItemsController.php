@@ -66,9 +66,10 @@ class CustomerItemsController extends Controller
         //     return view('detail',['item' => $item, 'store' => $store]);
 
              // レコード検索
-            $item = Items::find($id);
+            $item = Items::findOrFail($id);
              // 結果をビューに渡す
-             return view('detail',['item' => $item]);
+             return view('detail')->with('item',$item);
+
 
     }
 
