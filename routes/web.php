@@ -57,7 +57,6 @@ Route::group(['middleware' => 'auth'], function(){
     // 各編集画面表示
     Route::get('/stores/{id}/edit/time', 'StoresController@editTime')->name('storeTime.edit');
     Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo')->name('storeInfo.edit');
-    Route::get('/stores/edit/holiday', 'StoresController@editHoliday');
     Route::get('/stores/{id}/holiday', 'CalendarController@edit')->name('storeCalendar.edit');
     Route::get('/stores/{id}/edit/logo', 'StoresController@editStoreLogo')->name('storeLogo.edit');
     Route::get('/stores/{id}/edit/images', 'StoresController@editStoreImages')->name('storeImages.edit');

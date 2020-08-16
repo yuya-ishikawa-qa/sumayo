@@ -54,4 +54,14 @@ class CalendarView {
 		return $weeks;
 	}
 
+	// 次の月を取得
+	public function getNextMonth(){
+		return $this->carbon->copy()->addMonthsNoOverflow()->format('Y-m');
+	}
+	
+	// 前の月を取得
+	public function getPreviousMonth(){
+		return $this->carbon->copy()->subMonthsNoOverflow()->format('Y-m');
+	}
+
 }
