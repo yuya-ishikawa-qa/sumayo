@@ -35,8 +35,6 @@
             </th>
             <td>
               <select class="form-control" name="item_category_id">
-                <option value="0">選択しない
-                </option>
                 <option value="1">おすすめ
                 </option>
                 <option value="2">単品
