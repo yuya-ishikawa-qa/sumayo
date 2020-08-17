@@ -20,7 +20,6 @@ class CalendarController extends Controller
         //クエリーのdateを受け取る
         $date = $request->input("date");
         
-
 		//dateがYYYY-MMの形式でない場合nullを返す
 		if (!($date && preg_match("/^[0-9]{4}-[0-9]{2}$/", $date))){
 			$date = null;
@@ -28,11 +27,10 @@ class CalendarController extends Controller
         
 		//取得出来ない時は現在(=今月)を指定する
         if (!$date){
-
             $date = time();
         }
 
-		//カレンダーに渡す
+		//カレンダーに日付を渡す
 		$calendar = new CalendarView($date);
 
         // 休日情報取得
@@ -51,18 +49,18 @@ class CalendarController extends Controller
         
         foreach ($request->all() as $key => $value) {
 
-            if (preg_match('/^([0-9]{8})$/', $key)) {
-                if ($value === '0' || $value === '1') {
+            dd($request->all());
 
+            if (preg_match('/^([0-9]{8})$/', $key)) {
+                if ($value === 1) {
                     $holidays = StoreHoliday::UpdateOrcreate(
                         ['store_id' => $store_id, 'date' => $key],
                         ['is_holiday' => $value]
                     );
-
-                } else {
-
-                    return back()->with('error_message', '不正なアクセスです');
                 }   
+            } else {
+                $notHolidays = StoreHoliday::where('is_holiday',1)->get();
+                $notHolidays->delete();
             }
         }
 
