@@ -21,7 +21,7 @@
                     {{ method_field('POST')}}
                     <img class="col-10 mb-2 img-fluid mx-auto d-block" src=
                     @if ( $item->path == null) "/storage/items/no_image.png"
-                    @else "/storage/{{$item->path}}"
+                    @else "/storage/items/{{$item->path}}"
                     @endif
                     id=item_detail_image alt="">
 

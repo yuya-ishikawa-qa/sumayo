@@ -19,7 +19,11 @@ class CustomerItemsController extends Controller
     // TOP
     public function index()
     {
-        $items = Items::all();
+        // $items = Items::all();
+
+        // 販売休止中なのは非表示
+        $items = Items::where('is_selling', '0')->orderBy('item_category_id', 'asc')->get();
+
         $store = Store::all();
 
         return view('index',['items' => $items, 'store' => $store]);
@@ -65,8 +69,10 @@ class CustomerItemsController extends Controller
         //     $store = Store::all();
         //     return view('detail',['item' => $item, 'store' => $store]);
 
-             // レコード検索
-            $item = Items::findOrFail($id);
+
+            // 販売休止中なのは非表示
+            $item = Items::where('is_selling', '0')->findOrFail($id);
+
              // 結果をビューに渡す
              return view('detail')->with('item',$item);
 

@@ -26,6 +26,9 @@ class ItemsController extends Controller
 
         $items = Items::orderBy('updated_at', 'desc')->get();
 
+        // 販売休止中なのは非表示
+        // $items = Items::where('is_selling', '0')->orderBy('updated_at', 'desc')->get();
+
         return view('items',[
             "items" => $items,
         ]);
@@ -65,7 +68,9 @@ class ItemsController extends Controller
                 $request->stock_saturday = $stock_all;
             } 
             
-            if ($request->file('path')->isValid([])) {
+            // if ($request->file('path')->isValid([])) {
+            // ↑だとfileない場合エラーになるので↓にする
+            if ($request->hasfile('path')) {
 
                 // 画像の保存(高橋さんと同じ方法)
                 $path = $request->file('path')->store('/'); 
@@ -203,17 +208,32 @@ class ItemsController extends Controller
             $item->stock_saturday = $request->stock_saturday;
         }
     
-    // storeの画像保存ができたらこっちも同じ方法にする
-    if($request->hasFile('path')) { 
-        if($item->path != $request->path) {
-            $filename = $request->file('path')->getClientOriginalName();
-            $item->path = $request->path->storeAs('items',date("Y-m-d H:i:s").'_'.$filename);
+        if ($request->hasfile('path')) {
+
+            // 画像の保存(高橋さんと同じ方法)
+            $path = $request->file('path')->store('/'); 
+            Storage::move($path, 'public/items/' . $path);
+
+            $item->path = $path;
+
+            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            // $store = Store::findOrFail($id);
+            // Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
+
+            //新規画像ファイル名保存(or上書き)
+            // $store->logo = $path;
+            // $store->save();
+        
+            // return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
+
         } else {
+            // return redirect()
+            //     ->back()
+            //     ->withInput()
+            //     ->withErrors();
             $item->path = "";
-        }
-    } else {
-        $item->path == $request->path;
-    }
+
+        }       
     
         //保存（更新）
         $item->save();

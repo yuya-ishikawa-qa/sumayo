@@ -32,8 +32,8 @@
             </th>
             <td>
                 <img src=
-                    @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/{{$item->path}}" @endif
-                class="img-fluid" alt="items_list_image" id="items_list_image">
+                @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif class="img-fluid" alt="items_list_image" id="items_list_image" >
+                </div>
                 <input type="file" name="path" value="{{old('path')}}"/>
             </td>
             </tr>
@@ -42,8 +42,6 @@
             </th>
             <td>
                 <select class="form-control" name="item_category_id">
-                <option value="0">選択しない
-                </option>
                 <option value="1">おすすめ
                 </option>
                 <option value="2">単品
