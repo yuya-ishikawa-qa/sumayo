@@ -28,7 +28,7 @@
       <a class="btn btn-outline-secondary float-left" href="{{ url('/stores/1/holiday?date=' . $calendar->getPreviousMonth()) }}">前月</a>
     </div>
     <div class="col">
-      <h3 class="red"><strong>{{ $calendar->getTitle() }}</strong></h3>  
+      <h5 class="text-center mt-2 "><strong>{{ $calendar->getTitle() }}</strong></h5>  
     </div>
     <div class="col">
       <a class="btn btn-outline-secondary float-right" href="{{ url('/stores/1/holiday?date=' . $calendar->getNextMonth()) }}">次月</a>
@@ -44,11 +44,6 @@
           <div class="row">
             <div class="col"> 
               日付 (曜日)
-            </div>
-            <div class="col">
-              <div class="pl-5">
-                営業 / 休み 選択
-              </div>
             </div>
           </div>
         </div>
@@ -71,19 +66,35 @@
                 @if ($day->render() !== '')
                   <li class="list-group-item $day->getClassName()">
                     <div class="row">
+                      
                       <div class="col">
                         {{ $day->renderDayOfTheWeek() }}
                       </div>
 
                       <div class="col">
-                        <div class="switchArea">
-                        @if (isset($holidays_list[$day->render()]) && $holidays_list[$day->render()] === 1)
-                          <input type="checkbox" name="{{ $day->render() }}" id="{{ $day->render() }}" value="1" checked>
-                        @endif
-                          <label for="{{ $day->render() }}"><span></span></label>
-                          <div id="swImg"></div>
+                        <div class="sample1Area ml-5" id="makeImg">
+                          @if ((isset($holidays_list[$day->render()]) && ($holidays_list[$day->render()]) !== 1)||(empty($holidays_list[$day->render()])))
+                            <input class="form-check-input sample1on" type="radio" name="{{ $day->render() }}" id="{{ $day->render() . '-0' }}" value="0" checked>
+                          @else
+                            <input class="form-check-input sample1on" type="radio" name="{{ $day->render() }}" id="{{ $day->render() . '-0' }}" value="0" >
+                          @endif
+
+                          <label class="form-check-label" for="{{ $day->render() . '-0' }}">
+                            営業
+                          </label>
+                        
+                          @if (isset($holidays_list[$day->render()]) && ($holidays_list[$day->render()]) === 1)
+                            <input class="form-check-input sample1off" type="radio" name="{{ $day->render() }}" id="{{ $day->render() . '-1' }}" value="1" checked>
+                          @else
+                            <input class="form-check-input sample1off" type="radio" name="{{ $day->render() }}" id="{{ $day->render() . '-1' }}" value="1">
+                          @endif
+                          
+                          <label class="form-check-label" for="{{ $day->render() . '-1' }}">
+                            休み
+                          </label>
                         </div>
                       </div>
+
                     </div>
                   </li>
                 @endif
