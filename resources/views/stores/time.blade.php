@@ -2,6 +2,11 @@
 
 @section('content')
 
+<script type="text/javascript">
+  $(function(){ // if document is ready
+  alert('jQuery is ready.')});
+</script>
+
 
 @if (session('flash_message'))
   <div class="text-center alert alert-success">
