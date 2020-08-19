@@ -93,13 +93,56 @@ class CustomerItemsController extends Controller
     public function showShopinfo()
     {
         $store = Store::all();
-        $StoreHoliday = StoreHoliday::where('holiday', '1')->get();
-        
-        $now = Carbon::now();
 
+        $holidays = StoreHoliday::where('is_holiday', '1')->where('date')->get();
+        dd($holidays);
+        foreach ($holidays as  $holiday) {
+
+            $holidays_list[] = $holiday->date;
+
+        }
+        
+        // for ($i = 1; $i < $holiday->id ; $i++) {
+        //     $date[] =
+        // } 
+
+        // extract($holidays_list);
+
+
+        
+        // dd($holidays_list);
+        
+
+
+        $now = Carbon::now()->format('Ym');
+        dd($now);
+        // $now->addMonth();
+        $start_month = Carbon::now()->startOfMonth();
+        $end_month = Carbon::now()->endOfMonth();
+
+        var_dump($holidays_list->between($start_month,$end_month));
+        if($holidays_list->between($start_month,$end_month)){
+
+            
+        }
+        
+        dd($yes);
+
+          // 休日情報取得
+          $holidays = StoreHoliday::all(); 
+          foreach ($holidays as $holiday) {
+              $holidays_list[$holiday->date] = $holiday->is_holiday;
+          }
+
+          dd($holidays_list);
+  
+    //       return view('stores.holiday', compact('calendar','store_id','holidays_list'));
+    //   }
+
+// dd($storeholiday->is_holiday);
 
         // 結果をビューに渡す
-        return view('shopinfo',['store' => $store, 'now' => $now]);
+        return view('shopinfo',['store' => $store, 'StoreHoliday' => $StoreHoliday]);
     }
 
     /**
