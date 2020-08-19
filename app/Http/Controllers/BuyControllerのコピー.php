@@ -35,27 +35,6 @@ class BuyController extends Controller
             ];
             session(['order' => $array]);
 
-
-            # 予約可能かチェック
-
-            ## 店舗情報取得
-            $store = Store::orderBy('id')->first();
-
-            ## 予約不可の直前予約でないかチェック
-
-            ### 基準値を設定する
-            $set = date_create(date("Y-m-d H:i:s"));
-            $set->modify(sprintf('+ %d minutes',$store->serve_range_time)); #本日の予約が可能かどうか
-
-
-
-
-
-
-
-
-
-
             return view('order_confirmation');
         }else{
             # カートに商品が入っていない場合はカート画面に遷移
@@ -160,7 +139,7 @@ class BuyController extends Controller
         $store = Store::orderBy('id')->first();
 
         # 予約可能期間の始めを設定する
-        $set_date = $end_date = date_create(date("Y-m-d"));
+        $set_date = date_create(date("Y-m-d H:i:s"));
         $set_date->modify(sprintf('+ %d minutes',$store->serve_range_time)); #本日の予約が可能かどうか
         $set_date->setTime(00, 00, 00);
 
