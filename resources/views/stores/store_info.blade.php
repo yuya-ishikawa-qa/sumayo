@@ -73,9 +73,8 @@
               //マーカーの生成
               var marker = new google.maps.Marker({
                 map: map,
-                position: map.getCenter(),
-                
-                icon,
+                // position: map.getCenter(),
+                position: results[0].geometry.location,
                 // animation: google.maps.Animation.DROP
               });
             
