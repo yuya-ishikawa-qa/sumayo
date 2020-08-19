@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 // CustomerItemsモデル使用
 use\App\Items;
 use\App\Store;
+use\App\StoreHoliday;
+
+// 日時Carbon使用
+use Carbon\Carbon;
 
 class CustomerItemsController extends Controller
 {
@@ -89,9 +93,13 @@ class CustomerItemsController extends Controller
     public function showShopinfo()
     {
         $store = Store::all();
+        $StoreHoliday = StoreHoliday::where('holiday', '1')->get();
+        
+        $now = Carbon::now();
+
 
         // 結果をビューに渡す
-        return view('shopinfo',['store' => $store]);
+        return view('shopinfo',['store' => $store, 'now' => $now]);
     }
 
     /**

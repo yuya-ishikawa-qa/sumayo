@@ -55,18 +55,48 @@ class ItemsController extends Controller
      */
     public function store(ItemsRequest $request)
     {       
-            $stock_all = $request->stock_all;
+            // $stock_all = $request->stock_all;
             
             // 在庫一括入力された場合
-            if( isset($stock_all) ){
-                $request->stock_sunday = $stock_all;
-                $request->stock_monday = $stock_all;
-                $request->stock_tuesday = $stock_all;
-                $request->stock_wednesday = $stock_all;
-                $request->stock_thursday = $stock_all;
-                $request->stock_friday = $stock_all;
-                $request->stock_saturday = $stock_all;
-            } 
+            // if( isset($stock_all) ){
+            //     $request->stock_sunday = $stock_all;
+            //     $request->stock_monday = $stock_all;
+            //     $request->stock_tuesday = $stock_all;
+            //     $request->stock_wednesday = $stock_all;
+            //     $request->stock_thursday = $stock_all;
+            //     $request->stock_friday = $stock_all;
+            //     $request->stock_saturday = $stock_all;
+            // } 
+
+            // 在庫数が未入力の場合0とする
+            // if( is_null($request->stock_sunday)){
+            //     $request->stock_sunday = '0';
+            // }
+            // if( is_null($request->stock_monday)){
+            //     $request->stock_monday = '0';
+            // }
+            // if( is_null($request->stock_tuesday)){
+            //     $request->stock_tuesday = '0';
+            // }
+            // if( is_null($request->stock_wednesday)){
+            //     $request->stock_wednesday = '0';
+            // }
+            // if( is_null($request->stock_thursday)){
+            //     $request->stock_thursday = '0';
+            // }
+            // if( is_null($request->stock_friday)){
+            //     $request->stock_friday = '0';
+            // }
+            // if( is_null($request->stock_saturday)){
+            //     $request->stock_saturday = '0';
+            // }
+
+            // dd($request->stock_sunday);
+
+
+
+
+
             
             // if ($request->file('path')->isValid([])) {
             // ↑だとfileない場合エラーになるので↓にする

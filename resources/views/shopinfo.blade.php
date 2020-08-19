@@ -16,6 +16,7 @@
             <p class="col-4">定休日</p>
             <p class="col-8">3日/5日/15日</p>
 
+
             <p class="col-4">住所</p>
             <p class="col-8">{{ $store->address }}</p>
             <p class="col-4">電話番号</p>
