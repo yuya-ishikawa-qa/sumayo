@@ -109,7 +109,7 @@
 
         <div>
             <dl>
-                <dt><label for="remark">備考</label></dt>
+                <dt>備考</dt>
                 <dd>{{ $order->comment }}</dd>
             </dl>
         </div>
