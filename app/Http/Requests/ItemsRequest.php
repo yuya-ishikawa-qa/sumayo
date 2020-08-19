@@ -40,7 +40,7 @@ class ItemsRequest extends FormRequest
             'stock_friday' => 'required|integer',
             'stock_saturday' => 'required|integer',
             'stock_sunday' => 'required|integer',
-            'path' =>  'file|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'path' =>  'file|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
