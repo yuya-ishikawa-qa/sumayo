@@ -3,11 +3,14 @@
 @section('content')
 
 {{--  この戻るボタンはあとで綺麗にする  --}}
-        <button type="button" onclick="history.back()" class="ml-1">＜</button>
+        {{--  <button type="button" onclick="history.back()" class="ml-1">＜</button>
 
         @if (session('flash_message'))
         <div style="color:red">{{ session('flash_message') }}</div>
-        @endif
+        @endif  --}}
+
+<a href="{{ url('/')}}">戻る</a>
+
 
 {{--  商品画像  --}}
         <div class="container">
@@ -18,7 +21,7 @@
                     {{ method_field('POST')}}
                     <img class="col-10 mb-2 img-fluid mx-auto d-block" src=
                     @if ( $item->path == null) "/storage/items/no_image.png"
-                    @else "/storage/{{$item->path}}"
+                    @else "/storage/items/{{$item->path}}"
                     @endif
                     id=item_detail_image alt="">
 

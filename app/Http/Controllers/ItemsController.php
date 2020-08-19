@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Items;
 // 商品登録バリデーション用のRequest
 use App\Http\Requests\ItemsRequest;
+// 画像保存用
+use Illuminate\Support\Facades\Storage;
+
 
 class ItemsController extends Controller
 {
@@ -22,6 +25,9 @@ class ItemsController extends Controller
     {
 
         $items = Items::orderBy('updated_at', 'desc')->get();
+
+        // 販売休止中なのは非表示
+        // $items = Items::where('is_selling', '0')->orderBy('updated_at', 'desc')->get();
 
         return view('items',[
             "items" => $items,
@@ -62,14 +68,45 @@ class ItemsController extends Controller
                 $request->stock_saturday = $stock_all;
             } 
             
-            if($request->hasFile('path')) { 
-                //ファイル名取得
-                $filename = $request->file('path')->getClientOriginalName();
-                $request->path = $request->path->storeAs('items',date("Y-m-d_H:i:s").'_'.$filename);
+            // if ($request->file('path')->isValid([])) {
+            // ↑だとfileない場合エラーになるので↓にする
+            if ($request->hasfile('path')) {
 
+                // 画像の保存(高橋さんと同じ方法)
+                $path = $request->file('path')->store('/'); 
+                Storage::move($path, 'public/items/' . $path);
+
+                $request->path = $path;
+    
+                //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+                // $store = Store::findOrFail($id);
+                // Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
+    
+                //新規画像ファイル名保存(or上書き)
+                // $store->logo = $path;
+                // $store->save();
+            
+                // return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
+    
             } else {
+                // return redirect()
+                //     ->back()
+                //     ->withInput()
+                //     ->withErrors();
                 $request->path = "";
+
             }
+
+
+            // 前回までの
+            // if($request->hasFile('path')) { 
+                //ファイル名取得
+            //     $filename = $request->file('path')->getClientOriginalName();
+            //     $request->path = $request->path->storeAs('public/items',date("Y-m-d_H:i:s").'_'.$filename);
+
+            // } else {
+            //     $request->path = "";
+            // }
         
         // データベーステーブルitems内容を入れる
         Items::insert([
@@ -107,7 +144,7 @@ class ItemsController extends Controller
     public function showItemsDetail($id)
     {
          // レコード検索
-         $item = Items::find($id);
+         $item = Items::findOrFail($id);
          // 結果をビューに渡す
          return view('item_detail')->with('item',$item);
     }
@@ -124,7 +161,7 @@ class ItemsController extends Controller
     {
         
         // レコード検索
-        $item = Items::find($id);
+        $item = Items::findOrFail($id);
 
         // 結果をビューに渡す
         return view('item_edit')->with('item',$item);
@@ -141,7 +178,7 @@ class ItemsController extends Controller
     {
 
          //レコードを検索
-        $item = Items::find($id);
+        $item = Items::findOrFail($id);
       
         //値を代入
         $item->item_name = $request->item_name;
@@ -170,17 +207,33 @@ class ItemsController extends Controller
             $item->stock_friday = $request->stock_friday;
             $item->stock_saturday = $request->stock_saturday;
         }
+    
+        if ($request->hasfile('path')) {
+
+            // 画像の保存(高橋さんと同じ方法)
+            $path = $request->file('path')->store('/'); 
+            Storage::move($path, 'public/items/' . $path);
+
+            $item->path = $path;
+
+            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            // $store = Store::findOrFail($id);
+            // Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
+
+            //新規画像ファイル名保存(or上書き)
+            // $store->logo = $path;
+            // $store->save();
         
-    if($request->hasFile('path')) { 
-        if($item->path != $request->path) {
-            $filename = $request->file('path')->getClientOriginalName();
-            $item->path = $request->path->storeAs('items',date("Y-m-d H:i:s").'_'.$filename);
+            // return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
+
         } else {
+            // return redirect()
+            //     ->back()
+            //     ->withInput()
+            //     ->withErrors();
             $item->path = "";
-        }
-    } else {
-        $item->path == $request->path;
-    }
+
+        }       
     
         //保存（更新）
         $item->save();
@@ -197,7 +250,7 @@ class ItemsController extends Controller
     public function destroy($id)
     {
          //削除対象レコードを検索
-         $item = Items::find($id);
+         $item = Items::findOrFail($id);
          //削除
          $item->delete();
          //リダイレクト

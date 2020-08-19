@@ -56,11 +56,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/stores/{id}/time', 'StoresController@showStoreTime')->name('storeTime.show');
     Route::get('/stores/{id}/info', 'StoresController@showStoreInfo')->name('storeInfo.show');
 
+    
     // 各編集画面表示
     Route::get('/stores/{id}/edit/time', 'StoresController@editTime')->name('storeTime.edit');
     Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo')->name('storeInfo.edit');
-    Route::get('/stores/edit/holiday', 'StoresController@editHoliday');
-    Route::get('/stores/edit/category', 'StoresController@editCategory');
+    Route::get('/stores/{id}/holiday', 'CalendarController@edit')->name('storeCalendar.edit');
     Route::get('/stores/{id}/edit/logo', 'StoresController@editStoreLogo')->name('storeLogo.edit');
     Route::get('/stores/{id}/edit/images', 'StoresController@editStoreImages')->name('storeImages.edit');
 
@@ -71,6 +71,10 @@ Route::group(['middleware' => 'auth'], function(){
     // 店舗画像更新処理
     Route::post('stores/{id}/logo', 'StoresController@uploadStoreLogo')->name('storeLogo.upload');
     Route::post('stores/{id}/images', 'StoresController@uploadStoreImages')->name('storeImages.upload');
+
+    // 店舗カレンダー更新処理
+    Route::put('stores/{id}/holiday', 'CalendarController@update')->name('storeCalendar.update');
+
 
     // ユーザー関係処理
 

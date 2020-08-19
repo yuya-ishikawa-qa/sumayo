@@ -23,19 +23,21 @@ class ItemsRequest extends FormRequest
      *
      * @return array
      */
+
+    // バリデーションあとでやる
     public function rules()
     {
         return [
-            'item_name' => 'required', 'string', 'max:50',
-            'description' => 'required', 'string', 'max:100',
-            'price' => 'required', 'string', 'max:50',
-            'stock_all' => 'nullable', 'numeric',
-            'stock_monday' => 'nullable', 'numeric',
-            'stock_tuesday' => 'nullable', 'numeric',
-            'stock_wednesday' => 'nullable', 'numeric',
-            'stock_thursday' => 'nullable', 'numeric',
-            'stock_saturday' => 'nullable', 'numeric',
-            'stock_sunday' => 'nullable', 'numeric',
+            'item_name' => 'required|string|max:50',
+            'description' => 'required|string|max:100',
+            'price' => 'required|string|max:50',
+            'stock_all' => 'nullable|numeric',
+            'stock_monday' => 'nullable|numeric',
+            'stock_tuesday' => 'nullable|numeric',
+            'stock_wednesday' => 'nullable|numeric',
+            'stock_thursday' => 'nullable|numeric',
+            'stock_saturday' => 'nullable|numeric',
+            'stock_sunday' => 'nullable|numeric',
         ];
     }
 

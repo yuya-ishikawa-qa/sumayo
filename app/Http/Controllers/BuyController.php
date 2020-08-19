@@ -149,26 +149,51 @@ class BuyController extends Controller
 
         # 予約可能期間中の休日のリストを取得する
         $check_date = [];
-        $set_date_text = $set_date->format('Y-m-d');
-        $end_date_text = $end_date->format('Y-m-d');
+        $set_date_text = $set_date->format('Ymd');
+        $end_date_text = $end_date->format('Ymd');
         $store_holiday = StoreHoliday::where([
-            ['holiday', '>=', $set_date_text],
-            ['holiday', '<=', $end_date_text],
+            ['date', '>=', $set_date_text],
+            ['date', '<=', $end_date_text],
+            ['is_holiday', '=', 1],
         ])->get();
         foreach($store_holiday as $v){
-            $check_date[] = $v->holiday;
+            $check_date[] = $v->date;
         }
 
         # 予約可能期間から予約可能日を取得する
         while($set_date <= $end_date){
 
-            if(!in_array($set_date->format('Y-m-d'), $check_date)){
+            if(!in_array($set_date->format('Ymd'), $check_date)){
                 # 休日は予約可能日に含めない
                 $return[] = $set_date->format('Y-m-d');
             }
 
             $set_date->modify('+ 1 days');
         }
+
+
+//        # 予約可能期間中の休日のリストを取得する
+//        $check_date = [];
+//        $set_date_text = $set_date->format('Y-m-d');
+//        $end_date_text = $end_date->format('Y-m-d');
+//        $store_holiday = StoreHoliday::where([
+//            ['holiday', '>=', $set_date_text],
+//            ['holiday', '<=', $end_date_text],
+//        ])->get();
+//        foreach($store_holiday as $v){
+//            $check_date[] = $v->holiday;
+//        }
+//
+//        # 予約可能期間から予約可能日を取得する
+//        while($set_date <= $end_date){
+//
+//            if(!in_array($set_date->format('Y-m-d'), $check_date)){
+//                # 休日は予約可能日に含めない
+//                $return[] = $set_date->format('Y-m-d');
+//            }
+//
+//            $set_date->modify('+ 1 days');
+//        }
 
         return $return;
 

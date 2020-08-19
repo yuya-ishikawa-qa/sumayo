@@ -2,8 +2,7 @@
     
 @section('content')
 
-{{--  この戻るボタンはあとで綺麗にする  --}}
-    <button type="button" onclick="history.back()" class="ml-1">＜</button>
+<a href="{{ url('/')}}">戻る</a>
             
 {{--  お店情報  --}}
     <div class="container_shopinfo">
