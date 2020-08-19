@@ -93,7 +93,7 @@ $item_total = $tax_total = 0;
 
     {{--  注文に進む  --}}
     <div class="col-12 mt-3" align="center">
-        <a href="{{ url('/order_form')}}"><button class="btn btn-primary">注文手続き</button></a>
+        <a href="{{route('customerinfo.create')}}"><button class="btn btn-primary">注文手続き</button></a>
     </div>
     @else
     <div style="color:red">※商品が選択されていません</div>

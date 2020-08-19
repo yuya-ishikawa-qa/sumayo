@@ -12,7 +12,6 @@ class Order extends Model
         'recieved_date',
         'recieved_time',
         'order_total_price',
-        'comment',
     ];
 
     public function customer()

@@ -124,7 +124,7 @@ class StoresController extends Controller
         // 店舗情報情報取得
         $store = Store::findOrFail($id);
 
-        
+
         // 店舗情報更新
         $store->earliest_receivable_time = $request->earliest_receivable_time;
 
@@ -139,9 +139,9 @@ class StoresController extends Controller
 
         $store->serve_range_time = $request->serve_range_time;
         $store->capacity = $request->capacity;
-        
+
         $store->save();
-        
+
         // 更新メッセージ
         session()->flash('flash_message', '店舗営業時間の更新が完了しました');
 
@@ -154,7 +154,7 @@ class StoresController extends Controller
         if ($request->file('logo')->isValid([])) {
 
             // 画像の保存
-            $path = $request->file('logo')->store('/'); 
+            $path = $request->file('logo')->store('/');
             Storage::move($path, 'public/storeLogo/' . $path);
 
             //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
@@ -164,7 +164,7 @@ class StoresController extends Controller
             //新規画像ファイル名保存(or上書き)
             $store->logo = $path;
             $store->save();
-        
+
             return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
 
         } else {
@@ -189,15 +189,15 @@ class StoresController extends Controller
                 $store->{'top_image'.$i} = null;
             }
 
-            $store->save();            
-        
+            $store->save();
+
             // 新規画像投稿処理
             foreach ($request->file('top_images') as $key => $top_image ) {
 
                 // 新規画像 保存
-                $path = $top_image->store('/'); 
+                $path = $top_image->store('/');
                 Storage::move($path, 'public/storeImages/' . $path);
-                
+
                 //新規画像 ファイル名格納
                 $store->$key = $path;
             }
@@ -205,7 +205,7 @@ class StoresController extends Controller
             // 新規画像 ファイル名更新
             $store->save();
 
-            return back()->with('flash_message', '店舗用トップ画像の投稿が完了しました');    
+            return back()->with('flash_message', '店舗用トップ画像の投稿が完了しました');
         }
 
         // 添付がない場合のエラーメッセージ
