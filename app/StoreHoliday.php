@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class StoreHoliday extends Model
 {
     protected $fillable = [
-        'holiday',
+        'store_id',
+        'date',
+        'is_holiday',
     ];
 
     public function store()

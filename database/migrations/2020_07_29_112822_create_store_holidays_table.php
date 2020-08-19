@@ -15,8 +15,9 @@ class CreateStoreHolidaysTable extends Migration
     {
         Schema::create('store_holidays', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('store_id')->default(1);
-            $table->date('holiday')->unique();
+            $table->integer('store_id')->references('id')->on('stores');
+            $table->string('date', 8)->unique();
+            $table->integer('is_holiday')->default(0);
             $table->timestamps();
         });
     }
