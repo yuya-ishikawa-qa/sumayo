@@ -2,28 +2,70 @@
     
 @section('content')
 
+    @php
+        $weeks = $calendar->getWeeks();
+    @endphp
+
 <a href="{{ url('/')}}">戻る</a>
             
 {{--  お店情報  --}}
-    <div class="container_shopinfo">
-        <div class="row">
+    <div class="container">
         @foreach ($store as $store)
-            <h1 class="col-12 mt-3 mb-3">{{ $store->name }}</h1>
-            <p class="col-4">営業時間</p>
-            <p class="col-8">{{ substr($store->start_time, 0, 5) }}-{{ substr($store->end_time, 0, 5) }}</p>
+            <div class="row text-center">
+                <h3 class="col-12 mt-3 mb-3">{{ $store->name }}</h3>
+            </div>
 
-            {{--  定休日は後で  --}}
-            <p class="col-4">定休日</p>
-            <p class="col-8">3日/5日/15日</p>
+            <div class="mb-4">
+                <div class="text-center">営業時間</div>
+                <div class="col text-center">
+                    <span class="just"><strong>{{ substr($store->start_time, 0, 5) }}-{{ substr($store->end_time, 0, 5) }}</strong></span><br>
+                </div>
+            </div>
 
-            <p class="col-4">住所</p>
-            <p class="col-8">{{ $store->address }}</p>
-            <p class="col-4">電話番号</p>
-            <p class="col-8">{{ $store->phone }}</p>
-            <p class="col-4">コメント</p>
-            <p class="col-8">{{ $store->comment }}<p>
-        @endforeach
+            <div class="mb-4">
+                <div class="text-center">定休日</div>
+                <div class="col text-center">
+                    <span><strong>{{ $calendar->getTitle() }}</strong></span><br>
+                </div>
+                <div class="d-flex flex-wrap mb-2 ml-5">
+                    @foreach($weeks as $week)
+                        @php
+                            $days = $week->getDays();
+                        @endphp
+                        @foreach($days as $day)
+                            @if (isset($holidays_list[$day->render()]) && ($holidays_list[$day->render()]) === 1)
+                            <div class="text-danger pl-3 pr-3 justify-content-around"><strong>{{ $day->renderDayOfTheWeek() }}</strong></div>
+                            @endif        
+                        @endforeach
+                    @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="text-center">電話番号</div>
+                <div class="col text-center">
+                    <span class="just"><strong>{{ $store->phone }}</strong></span><br>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="text-center">住所</div>
+                <div class="col text-center">
+                    <span class="just"><strong>{{ $store->address }}</strong></span><br>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="text-center">コメント</div>
+                <div class="col text-center">
+                    <span class="just"><strong>{{ $store->comment }}</strong></span><br>
+                </div>
+            </div>
+
+
             
+        @endforeach
         </div>
     </div>
             
