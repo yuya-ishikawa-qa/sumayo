@@ -55,10 +55,7 @@ class BuyController extends Controller
                 $sub_total = 0;# 初期化
 
                 # 商品取得
-                $items = Items::find([$key]);
-                foreach($items as $v){
-                    $item = $v;
-                }
+                $item = Items::find($key);
 
                 $item_list[] = [
                     'item_id' => $key,
@@ -132,7 +129,7 @@ class BuyController extends Controller
 
     public function get_available_date()
     {
-        $return = [];
+        $available_dates = [];
 
         # 店舗情報取得
         $store = Store::orderBy('id')->first();
@@ -164,7 +161,7 @@ class BuyController extends Controller
 
             if(!in_array($set_date->format('Ymd'), $check_date)){
                 # 休日は予約可能日に含めない
-                $return[] = $set_date->format('Y-m-d');
+                $available_dates[] = $set_date->format('Y-m-d');
             }
 
             $set_date->modify('+ 1 days');
@@ -188,19 +185,19 @@ class BuyController extends Controller
 //
 //            if(!in_array($set_date->format('Y-m-d'), $check_date)){
 //                # 休日は予約可能日に含めない
-//                $return[] = $set_date->format('Y-m-d');
+//                $available_dates[] = $set_date->format('Y-m-d');
 //            }
 //
 //            $set_date->modify('+ 1 days');
 //        }
 
-        return $return;
+        return $available_dates;
 
     }
 
     public function get_times()
     {
-        $return = [];
+        $available_times = [];
 
         # 店舗情報取得
         $store = Store::orderBy('id')->first();
@@ -214,14 +211,14 @@ class BuyController extends Controller
         $next_time->modify(sprintf('+ %d minutes',$store->serve_range_time));
 
         while($next_time <= $end_time){
-            $return[] = $set_time->format('H:i:s');
+            $available_times[] = $set_time->format('H:i:s');
 
             # 1回分時間を進める
             $set_time->modify(sprintf('+ %d minutes',$store->serve_range_time));
             $next_time->modify(sprintf('+ %d minutes',$store->serve_range_time));
         }
 
-        return $return;
+        return $available_times;
 
     }
 }
