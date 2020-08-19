@@ -202,7 +202,7 @@
                 <button class="btn btn-primary" type="submit">注文確認</button>
             </form>
             <div class="mt-2">
-                <a href="{{route('buy.show')}}"><button class="btn btn-primary" type="submit">戻る</button></a>
+                <a href="{{route('cart.index')}}"><button class="btn btn-primary" type="submit">戻る</button></a>
             </div>
         </main>
 @endsection
