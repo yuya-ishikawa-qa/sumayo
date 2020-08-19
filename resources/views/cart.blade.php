@@ -33,7 +33,7 @@ $item_total = $tax_total = 0;
                 @if ( $item->path == null)
                 <img src= "/storage/items/no_image.png" class="img-fluid" alt="items_list_image" id="items_list_image">
                 @else
-                <img src="/storage/{{$item->path}}"
+                <img src="/storage/items/{{$item->path}}"
                 class="img-fluid" alt="items_list_image" id="items_list_image">
                 @endif
             </div>
