@@ -19,10 +19,11 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('/css/store.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('/css/toggleButton.css') }}">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
