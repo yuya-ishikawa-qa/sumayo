@@ -29,13 +29,16 @@ Route::get('/order_confirm', function () {
 Route::get('/', 'CustomerItemsController@index')->name('top');
 // 商品詳細(客側)
 Route::get('/detail/{id}', 'CustomerItemsController@showDetail')->name('detail');
-// カート情報(客側)
-Route::get('/cart', 'CustomerItemsController@showCart');
 // 店舗情報(客側)
 Route::get('/shopinfo', 'CustomerItemsController@showShopinfo');
 
 // カート関連処理
 Route::resource('cart', 'OrderItmesController',['only' => ['index','store','update','destroy']]);
+
+// 顧客入力情報処理
+Route::get('/customerinfo/create', 'CustomerInfoController@create')->name('customerinfo.create');
+Route::post('/buy/show', 'BuyController@show')->name('buy.show');
+Route::post('/buy/store', 'BuyController@store')->name('buy.store');
 
 
 Auth::routes();
