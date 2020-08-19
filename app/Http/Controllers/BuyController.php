@@ -47,6 +47,8 @@ class BuyController extends Controller
             $set = date_create(date("Y-m-d H:i:s"));
             $set->modify(sprintf('+ %d minutes',$store->serve_range_time)); #本日の予約が可能かどうか
 
+            $check_date = date_create("%s %s:00",session->recieved_date,session->recieved_time);
+
 
 
 
@@ -160,7 +162,7 @@ class BuyController extends Controller
         $store = Store::orderBy('id')->first();
 
         # 予約可能期間の始めを設定する
-        $set_date = $end_date = date_create(date("Y-m-d"));
+        $set_date = date_create(date("Y-m-d H:i:s"));
         $set_date->modify(sprintf('+ %d minutes',$store->serve_range_time)); #本日の予約が可能かどうか
         $set_date->setTime(00, 00, 00);
 
