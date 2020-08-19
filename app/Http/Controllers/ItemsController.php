@@ -26,9 +26,6 @@ class ItemsController extends Controller
 
         $items = Items::orderBy('updated_at', 'desc')->get();
 
-        // 販売休止中なのは非表示
-        // $items = Items::where('is_selling', '0')->orderBy('updated_at', 'desc')->get();
-
         return view('items',[
             "items" => $items,
         ]);
@@ -55,49 +52,7 @@ class ItemsController extends Controller
      */
     public function store(ItemsRequest $request)
     {       
-            // $stock_all = $request->stock_all;
-            
-            // 在庫一括入力された場合
-            // if( isset($stock_all) ){
-            //     $request->stock_sunday = $stock_all;
-            //     $request->stock_monday = $stock_all;
-            //     $request->stock_tuesday = $stock_all;
-            //     $request->stock_wednesday = $stock_all;
-            //     $request->stock_thursday = $stock_all;
-            //     $request->stock_friday = $stock_all;
-            //     $request->stock_saturday = $stock_all;
-            // } 
 
-            // 在庫数が未入力の場合0とする
-            // if( is_null($request->stock_sunday)){
-            //     $request->stock_sunday = '0';
-            // }
-            // if( is_null($request->stock_monday)){
-            //     $request->stock_monday = '0';
-            // }
-            // if( is_null($request->stock_tuesday)){
-            //     $request->stock_tuesday = '0';
-            // }
-            // if( is_null($request->stock_wednesday)){
-            //     $request->stock_wednesday = '0';
-            // }
-            // if( is_null($request->stock_thursday)){
-            //     $request->stock_thursday = '0';
-            // }
-            // if( is_null($request->stock_friday)){
-            //     $request->stock_friday = '0';
-            // }
-            // if( is_null($request->stock_saturday)){
-            //     $request->stock_saturday = '0';
-            // }
-
-            // dd($request->stock_sunday);
-
-
-
-
-
-            
             // if ($request->file('path')->isValid([])) {
             // ↑だとfileない場合エラーになるので↓にする
             if ($request->hasfile('path')) {
@@ -108,35 +63,9 @@ class ItemsController extends Controller
 
                 $request->path = $path;
     
-                //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
-                // $store = Store::findOrFail($id);
-                // Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
-    
-                //新規画像ファイル名保存(or上書き)
-                // $store->logo = $path;
-                // $store->save();
-            
-                // return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
-    
             } else {
-                // return redirect()
-                //     ->back()
-                //     ->withInput()
-                //     ->withErrors();
                 $request->path = "";
-
             }
-
-
-            // 前回までの
-            // if($request->hasFile('path')) { 
-                //ファイル名取得
-            //     $filename = $request->file('path')->getClientOriginalName();
-            //     $request->path = $request->path->storeAs('public/items',date("Y-m-d_H:i:s").'_'.$filename);
-
-            // } else {
-            //     $request->path = "";
-            // }
         
         // データベーステーブルitems内容を入れる
         Items::insert([
@@ -212,31 +141,18 @@ class ItemsController extends Controller
       
         //値を代入
         $item->item_name = $request->item_name;
+        $item->price = $request->price;
+        $item->tax = $request->tax;
         $item->description = $request->description;
         $item->is_selling = $request->is_selling;
         $item->item_category_id = $request->item_category_id;
-        $item->price = $request->price;
-        $item->tax = $request->tax;
-
-        $stock_all = $request->stock_all;
-
-        if( isset($stock_all) ){
-            $item->stock_sunday = $stock_all;
-            $item->stock_monday = $stock_all;
-            $item->stock_tuesday = $stock_all;
-            $item->stock_wednesday = $stock_all;
-            $item->stock_thursday = $stock_all;
-            $item->stock_friday = $stock_all;
-            $item->stock_saturday = $stock_all;
-        } else {
-            $item->stock_sunday = $request->stock_sunday;
-            $item->stock_monday = $request->stock_monday;
-            $item->stock_tuesday = $request->stock_tuesday;
-            $item->stock_wednesday = $request->stock_wednesday;
-            $item->stock_thursday = $request->stock_thursday;
-            $item->stock_friday = $request->stock_friday;
-            $item->stock_saturday = $request->stock_saturday;
-        }
+        $item->stock_sunday = $request->stock_sunday;
+        $item->stock_monday = $request->stock_monday;
+        $item->stock_tuesday = $request->stock_tuesday;
+        $item->stock_wednesday = $request->stock_wednesday;
+        $item->stock_thursday = $request->stock_thursday;
+        $item->stock_friday = $request->stock_friday;
+        $item->stock_saturday = $request->stock_saturday;
     
         if ($request->hasfile('path')) {
 
@@ -246,23 +162,8 @@ class ItemsController extends Controller
 
             $item->path = $path;
 
-            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
-            // $store = Store::findOrFail($id);
-            // Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
-
-            //新規画像ファイル名保存(or上書き)
-            // $store->logo = $path;
-            // $store->save();
-        
-            // return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
-
         } else {
-            // return redirect()
-            //     ->back()
-            //     ->withInput()
-            //     ->withErrors();
             $item->path = "";
-
         }       
     
         //保存（更新）

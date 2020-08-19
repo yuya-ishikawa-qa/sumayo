@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-<a href="{{ url('/stores')}}">TOP画面へ</a>
+<a href="{{ url('/stores')}}"><button class="btn btn-secondary btn-sm mb-2">戻る</button></a>
     <div class="row justify-content-center">
-        <a class="btn btn-secondary rounded-pill btn-lg col-10 mt-3" href="{{ url('/items/register')}}" role="button">商品登録
+        <a class="btn btn-primary rounded-pill btn-lg col-10 mt-2 mb-2" href="{{ url('/items/register')}}" role="button">商品登録
         </a>
     </div>
-    <p class="col-12 text-center mt-3 mb-0">商品一覧
-    </p>
+    <h4 class="col-12 text-center mt-4 mb-1">商品一覧
+    </h4>
     <table class="table">
         <thead>
         <tr>

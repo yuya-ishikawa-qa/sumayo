@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container">
-<a href="{{ url('/stores')}}">TOP画面へ</a>
+<a href="{{ url('/stores')}}"><button class="btn btn-secondary btn-sm mb-2">戻る</button></a>
   <form action="/items/store" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
@@ -28,9 +28,13 @@
             </th>
             <td>
               <input type="file" name="path" value="{{old('path')}}"/>
-              <span class="text-danger">
+              @if($errors->has('path'))
+                    <div>
+                        <span class="text-danger">
                         <strong>{{ $errors->first('path') }}</strong>
                         </span>
+                    </div>
+                @endif
             </td>
           </tr>
           <tr>
@@ -127,15 +131,7 @@
                  $errors->has('stock_sunday'))
                     <div>
                         <span class="text-danger">
-                        <strong>
-                        {{ $errors->first('stock_monday') }}
-                        {{ $errors->first('stock_tuesday') }}
-                        {{ $errors->first('stock_wednesday') }}
-                        {{ $errors->first('stock_thursday') }}
-                        {{ $errors->first('stock_friday') }}
-                        {{ $errors->first('stock_saturday') }}
-                        {{ $errors->first('stock_sunday') }}
-                        </strong>
+                        <strong>在庫数は数量(半角)を入力してください</strong>
                         </span>
                     </div>
                 @endif
@@ -246,14 +242,14 @@
             <th scope="row ">
             </th>
             <td>
-              *定休日の曜日は0と入力してください
+              *定休日の場合は0と入力してください
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="row justify-content-center">
-      <button class="btn btn-secondary rounded-pill btn-lg col-5">登録
+      <button class="btn btn-primary rounded-pill btn-lg col-5">登録
       </button>
     </div>
   </form>
@@ -292,30 +288,26 @@
     //オンロードさせ、リロード時に選択を保持
     window.onload = entryChange1;
 
-    $(function(){
-   
+    $(function(){   
+        var $test1 = $('#test1');
+        var $test2 = $('#test2');
+        var $test3 = $('#test3');
+        var $test4 = $('#test4');
+        var $test5 = $('#test5');
+        var $test6 = $('#test6');
+        var $test7 = $('#test7');
+        var $test8 = $('#test8');
 
-var $test1 = $('#test1');
-var $test2 = $('#test2');
-var $test3 = $('#test3');
-var $test4 = $('#test4');
-var $test5 = $('#test5');
-var $test6 = $('#test6');
-var $test7 = $('#test7');
-var $test8 = $('#test8');
-$test1.on('keyup change',function(){
-    $test2.val($test1.val());
-    $test3.val($test1.val());
-    $test4.val($test1.val());
-    $test5.val($test1.val());
-    $test6.val($test1.val());
-    $test7.val($test1.val());
-    $test8.val($test1.val());
-})
-
-
-
-});
+        $test1.on('keyup change',function(){
+            $test2.val($test1.val());
+            $test3.val($test1.val());
+            $test4.val($test1.val());
+            $test5.val($test1.val());
+            $test6.val($test1.val());
+            $test7.val($test1.val());
+            $test8.val($test1.val());
+        })
+    });
 
   </script>
   @endsection
