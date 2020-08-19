@@ -116,7 +116,6 @@ class BuyController extends Controller
 
                 \DB::commit();
             } catch (\Exception $e) {
-                dd($e);
                 $flight_order = null;
                 \DB::rollback();
             }
