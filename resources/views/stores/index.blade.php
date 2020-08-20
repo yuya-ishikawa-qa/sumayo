@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <div class="text-center pt-2 mb-4">
+    <div class="text-center pt-5 mb-4">
     <h2>店舗管理画面TOP</h2>
     </div>
 
@@ -82,7 +82,7 @@
   <div class="card-group">
     <div class="card border-primary text-center">
       <div class="card-body">
-        <h6 class="card-title">店舗情報</h6>
+        <h6 class="card-title">店舗情報設定</h6>
         <p class="card-text"></p>
         <a href="{{ route('storeInfo.show', ['id' => $store->id ]) }}" class="btn btn-primary">表示</a>
       </div>
@@ -90,7 +90,7 @@
 
     <div class="card border-primary text-center">
       <div class="card-body">
-        <h6 class="card-title">店舗営業時間</h6>
+        <h6 class="card-title">店舗営業時間設定</h6>
         <p class="card-text"></p>
         <a href="{{ route('storeTime.show', ['id' => $store->id ]) }}" class="btn btn-primary">表示</a>
       </div>
@@ -100,7 +100,7 @@
   <div class="card-group">
     <div class="card border-primary text-center">
       <div class="card-body">
-        <h6 class="card-title">休日カレンダー</h6>
+        <h6 class="card-title">休日カレンダー設定</h6>
         <p class="card-text"></p>
         <a href="{{ route('storeCalendar.edit', ['id' => $store->id ]) }}" class="btn btn-primary">表示</a>
       </div>
@@ -114,7 +114,7 @@
     <div class="card-group">
       <div class="card border-primary text-center">
         <div class="card-body">
-          <h6 class="card-title">お店ロゴ画像</h6>
+          <h6 class="card-title">お店ロゴ画像設定</h6>
           <p class="card-text"></p>
           <a href="{{ route('storeLogo.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
         </div>
@@ -122,7 +122,7 @@
 
       <div class="card border-primary text-center">
         <div class="card-body">
-          <h6 class="card-title">オススメ商品画像</h6>
+          <h6 class="card-title">お店TOP画像設定</h6>
           <p class="card-text"></p>
           <a href="{{ route('storeImages.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
         </div>

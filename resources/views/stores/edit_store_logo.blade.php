@@ -4,7 +4,7 @@
 <div class="container">
 
     <div class="text-center pt-3 mb-4">
-        <h2>店舗ロゴ</h2>
+        <h2>お店ロゴ画像設定</h2>
     </div>
 
     @if (session('flash_message'))
@@ -23,7 +23,7 @@
                         <strong><u>アップロード済ロゴ画像</u></strong>
                     </div>
                     <div class="col">
-                        <img src="/storage/storeLogo/{{$store->logo}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="/storage/storeLogo/{{$store->logo}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @else

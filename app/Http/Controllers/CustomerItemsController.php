@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Calendar\CalendarView;
+
 // CustomerItemsモデル使用
 use\App\Items;
 use\App\Store;
+use\App\StoreHoliday;
+
 
 class CustomerItemsController extends Controller
 {
@@ -88,10 +92,24 @@ class CustomerItemsController extends Controller
     // 店舗情報
     public function showShopinfo()
     {
+        
+        // store情報 取得
         $store = Store::all();
 
+        //カレンダーに日付を渡す
+		$calendar = new CalendarView(time());
+        
+        // 休日情報取得
+        $holidays = StoreHoliday::where('is_holiday','1')->get();
+
+        foreach ($holidays as $holiday) {
+            $holidays_list[$holiday->date] = $holiday->is_holiday;
+        }
+
         // 結果をビューに渡す
-        return view('shopinfo',['store' => $store]);
+		return view('shopinfo', compact('calendar','store','holidays_list'));
+
+        // return view('shopinfo',['store' => $store]);
     }
 
     /**

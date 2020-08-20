@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <a href="{{ url('/stores')}}">TOP画面へ</a>
+    <a href="{{ url('/stores')}}"><button class="btn btn-secondary btn-sm mb-2">戻る</button></a>
     <h2 class="text-center mt-2">商品詳細</h2>
     <div class="row">
         <div class="col-5 mx-auto d-block mb-2">
@@ -47,7 +47,6 @@
                 <th scope="row">消費税</th>
                 <td>{{ $item->tax }}%</td>
                 </tr>
-                {{--  在庫数表示方法考える  --}}
                 <tr>
                 <th scope="row">在庫数</th>
                     <td>
@@ -64,18 +63,19 @@
 
     </div>
     <div class="row justify-content-center">
-        <a class="btn btn-secondary rounded-pill btn-lg mb-3" href='/items/edit/{{$item->id}}' role="button">編集</a>
+        <a class="btn btn-primary rounded-pill btn-lg mb-3" href='/items/edit/{{$item->id}}' role="button">編集</a>
         <a class="col-2"></a>
             <form method="post" action="/items/destroy/{{$item->id}}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <input type="submit" value="削除" class="btn btn-danger btn-lg rounded-pill btn-destroy">
         </form>
 
-        <a href="{{ url('/items')}}" class="col-10 text-center mt-4">商品一覧に戻る</a>
+        <a href="{{ url('/items')}}" class="col-10 text-center mt-2">商品一覧に戻る</a>
     </div>
 </div>
 
- {{--  削除確認アラート必要なら追加  --}}
+ {{--  削除確認アラート  --}}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 <script>
 $(function(){
     $('.btn-destroy').click(function(){

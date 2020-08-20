@@ -8,20 +8,20 @@ class Store extends Model
 {
     protected $fillable = [
 
-        'store_name',
-        'store_phone',
-        'store_postcode',
-        'store_address',
-        'store_comment',
+        'name',
+        'phone',
+        'postcode',
+        'address',
+        'comment',
         'start_time',
         'end_time',
         'earliest_receivable_time',
         'serve_range_time',
         'capacity',
-        'store_logo',
-        'store_image1',
-        'store_image2',
-        'store_image3',
+        'logo',
+        'top_image1',
+        'top_image2',
+        'top_image3',
     ];
 
     // Store Model : User Mode = 1 対 多 を定義
