@@ -4,7 +4,7 @@
 <div class="container">
 
     <div class="text-center pt-3 mb-4">
-        <h2>オススメ商品画像</h2>
+        <h2>お店TOP画像設定</h2>
     </div>
 
     @if (session('flash_message'))
@@ -32,7 +32,7 @@
                         <strong><u>アップロード済トップ画像1</u></strong>
                     </div>
                     <div class="col">
-                        <img src="/storage/storeImages/{{$store->top_image1}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="/storage/storeImages/{{$store->top_image1}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @endisset
@@ -43,7 +43,7 @@
                         <strong><u>アップロード済トップ画像2</u></strong>
                     </div>
                     <div class="col">
-                        <img src="/storage/storeImages/{{$store->top_image2}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="/storage/storeImages/{{$store->top_image2}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @endisset
@@ -54,7 +54,7 @@
                         <strong><u>アップロード済トップ画像3</u></strong>
                     </div>
                     <div class="col">
-                        <img src="/storage/storeImages/{{$store->top_image3}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="/storage/storeImages/{{$store->top_image3}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @endisset

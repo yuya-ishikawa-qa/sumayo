@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="/stores">
                     店舗側管理画面
@@ -60,17 +60,10 @@
             </div>
         </nav>
 
-        <main class="mt-4 mb-3">
+        <main class="mt-4 mb-5">
             @yield('content')
         </main>
 
     </div>
-
-    @if (auth::check())
-        <div class="nav-bar">
-            @include('commons.footer')
-        </div>
-    @endif
-
 </body>
 </html>
