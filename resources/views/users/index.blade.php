@@ -55,13 +55,13 @@
         
         <!-- 編集ボタン -->
         <td>
-          <a href="/users/{{ $user->id }}/edit"><button class="btn btn-primary">編集</button></a>
+          <a href="{{ route('users.edit',['id' => $user->id ]) }}"><button class="btn btn-primary">編集</button></a>
         </td>
 
         <!-- 店長は削除ボタン無し -->
         <td>
         @if( $user->id !== 1)
-          <form action="/users/{{ $user->id }}" method="post">
+          <form action="{{ route('users.destory', ['id' => $user->id ]) }}" method="post">          
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <button type="submit" class="btn btn-danger">削除</button>
@@ -74,9 +74,10 @@
       @endowner
 
       @php
-        $user = $users[0];
-        $user_id = $user->id;
+        $user_id = Auth::id()
       @endphp
+      
+      <p>{{ $user_id }}</p>
 
       <!-- ログイン中の店員の場合の表示 -->
       @if (Auth::check() && $user_id != 1)
@@ -90,29 +91,27 @@
 
         <!-- 名前 -->
         <td>
-            <div class="mb-2">
-              {{ Auth::user()->name }}
-            </div>
-        </td>
-
-        <!-- メールアドレス -->
-        <td>
-            <div class="mb-2">
-              {{ Auth::user()->email }}
-            </div>
+          <div class="mb-2">
+            {{ Auth::user()->name }}</br>
+            {{ Auth::user()->email }}
+          </div>
         </td>
         
         <!-- 編集ボタン -->
         <td>
-            <a href="/users/{{ Auth::user()->id }}/edit"><button class="btn btn-primary">編集</button></a>
+          <a href="{{ route('users.edit',['id' => \Auth::user()->id ]) }}"><button class="btn btn-primary">編集</button></a>
         </td>
+
+        <td></td>
+
+
       </tr>
       @endif
     </tbody>
   </table>
 
   <div class="text-center">
-    <a href="/stores"><button class="btn btn-secondary">戻る</button></a>
+    <a href="{{ url('/stores') }}"><button class="btn btn-secondary">戻る</button></a>
   </div>
 
 </div>

@@ -68,8 +68,15 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        // ユーザー情報取得
-        $user = User::findOrFail($id);
+        // 店員の場合他のページへの遷移を制限
+        if (\Auth::id() != 1) {
+            
+            $user = \Auth::user();
+
+        } else {
+            // 店長の場合全てのユーザー情報取得が可能
+            $user = User::findOrFail($id);
+        }
 
         return view('users.edit', ['user' => $user ]);
     }
