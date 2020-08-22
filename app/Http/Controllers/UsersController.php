@@ -99,7 +99,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         // パスワード更新
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect("users/{$user->id}/edit")->with('flash_message', 'パスワードを変更しました');

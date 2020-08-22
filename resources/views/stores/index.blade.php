@@ -9,7 +9,7 @@
     </div>
 
     <div class="text-left pt-2 mb-4">
-    <h4>1.予約管理</h4>
+    <h4>予約管理</h4>
     </div>
 
     <div class="card-group">
@@ -30,30 +30,32 @@
     </div>
     </div>
 
+  @owner
     <div class="text-left mt-4 mb-4">
-    <h4>2.商品管理</h4>
+      <h4>商品管理</h4>
     </div>
 
     <div class="card-group">
-    <div class="card border-primary text-center">
+      <div class="card border-primary text-center">
         <div class="card-body">
         <h6 class="card-title">商品一覧</h6>
         <p class="card-text"></p>
         <a href="{{ url('/items')}}" class="btn btn-primary">表示</a>
         </div>
-    </div>
+      </div>
 
-    <div class="card border-primary text-center">
+      <div class="card border-primary text-center">
         <div class="card-body">
         <h6 class="card-title">商品登録</h6>
         <p class="card-text"></p>
         <a href="{{ url('/items/register')}}" class="btn btn-primary">登録画面へ</a>
         </div>
+      </div>
     </div>
-    </div>
+  @endowner
 
   <div class="text-left mt-4 mb-4">
-    <h4>3.スタッフアカウント管理</h4>
+    <h4>スタッフアカウント管理</h4>
   </div>
 
   <div class="card-group">
@@ -65,6 +67,7 @@
       </div>
     </div>
 
+  @owner
     <div class="card border-primary text-center">
       <div class="card-body">
         <h6 class="card-title">新規スタッフ登録</h6>
@@ -72,11 +75,12 @@
         <a href="{{ url('/users/create') }}" class="btn btn-primary">登録画面へ</a>
       </div>
     </div>
+  @endowner
   </div>
 
-
+  @owner
   <div class="text-left mt-4 mb-4">
-    <h4>4.店舗管理</h4>
+    <h4>店舗管理</h4>
   </div>
 
   <div class="card-group">
@@ -107,27 +111,28 @@
     </div>
   </div>
 
-    <div class="text-left mt-4 mb-4">
-      <h4>5.画像管理</h4>
-    </div>
+  <div class="text-left mt-4 mb-4">
+    <h4>画像管理</h4>
+  </div>
 
-    <div class="card-group">
-      <div class="card border-primary text-center">
-        <div class="card-body">
-          <h6 class="card-title">お店ロゴ画像設定</h6>
-          <p class="card-text"></p>
-          <a href="{{ route('storeLogo.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
-        </div>
-      </div>
-
-      <div class="card border-primary text-center">
-        <div class="card-body">
-          <h6 class="card-title">お店TOP画像設定</h6>
-          <p class="card-text"></p>
-          <a href="{{ route('storeImages.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
-        </div>
+  <div class="card-group">
+    <div class="card border-primary text-center">
+      <div class="card-body">
+        <h6 class="card-title">お店ロゴ画像設定</h6>
+        <p class="card-text"></p>
+        <a href="{{ route('storeLogo.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
       </div>
     </div>
+
+    <div class="card border-primary text-center">
+      <div class="card-body">
+        <h6 class="card-title">お店TOP画像設定</h6>
+        <p class="card-text"></p>
+        <a href="{{ route('storeImages.edit', ['id' => $store->id]) }}" class="btn btn-primary">登録画面へ</a>
+      </div>
+    </div>
+  </div>
+  @endowner
 </div>
 @endsection
 
