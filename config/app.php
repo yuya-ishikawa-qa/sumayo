@@ -228,7 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        // 定数定義用に追加
+        'Config' => App\MyApp::class,
     ],
 
     'key_name' => env('API_KEY'),

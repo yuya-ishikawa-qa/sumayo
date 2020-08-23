@@ -16,6 +16,14 @@
   </div>
   @endif
 
+  @if (session('error_message'))
+  <div class="mb-5">
+    <div class="alert alert-danger" role="alert">
+      {{ session('error_message') }}
+    </div>
+  </div>
+  @endif
+
   <table class="table table-striped table-condensed">
     <thead>
       <tr>
