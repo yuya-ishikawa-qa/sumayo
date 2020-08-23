@@ -41,23 +41,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        @if (Route::has('login'))
+                        @auth
                             @php
                                 $user_name = \Auth::user()->name;
                             @endphp
-
-                            @auth
-                                <li class="nav-item">
-                                    <strong><span class="nav-link disabled text-dark" href="#">ようこそ {{ $user_name }}さん</span></strong>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/">お客様注文ページへ</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/logout">ログアウト</a>
-                                </li>
-                            @endauth
-                        @endif
+                            <li class="nav-item">
+                                <strong><span class="nav-link disabled text-dark" href="#">ようこそ {{ $user_name }}さん</span></strong>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">お客様注文ページへ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">ログアウト</a>
+                            </li>
+                        @endauth
 
                     </ul>
                 </div>
