@@ -38,8 +38,8 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
-
-    'debug' => env('APP_DEBUG', false),
+    // local環境ではAPP_DEBUG環境変数をtrueに設定すべきでしょう。実働環境ではこの値をいつもfalseにすべきです。実働環境でこの値をtrueにしてしまうと、アプリケーションのエンドユーザーへ、セキュリティリスクになりえる設定情報を表示するリスクを犯すことになります。
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
