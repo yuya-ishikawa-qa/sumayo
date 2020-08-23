@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>スマヨ</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -33,26 +33,29 @@
                 <a class="navbar-brand" href="/stores">
                     店舗側管理画面
                 </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">お客様注文ページへ</a>
-                        </li>
-
+                    <ul class="navbar-nav ml-auto">
                         @if (Route::has('login'))
+                            @php
+                                $user_name = \Auth::user()->name;
+                            @endphp
+
                             @auth
+                                <li class="nav-item">
+                                    <strong><span class="nav-link disabled text-dark" href="#">ようこそ {{ $user_name }}さん</span></strong>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">お客様注文ページへ</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/logout">ログアウト</a>
                                 </li>
-                            @else
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link" href="/login">ログイン</a>
-                                </li>-->
                             @endauth
                         @endif
 
