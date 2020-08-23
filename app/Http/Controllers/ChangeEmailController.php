@@ -30,7 +30,7 @@ class ChangeEmailController extends Controller
         );
 
         // 店員の場合他ユーザーの変更を制限
-        if (\Auth::id() != config('const.OWNER_ID')) {            
+        if (\Auth::id() != User::OWNER_ID ) {            
             $user = \Auth::user();
         // 店長の場合全てのユーザーの編集が可能
         } else {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Config;
+
 use App\User;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserNameRequest;
@@ -70,7 +70,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         // 店員の場合他ユーザーページへの遷移を制限
-        if (\Auth::id() != (config('const.OWNER_ID'))) {            
+        if (\Auth::id() != User::OWNER_ID ) {            
             $user = \Auth::user();
         } else {
             // 店長の場合全てのユーザーの編集画面表示が可能
@@ -91,7 +91,7 @@ class UsersController extends Controller
     {
 
         // 店員の場合ログインユーザーのみの名前を変更可能
-        if (\Auth::id() != config('const.OWNER_ID')) {            
+        if (\Auth::id() != User::OWNER_ID ) {            
             $user = \Auth::user();
 
         // 店長の場合全てのユーザーの名前を変更可能
@@ -109,7 +109,7 @@ class UsersController extends Controller
     public function updateUserPassword(UserPasswordRequest $request, $id)
     {
         // 店員の場合ログインユーザーのみのパスワードを変更可能
-        if (\Auth::id() != config('const.OWNER_ID')) {            
+        if (\Auth::id() != User::OWNER_ID ) {            
             $user = \Auth::user();
 
         // 店長の場合全てのユーザーのパスワードを変更可能
