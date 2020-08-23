@@ -29,8 +29,13 @@ class ChangeEmailController extends Controller
             config('app.key')
         );
 
-        // ユーザー情報取得
-        $user = User::findOrFail($id);
+        // 店員の場合他ユーザーの変更を制限
+        if (\Auth::id() != User::OWNER_ID ) {            
+            $user = \Auth::user();
+        // 店長の場合全てのユーザーの編集が可能
+        } else {
+            $user = User::findOrFail($id);
+        }
 
         // 情報を配列化
         $params = [

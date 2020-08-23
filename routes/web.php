@@ -44,91 +44,88 @@ Route::post('/buy/store', 'BuyController@store')->name('buy.store');
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
+// 店舗管理画面処理
 Route::group(['middleware' => 'auth'], function(){
 
-    // 店舗関係処理
-
+    // 店長・店員両方閲覧可能
     // TOP画面表示
     Route::get('/stores', 'StoresController@index')->name('store.top');
-
-    // 各詳細画面表示
-    Route::get('/stores/holiday', 'StoresController@showStoreHoliday');
-    Route::get('/stores/{id}/time', 'StoresController@showStoreTime')->name('storeTime.show');
-    Route::get('/stores/{id}/info', 'StoresController@showStoreInfo')->name('storeInfo.show');
-
-    
-    // 各編集画面表示
-    Route::get('/stores/{id}/edit/time', 'StoresController@editTime')->name('storeTime.edit');
-    Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo')->name('storeInfo.edit');
-    Route::get('/stores/{id}/holiday', 'CalendarController@edit')->name('storeCalendar.edit');
-    Route::get('/stores/{id}/edit/logo', 'StoresController@editStoreLogo')->name('storeLogo.edit');
-    Route::get('/stores/{id}/edit/images', 'StoresController@editStoreImages')->name('storeImages.edit');
-
-    // 店舗情報更新処理
-    Route::put('/stores/{id}/time', 'StoresController@updateStoreTime')->name('storeTime.update');
-    Route::put('/stores/{id}/info', 'StoresController@updateStoreInfo')->name('storeInfo.update');
-
-    // 店舗画像更新処理
-    Route::post('stores/{id}/logo', 'StoresController@uploadStoreLogo')->name('storeLogo.upload');
-    Route::post('stores/{id}/images', 'StoresController@uploadStoreImages')->name('storeImages.upload');
-
-    // 店舗カレンダー更新処理
-    Route::put('stores/{id}/holiday', 'CalendarController@update')->name('storeCalendar.update');
-
-
-    // ユーザー関係処理
-
+    // 注文管理関係処理
+    Route::resource('orders', 'OrdersController',['only' => ['index','show','edit','update']]);
     // 一覧表示
     Route::get('/users', 'UsersController@index')->name('users.top');
 
-    // 新規ユーザー登録
-    Route::get('/users/create', 'UsersController@create')->name('users.create');
-    Route::post('/users', 'UsersController@store')->name('users.store');
-
-    // 編集画面表示
+    // ユーザー編集画面表示
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');;
-    Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
-
-    // 商品一覧(店舗側)
-    Route::get('/items', 'ItemsController@index');
-    // Route::post('/items', 'ItemsController@create');
-
-    // 商品詳細(店舗側)
-    Route::get('/items/detail/{id}', 'ItemsController@showItemsDetail');
-
-    // 商品編集(店舗側)
-    Route::get('/items/edit/{id}', 'ItemsController@edit');
-    Route::post('/items/update/{id}', 'ItemsController@update');
-
-    // 商品情報削除(店舗側)
-    Route::post('/items/destroy/{id}', 'ItemsController@destroy');
-
-    // 商品登録(店舗側)
-    Route::get('/items/register', 'ItemsController@create');
-    Route::post('/items/store', 'ItemsController@store');
-
+    // Route::put('/users/{id}/update', 'UsersController@update')->name('users.update');
     // ユーザー名更新
     Route::put('/users/{id}/name', 'UsersController@updateUserName')->name('users.updateName');
-
     // ユーザーパスワード更新
     Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
-
     // メールアドレス変更用メール送信
     Route::put('/users/{id}/password', 'UsersController@updateUserPassword')->name('users.updatePassword');
-
     // メールアドレス変更確認メール処理
     Route::post('/email/{id}', 'ChangeEmailController@sendChangeEmailLink')->name('email.update');
-
     // 新規メールアドレスに更新
     Route::get("reset/{token}", "ChangeEmailController@reset");
-
     // メール変更確認画面表示
     Route::post('/email/message', 'ChangeEmailController@showMessage');
+    
 
-    // ユーザー削除
-    Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destory');
 
-    // 注文管理関係処理
-    Route::resource('orders', 'OrdersController',['only' => ['index','show','edit','update']]);
+
+
+    // 店長権限のみ閲覧可能
+    Route::group(['middleware' => 'owner_auth'], function() {
+
+        // 各詳細画面表示
+        Route::get('/stores/holiday', 'StoresController@showStoreHoliday');
+        Route::get('/stores/{id}/time', 'StoresController@showStoreTime')->name('storeTime.show');
+        Route::get('/stores/{id}/info', 'StoresController@showStoreInfo')->name('storeInfo.show');
+
+        // 各編集画面表示
+        Route::get('/stores/{id}/edit/time', 'StoresController@editTime')->name('storeTime.edit');
+        Route::get('/stores/{id}/edit/info', 'StoresController@editStoreInfo')->name('storeInfo.edit');
+        Route::get('/stores/{id}/holiday', 'CalendarController@edit')->name('storeCalendar.edit');
+        Route::get('/stores/{id}/edit/logo', 'StoresController@editStoreLogo')->name('storeLogo.edit');
+        Route::get('/stores/{id}/edit/images', 'StoresController@editStoreImages')->name('storeImages.edit');
+
+        // 店舗情報更新処理
+        Route::put('/stores/{id}/time', 'StoresController@updateStoreTime')->name('storeTime.update');
+        Route::put('/stores/{id}/info', 'StoresController@updateStoreInfo')->name('storeInfo.update');
+
+        // 店舗画像更新処理
+        Route::post('stores/{id}/logo', 'StoresController@uploadStoreLogo')->name('storeLogo.upload');
+        Route::post('stores/{id}/images', 'StoresController@uploadStoreImages')->name('storeImages.upload');
+
+        // 店舗カレンダー更新処理
+        Route::put('stores/{id}/holiday', 'CalendarController@update')->name('storeCalendar.update');
+
+        // 新規ユーザー登録
+        Route::get('/users/create', 'UsersController@create')->name('users.create');
+        Route::post('/users', 'UsersController@store')->name('users.store');
+
+        // ユーザー削除
+        Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destory');
+
+        // 商品一覧(店舗側)
+        Route::get('/items', 'ItemsController@index');
+        // Route::post('/items', 'ItemsController@create');
+
+        // 商品詳細(店舗側)
+        Route::get('/items/detail/{id}', 'ItemsController@showItemsDetail');
+
+        // 商品編集(店舗側)
+        Route::get('/items/edit/{id}', 'ItemsController@edit');
+        Route::post('/items/update/{id}', 'ItemsController@update');
+
+        // 商品情報削除(店舗側)
+        Route::post('/items/destroy/{id}', 'ItemsController@destroy');
+
+        // 商品登録(店舗側)
+        Route::get('/items/register', 'ItemsController@create');
+        Route::post('/items/store', 'ItemsController@store');
+
+        });    
 
 });

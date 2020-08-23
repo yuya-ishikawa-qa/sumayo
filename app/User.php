@@ -10,6 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    // 店長IDを定義
+    const OWNER_ID = 1;
+
     /**
      * The attributes that are mass assignable.
      *
