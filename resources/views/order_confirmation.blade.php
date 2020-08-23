@@ -34,7 +34,15 @@ $item_total = $tax_total = 0; #初期化
                 $tax_total += $item->price * $item->tax / 100 * $value;
                 @endphp
                 <div class="item-list">
-                    <div class="img"><div><img src="/storage/{{$item->path}}" alt="{{ $item->item_name }}"></div></div>
+                    <div class="img">
+                        <div>
+                            @if ( $item->path == null)
+                            <img src="/storage/items/no_image.png" alt="{{ $item->item_name }}">
+                            @else
+                            <img src="/storage/items/{{$item->path}}" alt="{{ $item->item_name }}">
+                            @endif
+                        </div>
+                    </div>
                     <div class="title">{{ $item->item_name }}</div>
                     <div class="price">&yen;{{ number_format($item->price) }}</div>
                     <div class="quantity">{{ $value }}個</div>

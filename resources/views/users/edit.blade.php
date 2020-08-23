@@ -16,7 +16,13 @@
   </div>
   @endif
 
+  <!-- 店長の処理 ※店長は全ての店員の操作が可能 -->
+@owner
   <form action="{{ route('users.updateName', ['id' => $user->id ]) }}" method="post">
+@endowner
+@if (Auth::check() && Auth::user() != @owner)
+  <form action="{{ route('users.updateName', ['id' => Auth::user()->id ]) }}" method="post">
+@endif
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     <div class="form-group row mb-3 ml-3 mr-3 ">
@@ -37,7 +43,12 @@
     </div>
   </form>
 
-  <form action="{{ route('email.update', ['id' => $user->id ]) }}" method="POST" class="mt-5">
+@owner
+  <form action="{{ route('email.update', ['id' => $user->id ]) }}" method="post" class="mt-5">
+@endowner
+@if (Auth::check() && Auth::user() != @owner)
+  <form action="{{ route('email.update', ['id' => Auth::user()->id ]) }}" method="post" class="mt-5">
+@endif
     {{ csrf_field() }}
 
     <div class="form-group row ml-3">
@@ -63,8 +74,12 @@
 
   </form>
 
-
-  <form action="{{ route('users.updatePassword', ['id' => $user->id ]) }}" method="POST">
+  @owner
+    <form action="{{ route('users.updatePassword', ['id' => $user->id ]) }}" method="post">
+  @endowner
+  @if (Auth::check() && Auth::user() != @owner)
+    <form action="{{ route('users.updatePassword', ['id' => Auth::user()->id ]) }}" method="post">
+  @endif
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     <div class="form-group ml-3 row mt-5">
@@ -88,7 +103,6 @@
   <div class="text-center mt-5">
     <a href="{{ url('/users') }}"><button class="btn btn-secondary">戻る</button></a>
   </div>
-
 
 </div>
 
