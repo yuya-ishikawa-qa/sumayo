@@ -72,8 +72,6 @@ class UsersController extends Controller
         // 店員の場合他ユーザーページへの遷移を制限
         if (\Auth::id() != (config('const.OWNER_ID'))) {            
             $user = \Auth::user();
-            dd((config('const.OWNER_ID')));
-
         } else {
             // 店長の場合全てのユーザーの編集画面表示が可能
             $user = User::findOrFail($id);
