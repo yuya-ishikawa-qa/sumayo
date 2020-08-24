@@ -16,50 +16,110 @@
   </div>
   @endif
 
+  @if (session('error_message'))
+  <div class="mb-5">
+    <div class="alert alert-danger" role="alert">
+      {{ session('error_message') }}
+    </div>
+  </div>
+  @endif
+
   <table class="table table-striped table-condensed">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">
-          名前
+          名前</br>
+          メールアドレス
+        </th>
+        <th scope="col">
+          
+        </th>
+        <th scope="col">
+          
         </th>
       </tr>
     </thead>
     
     <tbody>
-    @foreach ($users as $key => $user)
+
+      @owner
+      @foreach ($users as $key => $user)
       <tr>
+        <!-- ID -->
         <th scope="row">
           <div class="d-flex align-items-center">
             {{ $user->id }}
           </div>
-        </td>
+        </th>
+
+        <!-- 名前 / メールアドレス -->
         <td>
-          <p class="mb-2">
-            {{ $user->name }}
-          </p>
+          <div class="mb-2">
+            {{ $user->name }}</br>
+            {{ $user->email }}
+          </div>
         </td>
+        
+        <!-- 編集ボタン -->
         <td>
-          <a href="/users/{{ $user->id }}/edit"><button class="btn btn-primary">編集</button></a> 
+          <a href="{{ route('users.edit',['id' => $user->id ]) }}"><button class="btn btn-primary">編集</button></a>
         </td>
 
         <!-- 店長は削除ボタン無し -->
         <td>
         @if( $user->id !== 1)
-          <form action="/users/{{ $user->id }}" method="post">
+          <form action="{{ route('users.destory', ['id' => $user->id ]) }}" method="post">          
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <button type="submit" class="btn btn-danger">削除</button>
           </form>
-        @endif  
+        @endif
         </td>
+        
       </tr>
       @endforeach
+      @endowner
+
+      @php
+        $user_id = Auth::id()
+      @endphp
+      
+      <p>{{ $user_id }}</p>
+
+      <!-- ログイン中の店員の場合の表示 -->
+      @if (Auth::check() && $user_id != 1)
+      <tr>
+        <!-- ID -->
+        <th scope="row">
+            <div class="d-flex align-items-center">
+              {{ Auth::user()->id }}
+            </div>
+        </th>
+
+        <!-- 名前 -->
+        <td>
+          <div class="mb-2">
+            {{ Auth::user()->name }}</br>
+            {{ Auth::user()->email }}
+          </div>
+        </td>
+        
+        <!-- 編集ボタン -->
+        <td>
+          <a href="{{ route('users.edit',['id' => \Auth::user()->id ]) }}"><button class="btn btn-primary">編集</button></a>
+        </td>
+
+        <td></td>
+
+
+      </tr>
+      @endif
     </tbody>
   </table>
 
   <div class="text-center">
-    <a href="/stores"><button class="btn btn-secondary">戻る</button></a>
+    <a href="{{ url('/stores') }}"><button class="btn btn-secondary">戻る</button></a>
   </div>
 
 </div>

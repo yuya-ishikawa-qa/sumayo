@@ -37,7 +37,7 @@
                       {{ $message }}
                     </div>
                   <div class="text-center mt-3">
-                      <a href="/stores"><button class="btn btn-primary">店舗管理画面へ</button></a>
+                      <a href="{{ url('/users') }}"><button class="btn btn-primary">店舗管理画面へ</button></a>
                     </div>
                   </div>
               </div>

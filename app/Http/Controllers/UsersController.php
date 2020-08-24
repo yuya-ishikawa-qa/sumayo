@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 use App\User;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserNameRequest;
@@ -68,8 +69,13 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        // ユーザー情報取得
-        $user = User::findOrFail($id);
+        // 店員の場合他ユーザーページへの遷移を制限
+        if (\Auth::id() != User::OWNER_ID ) {            
+            $user = \Auth::user();
+        } else {
+            // 店長の場合全てのユーザーの編集画面表示が可能
+            $user = User::findOrFail($id);
+        }
 
         return view('users.edit', ['user' => $user ]);
     }
@@ -83,8 +89,15 @@ class UsersController extends Controller
      */
     public function updateUserName(UserNameRequest $request, $id)
     {
-        // ユーザー情報取得
-        $user = User::findOrFail($id);
+
+        // 店員の場合ログインユーザーのみの名前を変更可能
+        if (\Auth::id() != User::OWNER_ID ) {            
+            $user = \Auth::user();
+
+        // 店長の場合全てのユーザーの名前を変更可能
+        } else {
+            $user = User::findOrFail($id);
+        }
 
         // ユーザー名書き込み更新
         $user->name = $request->name;
@@ -95,11 +108,16 @@ class UsersController extends Controller
 
     public function updateUserPassword(UserPasswordRequest $request, $id)
     {
-        // ユーザー情報取得
-        $user = User::findOrFail($id);
+        // 店員の場合ログインユーザーのみのパスワードを変更可能
+        if (\Auth::id() != User::OWNER_ID ) {            
+            $user = \Auth::user();
 
+        // 店長の場合全てのユーザーのパスワードを変更可能
+        } else {
+            $user = User::findOrFail($id);
+        }
         // パスワード更新
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect("users/{$user->id}/edit")->with('flash_message', 'パスワードを変更しました');
@@ -124,6 +142,5 @@ class UsersController extends Controller
         $message = $user->name . 'を削除しました。';
 
         return back()->with('flash_message', $message);
-
     }
 }
