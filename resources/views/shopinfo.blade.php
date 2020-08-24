@@ -60,23 +60,26 @@
             <!-- js -->
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
             
-            <!-- Google Map API script    -->
+           <!-- Google Map API script    -->
             <script>
             function initMap() {
 
-                var address = document.getElementById('address').textContent; 
+                var address = document.getElementById('address').textContent;
                 var contentString = document.getElementById('address').textContent;
-
                 var addresses = [
                     address,
                 ];
 
-                var contentString = '<h1>{{ $store->name }}</h1>'+'<p>{{ $store->comment }}</p>';
+
+                // var contentString = '<span>{{ $store->name }}</span>'+'</br>'+'〒 <span>{{ $store->postcode }}</span>'+'<span>{{ $store->address }}</span>'+'</br>'+'<span>{{ $store->comment }}</span>'+'</br>'+'<a href="https://maps.googleapis.com/maps/api/geocode/json?address={{ $store->address }}components=country:JP&key=">GoogleMapで見る</a>'
 
                 var latlng = []; //緯度経度の値をセット
                 var marker = []; //マーカーの位置情報をセット
                 var myLatLng; //地図の中心点をセット用
                 var geocoder;
+
+                var contentString = '<span>{{ $store->name }}</span>'+'</br>'+'〒 <span>{{ $store->postcode }}</span>'+'<span>{{ $store->address }}</span>'+'</br>'
+
                 geocoder = new google.maps.Geocoder();
 
                 var map = new google.maps.Map(document.getElementById('map'));//地図を作成する
@@ -86,8 +89,8 @@
                 function geo(callback){
                     var cRef = addresses.length;
                     for (var i = 0; i < addresses.length; i++) {
-                    (function (i) { 
-                        geocoder.geocode({'address': addresses[i]}, 
+                    (function (i) {
+                        geocoder.geocode({'address': addresses[i]},
                         function(results, status) { // 結果
                         if (status === google.maps.GeocoderStatus.OK) { // ステータスがOKの場合
                             latlng[i]=results[0].geometry.location;// マーカーを立てる位置をセット
@@ -116,16 +119,21 @@
                 }//function aftergeo終了
 
                 var infowindow = new google.maps.InfoWindow({
+                    
                     content: contentString
                 });
 
-                marker.addListener('click', function() {
-                    infowindow.open(map, marker);
-                });
+                window.onload = function () {
+                    marker[0].addListener('click', function() {
+                        infowindow.open(map, marker[0]);
+
+                    });
+                };
                 };//function initMap終了
             </script>
 
-            <script src="https://maps.googleapis.com/maps/api/js?key='ここにキー'&callback=initMap" async defer></script>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
 
             <div class="mb-4">
                 <div class="text-center">コメント</div>
