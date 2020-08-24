@@ -138,6 +138,8 @@ class ItemsController extends Controller
 
          //レコードを検索
         $item = Items::findOrFail($id);
+
+        // dd( $item->path);
       
         //値を代入
         $item->item_name = $request->item_name;
@@ -153,8 +155,11 @@ class ItemsController extends Controller
         $item->stock_thursday = $request->stock_thursday;
         $item->stock_friday = $request->stock_friday;
         $item->stock_saturday = $request->stock_saturday;
-    
-        if ($request->hasfile('path')) {
+
+        if(is_null($request->path)) {
+            $item->path == $item->path;
+            
+        } elseif ($request->hasfile('path')) {
 
             // 画像の保存(高橋さんと同じ方法)
             $path = $request->file('path')->store('/'); 

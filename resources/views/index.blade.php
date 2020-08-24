@@ -81,14 +81,14 @@
             <div class="col-6 col-sm-4 col-lg-3">
                 <a class="stretched-link">
                 <div class="card-body p-2">
-                    <a class="product-thumbnail d-block" href='/detail/{{$item->id}}'>
+                    <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}' id="items_list_image">
                     <img src=
                         @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
-                    class="img-fluid" alt="items_list_image" id="items_list_image">
+                    class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
-                    <p class="product-title mb-0">{{ $item->item_name }}
+                    <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
                     </p>
-                    <p class="sale-price mb-0">&yen;{{ $item->price }}
+                    <p class="sale-price mb-0" href='/detail/{{$item->id}}'>&yen;{{ $item->price }}
                     </p>
                 </div>
                 </a>
@@ -107,14 +107,14 @@
             <div class="col-6 col-sm-4 col-lg-3">
                 <a class="stretched-link">
                 <div class="card-body p-2">
-                    <a class="product-thumbnail d-block" href='/detail/{{$item->id}}'>
+                    <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
                         @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
-                    class="img-fluid" alt="items_list_image" id="items_list_image">
+                    class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
-                    <p class="product-title mb-0">{{ $item->item_name }}
+                    <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
                     </p>
-                    <p class="sale-price mb-0">&yen;{{ $item->price }}
+                    <p class="sale-price mb-0" href='/detail/{{$item->id}}'>&yen;{{ $item->price }}
                     </p>
                 </div>
                 </a>
@@ -133,14 +133,14 @@
             <div class="col-6 col-sm-4 col-lg-3">
                 <a class="stretched-link">
                 <div class="card-body p-2">
-                    <a class="product-thumbnail d-block" href='/detail/{{$item->id}}'>
+                    <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
                         @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
-                    class="img-fluid" alt="items_list_image" id="items_list_image">
+                    class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
-                    <p class="product-title mb-0">{{ $item->item_name }}
+                    <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
                     </p>
-                    <p class="sale-price mb-0">&yen;{{ $item->price }}
+                    <p class="sale-price mb-0" href='/detail/{{$item->id}}'>&yen;{{ $item->price }}
                     </p>
                 </div>
                 </a>
@@ -159,14 +159,14 @@
             <div class="col-6 col-sm-4 col-lg-3">
                 <a class="stretched-link">
                 <div class="card-body p-2">
-                    <a class="product-thumbnail d-block" href='/detail/{{$item->id}}'>
+                    <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
                         @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
-                    class="img-fluid" alt="items_list_image" id="items_list_image">
+                    class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
-                    <p class="product-title mb-0">{{ $item->item_name }}
+                    <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
                     </p>
-                    <p class="sale-price mb-0">&yen;{{ $item->price }}
+                    <p class="sale-price mb-0" href='/detail/{{$item->id}}'>&yen;{{ $item->price }}
                     </p>
                 </div>
                 </a>
@@ -185,14 +185,14 @@
             <div class="col-6 col-sm-4 col-lg-3">
                 <a class="stretched-link">
                 <div class="card-body p-2">
-                    <a class="product-thumbnail d-block" href='/detail/{{$item->id}}'>
+                    <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
                         @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
-                    class="img-fluid" alt="items_list_image" id="items_list_image">
+                    class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
-                    <p class="product-title mb-0">{{ $item->item_name }}
+                    <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
                     </p>
-                    <p class="sale-price mb-0">&yen;{{ $item->price }}
+                    <p class="sale-price mb-0" href='/detail/{{$item->id}}'>&yen;{{ $item->price }}
                     </p>
                 </div>
                 </a>
@@ -206,7 +206,4 @@
 {{--  スライドショー用  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-{{--  カテゴリー移動  --}}
-<script src="{{ asset('js/smooth_link.js') }}" defer></script>
-            
 @endsection
