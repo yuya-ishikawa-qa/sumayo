@@ -15,7 +15,7 @@ class OrderItemsTableSeeder extends Seeder
             'order_id' => 1,
             'item_id' => 1,
             'quantity' => 1,
-            'item_name' => '唐揚げ弁当',
+            'item_name' => 'ナポリタン',
             'price' => 500,
             'tax' => 8,
             'image' => 'sample.jpg'
@@ -24,7 +24,7 @@ class OrderItemsTableSeeder extends Seeder
             'order_id' => 2,
             'item_id' => 1,
             'quantity' => 1,
-            'item_name' => '唐揚げ弁当',
+            'item_name' => 'ナポリタン',
             'price' => 500,
             'tax' => 8,
             'image' => 'sample.jpg'
@@ -33,7 +33,7 @@ class OrderItemsTableSeeder extends Seeder
             'order_id' => 2,
             'item_id' => 2,
             'quantity' => 1,
-            'item_name' => 'ハンバーグ弁当',
+            'item_name' => 'シーフードパスタ',
             'price' => 500,
             'tax' => 8,
             'image' => 'sample.jpg'
@@ -42,7 +42,7 @@ class OrderItemsTableSeeder extends Seeder
             'order_id' => 3,
             'item_id' => 1,
             'quantity' => 3,
-            'item_name' => '唐揚げ弁当',
+            'item_name' => 'からあげ',
             'price' => 500,
             'tax' => 8,
             'image' => 'sample.jpg'
@@ -51,7 +51,7 @@ class OrderItemsTableSeeder extends Seeder
             'order_id' => 4,
             'item_id' => 3,
             'quantity' => 1,
-            'item_name' => 'スペシャル弁当',
+            'item_name' => 'からあげ',
             'price' => 400,
             'tax' => 8,
             'image' => 'sample.jpg'
@@ -60,7 +60,7 @@ class OrderItemsTableSeeder extends Seeder
             'order_id' => 4,
             'item_id' => 4,
             'quantity' => 1,
-            'item_name' => 'お茶',
+            'item_name' => 'カルボナーラ',
             'price' => 100,
             'tax' => 8,
             'image' => 'sample.jpg'
