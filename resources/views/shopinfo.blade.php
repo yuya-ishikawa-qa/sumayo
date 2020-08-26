@@ -27,7 +27,7 @@
                 <div class="col text-center">
                     <span><strong>{{ $calendar->getTitle() }}</strong></span><br>
                 </div>
-                <div class="d-flex flex-wrap mb-2 ml-5">
+                <div class="d-flex flex-wrap mb-2 ml-5 ">
                     @foreach($weeks as $week)
                         @php
                             $days = $week->getDays();
