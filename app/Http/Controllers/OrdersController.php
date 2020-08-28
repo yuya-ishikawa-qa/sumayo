@@ -59,7 +59,7 @@ class OrdersController extends Controller
             $search_date = date_create(date("Y-m-d"));
         }
 
-        $orders = Order::where('recieved_date', $search_date->format('Y-m-d'))->orderBy('recieved_date','asc')->paginate(50);;
+        $orders = Order::where('recieved_date', $search_date->format('Y-m-d'))->orderBy('order_status', 'asc')->orderBy('recieved_time','asc')->get();
 
         return view('orders/index', [
             'orders' => $orders,
@@ -141,6 +141,16 @@ class OrdersController extends Controller
         $post->fill($params)->save();
 
         return redirect()->route('orders.show',['id' => $id]);
+    }
+
+    public function updateMultiple(Request $request)
+    {
+        dd($request);
+        $count = '';
+
+
+
+        return redirect()->route('orders.index',['date' => $request->input('date')]);
     }
 
 

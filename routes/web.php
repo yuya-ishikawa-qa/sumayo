@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/stores', 'StoresController@index')->name('store.top');
     // 注文管理関係処理
     Route::resource('orders', 'OrdersController',['only' => ['index','show','edit','update']]);
+    Route::put('/orders', 'OrdersController@updateMultiple')->name('orders.updateMultiple');
+
     // 一覧表示
     Route::get('/users', 'UsersController@index')->name('users.top');
 
@@ -70,7 +72,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get("reset/{token}", "ChangeEmailController@reset");
     // メール変更確認画面表示
     Route::post('/email/message', 'ChangeEmailController@showMessage');
-    
+
 
 
 
@@ -126,6 +128,6 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/items/register', 'ItemsController@create');
         Route::post('/items/store', 'ItemsController@store');
 
-        });    
+        });
 
 });

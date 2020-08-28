@@ -9,17 +9,19 @@
             @php
             $search_date->modify('- 1 days');
             @endphp
-            <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $search_date->format('Y-m-d') }}">前</button>
-            <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $today->format('Y-m-d') }}">今日</button>
+            <button name="date_btn" class="btn btn-primary date_btn mt-1" type="submit" value="{{ $search_date->format('Y-m-d') }}">前</button>
+            <button name="date_btn" class="btn btn-primary date_btn mt-1" type="submit" value="{{ $today->format('Y-m-d') }}">今日</button>
             @php
             $search_date->modify('+ 2 days');
             @endphp
-            <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $search_date->format('Y-m-d') }}">次</button>
+            <button name="date_btn" class="btn btn-primary date_btn mt-1" type="submit" value="{{ $search_date->format('Y-m-d') }}">次</button>
         </form>
     </div>
-    <form action="{!! url('/order_detail'); !!}">
+    <form class="mt-1" action="{{route('orders.updateMultiple')}}" method="post">
+        {{csrf_field()}}
+        {{ method_field('PUT')}}
         <div class="order-area">
-            <button class="btn btn-primary" type="button">完了にする</button>
+            <button class="btn btn-primary">完了にする</button>
             <div class="order-item">
                 <div class="time">時間</div>
                 <div class="title">内容</div>
@@ -52,12 +54,15 @@
                 </div>
                 <div class="operation">
                     <a href="{{route('orders.show',['id' => $order->id])}}"><button type="button">詳細確認</button></a><br>
-                    <label><input type="checkbox">完了</label>
+                    <label><input name="complete[]" type="checkbox" value="{{ $order->id }}">完了</label>
                 </div>
             </div>
             @endforeach
-
         </div>
+        @php
+        $search_date->modify('- 1 days');
+        @endphp
+        <input type="hidden" name="check_date" value="{{ $search_date->format('Y-m-d') }}">
     </form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
