@@ -85,7 +85,7 @@ class BuyController extends Controller
                     'comment' => session()->get('order')['comment'],
                 ]);
 
-                Customer::create([
+                $flight_customer = Customer::create([
                     'order_id' => $flight_order->id,
                     'last_name' => session()->get('order')['last_name'],
                     'first_name' => session()->get('order')['first_name'],
@@ -106,6 +106,17 @@ class BuyController extends Controller
                         'image' => $value['image'],
                     ]);
                 }
+
+                mb_language("Japanese");
+                mb_internal_encoding("UTF-8");
+
+                $email = "xxxxxx@example.com";
+                $subject = "test"; // 題名
+                $body = "This is test\n"; // 本文
+                $to = $flight_customer->mail;
+                $header = "From: $email\nReply-To: $email\n";
+
+                mb_send_mail($to, $subject, $body, $header);
 
                 # カート、顧客情報を空に
                 session()->forget('cart');
