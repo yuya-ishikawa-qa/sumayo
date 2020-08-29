@@ -1,5 +1,5 @@
 @extends('layouts.app')
-    
+
 @section('content')
 
 <div class="container">
@@ -75,7 +75,7 @@
 </div>
 
  {{--  削除確認アラート  --}}
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
 <script>
 $(function(){
     $('.btn-destroy').click(function(){
