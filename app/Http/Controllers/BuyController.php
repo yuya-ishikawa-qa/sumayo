@@ -116,7 +116,7 @@ class BuyController extends Controller
                 $to = $flight_customer->mail;
                 $header = "From: $email\nReply-To: $email\n";
 
-                mb_send_mail($to, $subject, $body, $header);
+                $test = mb_send_mail($to, $subject, $body, $header);
 
                 # カート、顧客情報を空に
                 session()->forget('cart');
@@ -128,6 +128,7 @@ class BuyController extends Controller
                 \DB::rollback();
             }
 
+            dd($test);
             return view('order_confirm',[
                 'flight_order' => $flight_order
             ]);
