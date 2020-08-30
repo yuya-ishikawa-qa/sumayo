@@ -10,7 +10,9 @@
             <form action="{{route('buy.show')}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-area">
-
+                    @if (session('flash_message'))
+                    <div style="color:red">{{ session('flash_message') }}</div>
+                    @endif
                     <div>
                         <dl>
                             <dt><label for="test">受取日</label></dt>
@@ -49,8 +51,6 @@
                                     # 基準を設定(時間の管理のために使う日付は1980年1月1日とする)
                                     $set_time = date_create(sprintf('1980-01-01 %s',$value));
                                     @endphp
-                                    <option value="{{$set_time->format('H:i')}}">{{$set_time->format('H:i')}}</option>
-
                                     @if(!empty(old('recieved_time')) && old('recieved_time') == $set_time->format('H:i'))
                                     <option value="{{$set_time->format('H:i')}}" selected>{{$set_time->format('H:i')}}</option>
                                     @elseif(empty(old('recieved_time')) && !empty(session()->get('order')['recieved_time']) && session()->get('order')['recieved_time'] == $set_time->format('H:i'))

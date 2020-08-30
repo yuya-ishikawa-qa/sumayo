@@ -2,54 +2,47 @@
 
 @section('content')
 
-{{--  この戻るボタンはあとで綺麗にする  --}}
-        {{--  <button type="button" onclick="history.back()" class="ml-1">＜</button>
-
-        @if (session('flash_message'))
-        <div style="color:red">{{ session('flash_message') }}</div>
-        @endif  --}}
-
 <a href="{{ url('/')}}">戻る</a>
-
-
 {{--  商品画像  --}}
-        <div class="container">
-            <div class="row">
-
-                <form action="{{route('cart.store',['get_id' => $item->id])}}" method="post">
-                    {{csrf_field()}}
-                    {{ method_field('POST')}}
-                    <img class="col-10 mb-2 img-fluid mx-auto d-block" src=
-                    @if ( $item->path == null) "/storage/items/no_image.png"
-                    @else "/storage/items/{{$item->path}}"
-                    @endif
-                    id=item_detail_image alt="">
-
-                    <div class="product-title col-10"><h1>{{ $item->item_name }}</h1></div>
-                    <div class="product-description col-8"><p>{{ $item->description }}</p></div>
-                    <div class="sale-price col-4"><p>&yen;{{ $item->price }}（税抜）</p></div>
-
-                    {{--  数量指定  --}}
-                    <div class="col-12" align="center" id="count">
-                        <button class="minus">－</button>
-                        <input type="text" name="quantity" value="0" readonly class="number">
-                        <button class="plus" type="button">＋</button>
-                    </div>
-
-                    {{--  カートに入れ、商品一覧に戻る  --}}
-                    <div class="col-12 mt-3" align="center">
-                        <button class="btn btn-primary" name="next_page" value="index">カートに入れ、商品一覧に戻る</button>
-                    </div>
-
-                    {{--  注文に進む  --}}
-                    <div class="col-12 mt-3" align="center">
-                        <button class="btn btn-primary" name="next_page" value="cart">注文に進む</button>
-                    </div>
-                </form>
-
-{{--  formとsubmitでセッションに商品情報追加すること  --}}
+<div class="row justify-content-center">
+    <div class="col-10 col-sm-10 col-lg-8">
+        <div class="card-body p-2">
+            <div class="embed-responsive embed-responsive-4by3" id="items_list_image">
+            <img src=
+                @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+            class="justify-content-center card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
             </div>
+            <div class="col-12 mt-2"><h3>{{ $item->item_name }}</h3></div>
+            <div class="col-10"><p>{{ $item->description }}</p></div>
+            <div class="col-10"><h5>&yen;{{ $item->price }}（税抜）</h5></div>
         </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <form action="{{route('cart.store',['get_id' => $item->id])}}" method="post">
+            {{csrf_field()}}
+            {{ method_field('POST')}}
+            {{--  数量指定  --}}
+            <div class="col-12" align="center" id="count">
+                <button class="minus">－</button>
+                <input type="text" name="quantity" value="0" readonly class="number">
+                <button class="plus" type="button">＋</button>
+            </div>
+
+            {{--  カートに入れ、商品一覧に戻る  --}}
+            <div class="col-12 mt-3" align="center">
+                <button class="btn btn-primary" name="next_page" value="index">カートに入れ、商品一覧に戻る</button>
+            </div>
+
+            {{--  注文に進む  --}}
+            <div class="col-12 mt-3" align="center">
+                <button class="btn btn-primary" name="next_page" value="cart">注文に進む</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {{--  数量変更の設定  --}}
 

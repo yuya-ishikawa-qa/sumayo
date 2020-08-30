@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+
+use App\Mail\OrderMail;
 
 use App\Store;
 use App\StoreHoliday;
@@ -34,6 +37,144 @@ class BuyController extends Controller
                 'comment' => $request->comment,
             ];
             session(['order' => $array]);
+
+            /**************************
+            予約可能かチェック
+            **************************/
+
+            # 店舗情報取得
+            $store = Store::orderBy('id')->first();
+
+            # 予約したい日をセット
+            $check_date = date_create(sprintf("%s %s:00",session()->get('order')['recieved_date'],session()->get('order')['recieved_time']));
+
+            ## 休日でないかチェックする
+            $holidays = StoreHoliday::where([
+                ['date', '=', $check_date->format('Ymd')],
+                ['is_holiday', '=', 1],
+            ])->count();
+
+            if($holidays > 0){
+                ### 定休日で予約不可なため、エラーを返す
+                \Session::flash('flash_message', '※定休日のため予約できません');
+                return redirect()->route('customerinfo.create');
+            }
+
+            ## 営業時間内かチェックする
+            ### 営業時間をセット
+            $start_time = date_create(sprintf("%s %s",session()->get('order')['recieved_date'],$store->start_time));
+            $end_time = date_create(sprintf("%s %s",session()->get('order')['recieved_date'],$store->end_time));
+
+            if($check_date < $start_time || $check_date > $end_time){
+                ### 営業時間外で予約不可なため、エラーを返す
+                \Session::flash('flash_message', '※営業時間外のため予約できません');
+                return redirect()->route('customerinfo.create');
+            }
+
+
+            ## 選択された時間がルールに沿ったものかチェック
+            ### ルールに沿った時間を取得
+            $times_list = $this->get_times();
+            if(!in_array($check_date->format('H:i:s'),$times_list)){
+                ### ルール外ため、エラーを返す
+                \Session::flash('flash_message', '※ご希望の時間では予約できません');
+                return redirect()->route('customerinfo.create');
+            }
+
+
+            ## 予約不可の直前予約でないかチェック
+            ### 本日の予約が可能かどうかの基準値を設定する
+            $set_date = date_create(date("Y-m-d H:i:s"));
+            $text = sprintf('+ %d minutes',$store->earliest_receivable_time);
+            $set_date->modify(sprintf('+ %d minutes',$store->earliest_receivable_time));
+
+            if($set_date > $check_date){
+                ### 予約可能時間を過ぎているため、エラーを返す
+                \Session::flash('flash_message', '※ご希望の日時では予約できません');
+                return redirect()->route('customerinfo.create');
+            }
+
+
+            ## 同じ日時の予約数確認
+            $orders = Order::where([
+                ['recieved_date', '=', session()->get('order')['recieved_date']],
+                ['recieved_time', '=', session()->get('order')['recieved_time']],
+            ])->get();
+
+            if($orders->count() >= $store->capacity){
+                ###  予約受付不可なため、エラーを返す
+                \Session::flash('flash_message', '※ご希望の日時では予約できません');
+                return redirect()->route('customerinfo.create');
+            }
+
+            ## 商品在庫数にマッチしているか
+            ### 商品IDの取得
+            $item_id = [];
+            $items = []; # 予約済みの注文を管理する
+            foreach(session()->get('cart') as $k => $v){
+                $item_id[] = $k;
+                $items[$k] = 0;
+            }
+
+            ### 既に予約されている商品の数量取得
+            $order_item = \DB::table('orders')->join('order_items','orders.id','=','order_items.order_id')->where('orders.recieved_date', '=', session()->get('order')['recieved_date'])->whereIn('order_items.item_id', $item_id)->get();
+
+            foreach($order_item as $v){
+                $items[$v->item_id] += (int)$v->quantity;
+            }
+
+            ### カートに入れた商品情報取得
+            $stock_list = Items::find($item_id);
+
+            foreach($stock_list as $v){
+                $stock = 0;
+                ### 曜日あたりの在庫数を取得
+                switch($check_date->format('w')){
+                        case('0'):
+                        $stock = $v->stock_sunday;
+                        break;
+                        case('1'):
+                        $stock = $v->stock_monday;
+                        break;
+                        case('2'):
+                        $stock = $v->stock_tuesday;
+                        break;
+                        case('3'):
+                        $stock = $v->stock_wednesday;
+                        break;
+                        case('4'):
+                        $stock = $v->stock_thursday;
+                        break;
+                        case('5'):
+                        $stock = $v->stock_friday;
+                        break;
+                        case('6'):
+                        $stock = $v->stock_saturday;
+                        break;
+                }
+                if($stock < ($items[$v->id] + session()->get('cart')[$v->id])){
+                    ###  在庫数が足りないため、エラーを返す
+                    \Session::flash('flash_message', sprintf('※ご希望の日時では%sの予約できません',$v->item_name));
+                    return redirect()->route('customerinfo.create');
+                }
+
+                if($v->is_selling == 1){
+                    ### 注文の注文不可なため、該当商品をカートから外しエラーを返す
+                    # カートの商品を取得
+                    $cart = session()->pull('cart');
+
+                    # カートに商品が存在すれば商品を削除
+                    if(!empty($cart[$v->id])){
+                        unset($cart[$v->id]);
+                    }
+
+                    # カートに商品を戻す
+                    session(['cart' => $cart]);
+
+                    \Session::flash('flash_message', sprintf('※エラーが発生しました。恐れ入りますがはじめからやり直してください。',$v->item_name));
+                    return redirect()->route('cart.index');
+                }
+            }
 
             return view('order_confirmation');
         }else{
@@ -74,7 +215,141 @@ class BuyController extends Controller
 
             \DB::beginTransaction();
             try {
+            /**************************
+            予約可能かチェック
+            **************************/
+
+                # 店舗情報取得
                 $store = Store::orderBy('id')->first();
+
+                # 予約したい日をセット
+                $check_date = date_create(sprintf("%s %s:00",session()->get('order')['recieved_date'],session()->get('order')['recieved_time']));
+
+                ## 休日でないかチェックする
+                $holidays = StoreHoliday::where([
+                    ['date', '=', $check_date->format('Ymd')],
+                    ['is_holiday', '=', 1],
+                ])->count();
+
+                if($holidays > 0){
+                    ### 定休日で予約不可なため、エラーを返す
+                    throw new \Exception('定休日の予約');
+                }
+
+                ## 営業時間内かチェックする
+                ### 営業時間をセット
+                $start_time = date_create(sprintf("%s %s",session()->get('order')['recieved_date'],$store->start_time));
+                $end_time = date_create(sprintf("%s %s",session()->get('order')['recieved_date'],$store->end_time));
+
+                if($check_date < $start_time || $check_date > $end_time){
+                    ### 営業時間外で予約不可なため、エラーを返す
+                    throw new \Exception('営業時間外の予約');
+                }
+
+
+                ## 選択された時間がルールに沿ったものかチェック
+                ### ルールに沿った時間を取得
+                $times_list = $this->get_times();
+                if(!in_array($check_date->format('H:i:s'),$times_list)){
+                    ### ルール外ため、エラーを返す
+                    throw new \Exception('時間選択のルール外の予約');
+                }
+
+
+                ## 予約不可の直前予約でないかチェック
+                ### 本日の予約が可能かどうかの基準値を設定する
+                $set_date = date_create(date("Y-m-d H:i:s"));
+                $text = sprintf('+ %d minutes',$store->earliest_receivable_time);
+                $set_date->modify(sprintf('+ %d minutes',$store->earliest_receivable_time));
+
+                if($set_date > $check_date){
+                    ### 予約可能時間を過ぎているため、エラーを返す
+                    throw new \Exception('予約可能時間超過の予約');
+                }
+
+
+                ## 同じ日時の予約数確認
+                $orders = Order::where([
+                    ['recieved_date', '=', session()->get('order')['recieved_date']],
+                    ['recieved_time', '=', session()->get('order')['recieved_time']],
+                ])->get();
+
+                if($orders->count() >= $store->capacity){
+                    ###  予約受付不可なため、エラーを返す
+                    throw new \Exception('予約受付数超過の予約');
+                }
+
+                ## 商品在庫数にマッチしているか
+                ### 商品IDの取得
+                $item_id = [];
+                $items = []; # 予約済みの注文を管理する
+                foreach(session()->get('cart') as $k => $v){
+                    $item_id[] = $k;
+                    $items[$k] = 0;
+                }
+
+                ### 既に予約されている商品の数量取得
+                $order_item = \DB::table('orders')->join('order_items','orders.id','=','order_items.order_id')->where('orders.recieved_date', '=', session()->get('order')['recieved_date'])->whereIn('order_items.item_id', $item_id)->get();
+
+                foreach($order_item as $v){
+                    $items[$v->item_id] += (int)$v->quantity;
+                }
+
+                ### カートに入れた商品情報取得
+                $stock_list = Items::find($item_id);
+
+                foreach($stock_list as $v){
+                    $stock = 0;
+                    ### 曜日あたりの在庫数を取得
+                    switch($check_date->format('w')){
+                        case('0'):
+                            $stock = $v->stock_sunday;
+                            break;
+                        case('1'):
+                            $stock = $v->stock_monday;
+                            break;
+                        case('2'):
+                            $stock = $v->stock_tuesday;
+                            break;
+                        case('3'):
+                            $stock = $v->stock_wednesday;
+                            break;
+                        case('4'):
+                            $stock = $v->stock_thursday;
+                            break;
+                        case('5'):
+                            $stock = $v->stock_friday;
+                            break;
+                        case('6'):
+                            $stock = $v->stock_saturday;
+                            break;
+                    }
+
+                    if($stock < ($items[$v->id] + session()->get('cart')[$v->id])){
+                        ###  在庫数が足りないため、エラーを返す
+                        throw new \Exception('商品在庫数超過の予約');
+                    }
+
+                    if($v->is_selling == 1){
+                        ### 注文の注文不可なため、該当商品をカートから外しエラーを返す
+                        # カートの商品を取得
+                        $cart = session()->pull('cart');
+
+                        # カートに商品が存在すれば商品を削除
+                        if(!empty($cart[$v->id])){
+                            unset($cart[$v->id]);
+                        }
+
+                        # カートに商品を戻す
+                        session(['cart' => $cart]);
+
+                        throw new \Exception('販売不可商品を含む予約');
+                    }
+                }
+
+            /**************************
+            DBへ登録
+            **************************/
 
                 $flight_order = Order::create([
                     'store_id' => $store->id,
@@ -107,16 +382,8 @@ class BuyController extends Controller
                     ]);
                 }
 
-                mb_language("Japanese");
-                mb_internal_encoding("UTF-8");
-
-                $email = "xxxxxx@example.com";
-                $subject = "test"; // 題名
-                $body = "This is test\n"; // 本文
-                $to = $flight_customer->mail;
-                $header = "From: $email\nReply-To: $email\n";
-
-                $test = mb_send_mail($to, $subject, $body, $header);
+                # メール送信
+                /*                            Mail::to('test@example.com')->send(new OrderMail);*/
 
                 # カート、顧客情報を空に
                 session()->forget('cart');
