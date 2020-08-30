@@ -15,16 +15,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 
 
-Route::get('/order_form', function () {
-    return view('order_form');
-});
-Route::get('/order_confirmation', function () {
-    return view('order_confirmation');
-});
-Route::get('/order_confirm', function () {
-    return view('order_confirm');
-});
-
 // TOP(客側)
 Route::get('/', 'CustomerItemsController@index')->name('top');
 // 商品詳細(客側)
@@ -70,7 +60,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get("reset/{token}", "ChangeEmailController@reset");
     // メール変更確認画面表示
     Route::post('/email/message', 'ChangeEmailController@showMessage');
-    
+
 
 
 
@@ -126,6 +116,10 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/items/register', 'ItemsController@create');
         Route::post('/items/store', 'ItemsController@store');
 
-        });    
+        });
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
