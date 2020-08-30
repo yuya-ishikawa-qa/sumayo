@@ -45,7 +45,7 @@
 </div>
 
 {{--  数量変更の設定  --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <script>
     $(function(){
         var number,total_numner;

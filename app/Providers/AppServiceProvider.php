@@ -27,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('owner', function () {
             return (auth()->check() && auth()->user()->is_owner);
         });
+
+        /**
+         * .envファイルの(APP_ENV=production)のとき、強制https化
+         */
+        if(\App::environment('production')) {
+            \URL::forceScheme('https');
+        }
     }
 }

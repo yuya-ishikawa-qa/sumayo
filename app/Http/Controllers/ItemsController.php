@@ -58,10 +58,17 @@ class ItemsController extends Controller
             if ($request->hasfile('path')) {
 
                 // 画像の保存(高橋さんと同じ方法)
-                $path = $request->file('path')->store('/'); 
-                Storage::move($path, 'public/items/' . $path);
+                // $path = $request->file('path')->store('/');
+                // ローカルへの保存
+                // Storage::move($path, 'public/items/' . $path);
+                // $request->path = $path;
 
-                $request->path = $path;
+                // AWS S3への保存
+                $file = $request->file('path');
+                $path = Storage::disk('s3')->putFile('/', $file, 'public');
+
+                $request->path = Storage::disk('s3')->url($path);
+                // $request->path = $path;
     
             } else {
                 $request->path = "";

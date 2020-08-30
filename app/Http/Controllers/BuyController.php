@@ -360,7 +360,7 @@ class BuyController extends Controller
                     'comment' => session()->get('order')['comment'],
                 ]);
 
-                Customer::create([
+                $flight_customer = Customer::create([
                     'order_id' => $flight_order->id,
                     'last_name' => session()->get('order')['last_name'],
                     'first_name' => session()->get('order')['first_name'],
@@ -395,6 +395,7 @@ class BuyController extends Controller
                 \DB::rollback();
             }
 
+            dd($test);
             return view('order_confirm',[
                 'flight_order' => $flight_order
             ]);
