@@ -5,8 +5,6 @@ $item_total = $tax_total = 0;
 @extends('customer_layouts.customer_layouts')
 
 @section('content')
-{{--  この戻るボタンはあとで綺麗にする  --}}
-<button type="button" onclick="history.back()" class="ml-1">＜</button>
 
 <div class="container">
     <h1>カートの中身</h1>
