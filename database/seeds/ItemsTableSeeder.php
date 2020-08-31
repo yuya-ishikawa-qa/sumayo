@@ -26,7 +26,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '100',
                 'stock_saturday' => '100',
                 'stock_sunday' => '100',
-                'path' => 'naporitan.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/1l9UPPLpWnUCmqyN3KQqEz6wlcVZn2GzMFQPMhV1.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -46,7 +46,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '100',
                 'stock_saturday' => '100',
                 'stock_sunday' => '100',
-                'path' => 'seafoodpasta.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/8hQS1eRbUp6cHnH5P0Hbsxj0bxEeDq5Y1TRl9J2m.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -66,7 +66,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '100',
                 'stock_saturday' => '100',
                 'stock_sunday' => '100',
-                'path' => 'karaage.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/xErnvsytdshXlJ2XmAKeBQqnT7tcRHXvVSge8RfO.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -86,7 +86,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '80',
                 'stock_saturday' => '80',
                 'stock_sunday' => '80',
-                'path' => 'carbonara.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/SjYfLrKjIrMwij0WjcEX0jJc9ARvoM59bJdxO2Uj.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -106,7 +106,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '10',
                 'stock_saturday' => '10',
                 'stock_sunday' => '10',
-                'path' => 'party.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/WAKFCzi1nbngw0bp3pnYiWPhR9zcYisKUeucWVCU.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -126,7 +126,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '120',
                 'stock_saturday' => '120',
                 'stock_sunday' => '120',
-                'path' => 'bread.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/X5WVQpvbdhSFOQ3lCCKnf5LNTXKnrynKJ6vd1mc4.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -146,7 +146,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '120',
                 'stock_saturday' => '120',
                 'stock_sunday' => '120',
-                'path' => 'coffee.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/2j18s5AXWNqFjdR5Ba98gjREZ2e11b9bZfPgYCOt.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -166,7 +166,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '120',
                 'stock_saturday' => '120',
                 'stock_sunday' => '120',
-                'path' => 'cappuccino.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/zzeyW109PSbWWDDuwzScezBfhG4fIUeIkWxR9YVe.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -186,7 +186,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '120',
                 'stock_saturday' => '120',
                 'stock_sunday' => '120',
-                'path' => 'berry.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/9k62UqUxLA7fjqws1YBwedCElyHR8YnDHMu0RW6b.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -206,7 +206,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '120',
                 'stock_saturday' => '120',
                 'stock_sunday' => '120',
-                'path' => 'beer.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/CqQ8wM5deiKb5Oo1nwvpgSqIg3kl7a0g8CQMfqR3.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -226,7 +226,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '120',
                 'stock_saturday' => '120',
                 'stock_sunday' => '120',
-                'path' => 'pasta.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/6iqTahpwRbSFK9mj305GS43WVbpf4Fnryic8ink4.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -246,7 +246,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '120',
                 'stock_saturday' => '120',
                 'stock_sunday' => '120',
-                'path' => 'penne.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/qMbYUFWhU9sEJ8MaHFboULegjfdXPbXu34cf8FcW.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -266,7 +266,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '50',
                 'stock_saturday' => '50',
                 'stock_sunday' => '50',
-                'path' => 'popcorn.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/Aud1poBKuJdp0kpxhyzcisPOkjWkwcneZM0PayI7.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]
@@ -286,7 +286,7 @@ class ItemsTableSeeder extends Seeder
                 'stock_friday' => '20',
                 'stock_saturday' => '20',
                 'stock_sunday' => '20',
-                'path' => 'cheese.jpg',
+                'path' => 'https://sumayo.s3.ap-northeast-1.amazonaws.com/JPOEFsbEjsGimR7JTBItxuluCytOQ9axIE4zA8VN.jpeg',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ]

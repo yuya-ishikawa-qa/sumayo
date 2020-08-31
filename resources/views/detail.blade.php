@@ -8,9 +8,15 @@
     <div class="col-10 col-sm-10 col-lg-8">
         <div class="card-body p-2">
             <div class="embed-responsive embed-responsive-4by3" id="items_list_image">
-            <img src=
+            {{--  <img src=
                 @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+            class="justify-content-center card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">  --}}
+
+            {{--  S3用  --}}
+            <img src=
+                @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif
             class="justify-content-center card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
+
             </div>
             <div class="col-12 mt-2"><h3>{{ $item->item_name }}</h3></div>
             <div class="col-10"><p>{{ $item->description }}</p></div>
