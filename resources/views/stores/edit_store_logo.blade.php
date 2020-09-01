@@ -23,7 +23,7 @@
                         <strong><u>アップロード済ロゴ画像</u></strong>
                     </div>
                     <div class="col">
-                        <img style="max-width: 100%; height: auto;" src="/storage/storeLogo/{{$store->logo}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="{{$store->logo}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @else
