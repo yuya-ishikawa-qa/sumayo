@@ -18,6 +18,7 @@
             class="justify-content-center card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
 
             </div>
+            <div class="col-12" style="color:red">{{ session('flash_message') }}</div>
             <div class="col-12 mt-2"><h3>{{ $item->item_name }}</h3></div>
             <div class="col-10"><p>{{ $item->description }}</p></div>
             <div class="col-10"><h5>&yen;{{ $item->price }}（税抜）</h5></div>

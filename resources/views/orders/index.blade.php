@@ -6,6 +6,12 @@
         <form id="search_form" action="{{route('orders.index')}}" method="get">
             {{csrf_field()}}
             <input id="date" name="date" class="form-control" type="date" value="{{ $search_date->format('Y-m-d') }}">
+            <select id="status" name="status">
+                <option value="0">全て</option>
+                @foreach ($order_status_list as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
             @php
             $search_date->modify('- 1 days');
             @endphp
@@ -68,6 +74,10 @@
 <script>
     $(document).ready(function() {
         $('#date').change(function() {
+            var form = $(this).parents().find('form#search_form');
+            $(form).submit();
+        });
+        $('#status').change(function() {
             var form = $(this).parents().find('form#search_form');
             $(form).submit();
         });
