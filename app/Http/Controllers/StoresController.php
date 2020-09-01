@@ -124,10 +124,8 @@ class StoresController extends Controller
         // 店舗情報情報取得
         $store = Store::findOrFail($id);
 
-
         // 店舗情報更新
         $store->earliest_receivable_time = $request->earliest_receivable_time;
-
 
         $start_time = $request->start_hour . ':' . $request->start_min;
         $store_start_time = new Carbon($start_time);
@@ -153,17 +151,32 @@ class StoresController extends Controller
 
         if ($request->file('logo')->isValid([])) {
 
-            // 画像の保存
-            $path = $request->file('logo')->store('/');
-            Storage::move($path, 'public/storeLogo/' . $path);
+            // AWS S3画像保存処理
+            $file = $request->file('logo');
+            $path = Storage::disk('s3')->putFile('/', $file, 'public');
 
-            //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            // 画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            // AWS S3画像削除処理
             $store = Store::findOrFail($id);
-            Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
+            $disk = Storage::disk('s3');
+            $item = basename($store->logo);
+            $disk->delete('/',$item);
 
-            //新規画像ファイル名保存(or上書き)
-            $store->logo = $path;
-            $store->save();
+            // 画像ファイル名をDBに保存
+            $store->logo = Storage::disk('s3')->url($path);
+            $store->save();            
+
+            // ローカル用画像の保存
+            // $path = $request->file('logo')->store('/');
+            // Storage::move($path, 'public/storeLogo/' . $path);
+
+            // //画像アップロード時に既に他の画像がアップロードされている場合に既存の画像を削除
+            // $store = Store::findOrFail($id);
+            // Storage::disk('local')->delete('public/storeLogo/'.$store->logo);
+
+            // //新規画像ファイル名保存(or上書き)
+            // $store->logo = $path;
+            // $store->save();
 
             return back()->with('flash_message', '店舗ロゴ画像の投稿が完了しました');
 
@@ -180,26 +193,38 @@ class StoresController extends Controller
 
         if ($request->hasFile('top_images')) {
 
+            // AWS S3指定
             $store = Store::findOrFail($id);
 
             // 全画像&全画像ファイル名リセット処理
             for ($i = 1; $i <= 3; $i++) {
-
-                Storage::disk('local')->delete('public/storeImages/'.$store->{'top_image'.$i});
+                // AWS S3画像削除処理
+                $disk = Storage::disk('s3');
+                $item = basename($store->{'top_image'.$i});
+                $disk->delete('/',$item);
                 $store->{'top_image'.$i} = null;
+
+                // ローカル用処理
+                // Storage::disk('local')->delete('public/storeImages/'.$store->{'top_image'.$i});
+                // $store->{'top_image'.$i} = null;
             }
 
             $store->save();
 
             // 新規画像投稿処理
             foreach ($request->file('top_images') as $key => $top_image ) {
+                // AWS S3画像保存処理
+                $img_key = $key; 
+                $file = $top_image;
+                $path = Storage::disk('s3')->putFile('/', $file, 'public');
+                $store->$key = Storage::disk('s3')->url($path);
 
-                // 新規画像 保存
-                $path = $top_image->store('/');
-                Storage::move($path, 'public/storeImages/' . $path);
-
-                //新規画像 ファイル名格納
-                $store->$key = $path;
+                // // ローカル用処理
+                // // 新規画像 保存
+                // $path = $top_image->store('/');
+                // Storage::move($path, 'public/storeImages/' . $path);
+                // //新規画像 ファイル名格納
+                // $store->$key = $path;
             }
 
             // 新規画像 ファイル名更新
