@@ -31,7 +31,7 @@
             </th>
             <td>
             <img src=
-            @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif class="img-fluid" alt="items_list_image" id="items_list_image" >
+            @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif class="img-fluid" alt="items_list_image" id="items_list_image" >
             </div>
             <input type="file" name="path" value="{{old('path')}}"/>
             @if($errors->has('path'))

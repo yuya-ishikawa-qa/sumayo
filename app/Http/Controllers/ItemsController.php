@@ -75,7 +75,7 @@ class ItemsController extends Controller
             }
         
         // データベーステーブルitems内容を入れる
-        Items::insert([
+        Items::create([
             "item_name" => $request->item_name,
             "price"  => $request->price,
             "tax" => $request->tax,
@@ -145,8 +145,6 @@ class ItemsController extends Controller
 
          //レコードを検索
         $item = Items::findOrFail($id);
-
-        // dd( $item->path);
       
         //値を代入
         $item->item_name = $request->item_name;
@@ -169,10 +167,16 @@ class ItemsController extends Controller
         } elseif ($request->hasfile('path')) {
 
             // 画像の保存(高橋さんと同じ方法)
-            $path = $request->file('path')->store('/'); 
-            Storage::move($path, 'public/items/' . $path);
+            // $path = $request->file('path')->store('/'); 
+            // Storage::move($path, 'public/items/' . $path);
 
-            $item->path = $path;
+            // $item->path = $path;
+
+            // AWS S3への保存
+            $file = $request->file('path');
+            $path = Storage::disk('s3')->putFile('/', $file, 'public');
+
+            $item->path = Storage::disk('s3')->url($path);
 
         } else {
             $item->path = "";
