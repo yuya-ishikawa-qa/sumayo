@@ -22,8 +22,9 @@ class CreateCustomersTable extends Migration
             $table->string('first_name_kana',60);
             $table->string('mail',120);
             $table->string('tel',15);
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->timestamps();
+            //$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            //$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

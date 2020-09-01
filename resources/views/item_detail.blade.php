@@ -1,5 +1,5 @@
 @extends('layouts.app')
-    
+
 @section('content')
 
 <div class="container">
@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-5 mx-auto d-block mb-2">
         <img src=
-        @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif id=item_detail_image class="mx-auto d-block" >
+        @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif id=item_detail_image class="mx-auto d-block" >
         </div>
     </div>
 
@@ -75,7 +75,7 @@
 </div>
 
  {{--  削除確認アラート  --}}
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
 <script>
 $(function(){
     $('.btn-destroy').click(function(){

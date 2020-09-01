@@ -7,7 +7,10 @@
             @php
             $logo = App\Store::value('logo');
             @endphp
-            <img src="/storage/storeLogo/{{$logo}}" width="130" alt="logo"></a>
+            {{--  <img src="/storage/storeLogo/{{$logo}}" width="130" alt="logo"></a>  --}}
+
+            {{--  S3用  --}}
+            <img src="{{$logo}}" width="130" alt="logo"></a>
 
             {{--  カートアイコンはpublic/image内に保存。本来の画像保存場所ではないが変更のない画像のため  --}}
             <div class="justify-content-left" id="nav-bar">

@@ -15,16 +15,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 
 
-Route::get('/order_form', function () {
-    return view('order_form');
-});
-Route::get('/order_confirmation', function () {
-    return view('order_confirmation');
-});
-Route::get('/order_confirm', function () {
-    return view('order_confirm');
-});
-
 // TOP(客側)
 Route::get('/', 'CustomerItemsController@index')->name('top');
 // 商品詳細(客側)
@@ -131,3 +121,7 @@ Route::group(['middleware' => 'auth'], function(){
         });
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

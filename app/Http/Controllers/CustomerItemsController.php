@@ -102,6 +102,7 @@ class CustomerItemsController extends Controller
         // 休日情報取得
         $holidays = StoreHoliday::where('is_holiday','1')->get();
 
+        $holidays_list = [];
         foreach ($holidays as $holiday) {
             $holidays_list[$holiday->date] = $holiday->is_holiday;
         }

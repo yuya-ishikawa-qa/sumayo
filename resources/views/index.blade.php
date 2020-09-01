@@ -24,7 +24,7 @@
                 <div class="carousel-inner">
                     @foreach ($store as $store)
 
-                    <div class="carousel-item active">
+                    {{--  <div class="carousel-item active">
                         <img class="d-block w-100" src="/storage/storeImages/{{ $store->top_image1 }}" alt="First slide" id="top_image">
                     </div>
                     <div class="carousel-item">
@@ -32,6 +32,17 @@
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="/storage/storeImages/{{ $store->top_image3 }}"   alt="Third slide" id="top_image">
+                    </div>  --}}
+
+                    {{--  S3用  --}}
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="{{ $store->top_image1 }}" alt="First slide" id="top_image">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{ $store->top_image2 }}"   alt="Second slide" id="top_image">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{ $store->top_image3 }}"   alt="Third slide" id="top_image">
                     </div>
 
                 </div>
@@ -82,8 +93,14 @@
                 <a class="stretched-link">
                 <div class="card-body p-2">
                     <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}' id="items_list_image">
-                    <img src=
+
+                    {{--  <img src=
                         @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+                    class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">  --}}
+
+                    {{--  S3用  --}}
+                    <img src=
+                        @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif
                     class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
                     <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
@@ -109,7 +126,7 @@
                 <div class="card-body p-2">
                     <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
-                        @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+                        @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif
                     class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
                     <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
@@ -135,7 +152,7 @@
                 <div class="card-body p-2">
                     <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
-                        @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+                        @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif
                     class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
                     <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
@@ -161,7 +178,7 @@
                 <div class="card-body p-2">
                     <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
-                        @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+                        @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif
                     class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
                     <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}
@@ -187,7 +204,7 @@
                 <div class="card-body p-2">
                     <a class="embed-responsive embed-responsive-4by3" href='/detail/{{$item->id}}'>
                     <img src=
-                        @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+                        @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif
                     class="card-img-top embed-responsive-item" alt="items_list_image" id="items_list_image">
                     </a>
                     <p class="product-title mb-0" href='/detail/{{$item->id}}'>{{ $item->item_name }}

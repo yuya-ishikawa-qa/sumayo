@@ -30,7 +30,7 @@
         <tr>
             <th scope="row">
             <img src=
-                @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif
+                @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif
             class="img-fluid" alt="items_list_image" id="items_list_image">
             </th>
             <td>{{ $item->item_name }}

@@ -31,7 +31,7 @@
             </th>
             <td>
             <img src=
-            @if ( $item->path == null) "/storage/items/no_image.png" @else "/storage/items/{{$item->path}}" @endif class="img-fluid" alt="items_list_image" id="items_list_image" >
+            @if ( $item->path == null) "/image/no_image.png" @else "{{$item->path}}" @endif class="img-fluid" alt="items_list_image" id="items_list_image" >
             </div>
             <input type="file" name="path" value="{{old('path')}}"/>
             @if($errors->has('path'))
@@ -128,7 +128,7 @@
               </label>
               <div id="firstBox">
               <input name="stock_all" class="form-control text1" type="text" id="test1" value="{{$item->stock_all}}">
-              @if($errors->has('stock_monday') || 
+              @if($errors->has('stock_monday') ||
                  $errors->has('stock_tuesday') ||
                  $errors->has('stock_wednesday') ||
                  $errors->has('stock_thursday') ||
@@ -261,10 +261,9 @@
     </form>
 
     {{--  コンフリクト防止のため後でlayouts.appに追加  --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
     <script type="text/javascript">
     function entryChange1(){
-        radio = document.getElementsByName('entryPlan') 
+        radio = document.getElementsByName('entryPlan')
         if(radio[0].checked) {
         //フォーム
         document.getElementById('firstBox').style.display = "";
@@ -294,7 +293,7 @@
     //オンロードさせ、リロード時に選択を保持
     window.onload = entryChange1;
 
-    $(function(){   
+    $(function(){
         var $test1 = $('#test1');
         var $test2 = $('#test2');
         var $test3 = $('#test3');

@@ -65,7 +65,6 @@
         <input type="hidden" name="check_date" value="{{ $search_date->format('Y-m-d') }}">
     </form>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#date').change(function() {
