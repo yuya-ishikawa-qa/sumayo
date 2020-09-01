@@ -9,26 +9,88 @@ $item_total = $tax_total = 0; #初期化
         <meta http-equiv="content-language" content="ja">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        @if(app('env') == 'production')
-        <!-- Scripts -->
-        <script src="{{ secure_asset('js/app.js') }}" defer></script>
-        <script src="{{ secure_asset('js/jquery-3.5.1.min.js') }}"></script>
+        <style>
+            body{
+                margin: 0;
+            }
+            /*注文情報入力画面・注文情報確認画面・注文情報詳細画面・注文情報編集画面*/
+            div.info-area{
+                width: 100%;
+                padding: 0 5px;
+            }
+            div.info-area div.item-area > div{
+                display: flex;
+                width: 100%;
+                align-items: center;
+                text-align: left;
+            }
+            div.info-area div.item-area > div.item-list > div.img{
+                width: 20%;
+            }
+            div.info-area div.item-area > div.item-list > div.img > div{
+                width: 50px;
+                height: 50px;
+                margin: 0 auto;
+            }
+            div.info-area div.item-area > div.item-list > div.img > div > img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+            div.info-area div.item-area > div.item-list > div.title{
+                width: 30%;
+            }
+            div.info-area div.item-area > div.item-list > div.price{
+                width: 20%;
+            }
+            div.info-area div.item-area > div.item-list > div.quantity{
+                width: 10%;
+            }
+            div.info-area div.item-area > div.item-list > div.sub-total{
+                width: 20%;
+            }
+            div.info-area div.item-area > dl{
+                display: flex;
+                width: 80%;
+                margin: 50px 0 50px auto;
+                flex-wrap: wrap;
+            }
+            div.info-area div.item-area > dl > dt{
+                width: 50%;
+                text-align: left
+            }
+            div.info-area div.item-area > dl > dd{
+                width: 50%;
+                text-align: left;
+            }
 
-        <!-- CSS -->
-        <link href="{{ secure_asset('/css/customer.css') }}" rel="stylesheet">
-        <link href="{{ secure_asset('css/style.css') }}" rel="stylesheet">
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-        @else
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-
-        <!-- CSS -->
-        <link href="{{ asset('/css/customer.css') }}" rel="stylesheet">
-        <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        @endif
-
+            div.info-area div.form-area{
+                display: flex;
+                width: 100%;
+                flex-wrap: wrap;
+                text-align: left;
+            }
+            div.info-area div.form-area > div{
+                width: 100%;
+                padding: 0 20px 0 0;
+            }
+            div.info-area div.form-area > div > dl{
+                display: flex;
+                width: 100%;
+            }
+            div.info-area div.form-area > div > dl > dt{
+                width: 80px;
+            }
+            div.info-area div.form-area > div > dl > dt{
+                width: 120px;
+            }
+            div.info-area div.form-area > div > dl > dd{
+                width: calc(100% - 120px);
+            }
+            div.info-area div.form-area > div.half{
+                width: 50%;
+            }
+        </style>
 
     </head>
     <body>

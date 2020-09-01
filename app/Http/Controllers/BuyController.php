@@ -383,25 +383,27 @@ class BuyController extends Controller
                     ]);
                 }
 
+                # カート、顧客情報を空に
+                session()->forget('cart');
+                session()->forget('order');
+
+                \DB::commit();
+
             } catch (\Exception $e) {
-                dd($e);
 
                 $flight_order = null;
                 \DB::rollback();
             }
 
             # メール送信
-            ##ユーザー情報取得（メールアドレス）
-            $user = User::where('is_owner', '=', 1)->first();
+            if(!empty($flight_order) && !empty($flight_customer) && !empty($item_list) && !empty($store)){
 
-            ## メール送信
-            Mail::to($flight_customer->mail)->send(new OrderMail($flight_order,$flight_customer,$item_list,$store,$user));
+                ##ユーザー情報取得（メールアドレス）
+                $user = User::where('is_owner', '=', 1)->first();
 
-            # カート、顧客情報を空に
-            session()->forget('cart');
-            session()->forget('order');
-
-            \DB::commit();
+                ## メール送信
+                Mail::to($flight_customer->mail)->send(new OrderMail($flight_order,$flight_customer,$item_list,$store,$user));
+            }
 
             return view('order_confirm',[
                 'flight_order' => $flight_order
