@@ -55,6 +55,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">ログアウト</a>
                             </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">お客様注文ページへ</a>
+                            </li>
                         @endauth
 
                     </ul>
