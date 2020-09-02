@@ -35,6 +35,8 @@ class CalendarController extends Controller
 
         // 休日情報取得
         $holidays = StoreHoliday::all(); 
+        
+        $holidays_list = [];
         foreach ($holidays as $holiday) {
             $holidays_list[$holiday->date] = $holiday->is_holiday;
         }
