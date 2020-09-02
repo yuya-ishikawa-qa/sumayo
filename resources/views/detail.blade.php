@@ -45,7 +45,7 @@
 
             {{--  注文に進む  --}}
             <div class="col-12 mt-3" align="center">
-                <button class="btn btn-primary" name="next_page" value="cart">注文に進む</button>
+                <button class="btn btn-primary" name="next_page" value="cart">カートに入れ、注文に進む</button>
             </div>
         </form>
     </div>
