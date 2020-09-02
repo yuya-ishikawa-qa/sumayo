@@ -30,9 +30,11 @@ Route::get('/customerinfo/create', 'CustomerInfoController@create')->name('custo
 Route::post('/buy/show', 'BuyController@show')->name('buy.show');
 Route::post('/buy/store', 'BuyController@store')->name('buy.store');
 
-
-Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+// ログイン・ログアウト処理
+// Auth::routes();
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login.post');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');;
 
 // 店舗管理画面処理
 Route::group(['middleware' => 'auth'], function(){
@@ -61,10 +63,7 @@ Route::group(['middleware' => 'auth'], function(){
     // メール変更確認画面表示
     Route::post('/email/message', 'ChangeEmailController@showMessage');
 
-
-
-
-
+    
     // 店長権限のみ閲覧可能
     Route::group(['middleware' => 'owner_auth'], function() {
 
@@ -119,7 +118,3 @@ Route::group(['middleware' => 'auth'], function(){
         });
 
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -135,7 +135,7 @@
             </script>
 
 
-            <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key={{ config('app.key_name') }}&callback=initMap" async defer></script>
 
             <div class="mb-4">
                 <div class="text-center">コメント</div>
