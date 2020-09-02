@@ -37,9 +37,9 @@ $item_total = $tax_total = 0; #初期化
                     <div class="img">
                         <div>
                             @if ( $item->path == null)
-                            <img src="/storage/items/no_image.png" alt="{{ $item->item_name }}">
+                            <img src="/image/no_image.png" alt="{{ $item->item_name }}">
                             @else
-                            <img src="/storage/items/{{$item->path}}" alt="{{ $item->item_name }}">
+                            <img src="{{$item->path}}" alt="{{ $item->item_name }}">
                             @endif
                         </div>
                     </div>
