@@ -29,9 +29,9 @@ $item_total = $tax_total = 0;
         <div class="row no-gutters">
             <div class="col-3">
                 @if ( $item->path == null)
-                <img src= "/storage/items/no_image.png" class="img-fluid" alt="items_list_image" id="items_list_image">
+                <img src= "/image/no_image.png" class="img-fluid" alt="items_list_image" id="items_list_image">
                 @else
-                <img src="/storage/items/{{$item->path}}"
+                <img src="{{$item->path}}"
                 class="img-fluid" alt="items_list_image" id="items_list_image">
                 @endif
             </div>

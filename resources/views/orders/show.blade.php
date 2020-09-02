@@ -115,7 +115,11 @@
         </div>
 
     </div>
-    <a href="{{route('orders.edit',['id' => $order->id])}}"><button class="btn btn-primary" type="submit">編集</button></a>
-    <a href="{{route('orders.index',['date' => $recieved_date->format('Y-m-d')])}}"><button class="btn btn-primary" type="submit">戻る</button></a>
+    <div class="text-center mt-2">
+        <a href="{{route('orders.edit',['id' => $order->id])}}"><button class="btn btn-primary" type="submit">編集</button></a>
+    </div>
+    <div class="text-center mt-2">
+        <a href="{{route('orders.index',['date' => $recieved_date->format('Y-m-d')])}}"><button class="btn btn-secondary" type="submit">戻る</button></a>
+    </div>
 </div>
 @endsection

@@ -155,7 +155,7 @@
                                     $value = session()->get('order')['tel'];
                                 }
                                 @endphp
-                                <input class="form-control" name="tel" type="tel" value="{{$value}}" id="tel" placeholder="090-0000-1111" required>
+                                <input class="form-control" name="tel" type="text" value="{{$value}}" id="tel" placeholder="090-0000-1111" required>
                                 <p style="color:red">{{ $errors->first('tel') }}</p>
                             </dd>
                         </dl>

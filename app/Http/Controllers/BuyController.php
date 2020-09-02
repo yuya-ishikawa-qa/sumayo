@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Mail\OrderMail;
 
+use App\User;
 use App\Store;
 use App\StoreHoliday;
 use App\Order;
@@ -383,19 +384,24 @@ class BuyController extends Controller
                 }
 
                 # メール送信
-                /*                            Mail::to('test@example.com')->send(new OrderMail);*/
+                ##ユーザー情報取得（メールアドレス）
+                $user = User::where('is_owner', '=', 1)->first();
+
+                ## メール送信
+                Mail::to($flight_customer->mail)->send(new OrderMail($flight_order,$flight_customer,$item_list,$store,$user));
 
                 # カート、顧客情報を空に
                 session()->forget('cart');
                 session()->forget('order');
 
                 \DB::commit();
+
             } catch (\Exception $e) {
+
                 $flight_order = null;
                 \DB::rollback();
             }
 
-            dd($test);
             return view('order_confirm',[
                 'flight_order' => $flight_order
             ]);

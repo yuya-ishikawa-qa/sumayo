@@ -102,11 +102,23 @@ div.order-list{
     text-align: right;
     box-sizing: border-box;
 }
+div.order-list div.search{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+div.order-list div.search > div{
+    width: 50%;
+}
+div.order-list div.search > div:first-of-type{
+    width: 100%;
+}
 div.order-list div.order-area > div.order-item{
     display: flex;
-    width: 100%;
     align-items: center;
+    width: 100%;
     text-align: left;
+
 }
 div.order-list div.order-area > div.order-item > div.time{
     width: 20%;

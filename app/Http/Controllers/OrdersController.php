@@ -59,13 +59,35 @@ class OrdersController extends Controller
             $search_date = date_create(date("Y-m-d"));
         }
 
-        $orders = Order::where('recieved_date', $search_date->format('Y-m-d'))->orderBy('recieved_date','asc')->paginate(50);;
+        # ステータスのUPDATE
+        $update = 0;
+        if(isset($request->update) && $request->update === 'update' && isset($request->complete) && is_array($request->complete)){
+            $update = $this->updateMultiple($request->complete);
+        }
+
+        # 注文情報取得
+        $order_status = 0;
+        if(isset($request->order_status) && array_key_exists ( $request->order_status , self::order_status_list ) ){
+            #ステータスの指定がある場合
+            $orders = Order::where('recieved_date', $search_date->format('Y-m-d'))->where('order_status', $request->order_status)->orderBy('order_status', 'asc')->orderBy('recieved_time','asc')->get();
+
+            ### ステータス情報
+            $order_status = $request->order_status;
+        }else{
+            #ステータスの指定がない場合
+            $orders = Order::where('recieved_date', $search_date->format('Y-m-d'))->orderBy('order_status', 'asc')->orderBy('recieved_time','asc')->get();
+
+            ### ステータス情報
+            $order_status = 0;
+        }
 
         return view('orders/index', [
             'orders' => $orders,
             'today' => $today,
             'search_date' => $search_date,
             'order_status_list' => self::order_status_list,
+            'update' => $update,
+            'order_status' => $order_status,
         ]);
     }
 
@@ -141,6 +163,17 @@ class OrdersController extends Controller
         $post->fill($params)->save();
 
         return redirect()->route('orders.show',['id' => $id]);
+    }
+
+    public function updateMultiple($data)
+    {
+        $count = 0;
+        foreach($data as $value){
+            if(is_numeric($value)){
+                $count += Order::where('id', $value)->update(['order_status' => 2]);
+            }
+        }
+        return $count;
     }
 
 

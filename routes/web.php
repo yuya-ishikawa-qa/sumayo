@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/stores', 'StoresController@index')->name('store.top');
     // 注文管理関係処理
     Route::resource('orders', 'OrdersController',['only' => ['index','show','edit','update']]);
+
     // 一覧表示
     Route::get('/users', 'UsersController@index')->name('users.top');
 
