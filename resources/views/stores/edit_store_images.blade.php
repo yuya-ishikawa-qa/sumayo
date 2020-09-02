@@ -32,7 +32,7 @@
                         <strong><u>アップロード済トップ画像1</u></strong>
                     </div>
                     <div class="col">
-                        <img style="max-width: 100%; height: auto;" src="/storage/storeImages/{{$store->top_image1}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="{{$store->top_image1}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @endisset
@@ -43,7 +43,7 @@
                         <strong><u>アップロード済トップ画像2</u></strong>
                     </div>
                     <div class="col">
-                        <img style="max-width: 100%; height: auto;" src="/storage/storeImages/{{$store->top_image2}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="{{$store->top_image2}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @endisset
@@ -54,7 +54,7 @@
                         <strong><u>アップロード済トップ画像3</u></strong>
                     </div>
                     <div class="col">
-                        <img style="max-width: 100%; height: auto;" src="/storage/storeImages/{{$store->top_image3}}" alt="画像が読み込めません">
+                        <img style="max-width: 100%; height: auto;" src="{{$store->top_image3}}" alt="画像が読み込めません">
                     </div>
                 </div>
             @endisset

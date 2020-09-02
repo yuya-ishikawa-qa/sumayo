@@ -74,7 +74,7 @@ class ChangeEmailController extends Controller
                 ->where('token', $token)
                 ->delete();
             
-            $message = 'メールアドレスを更新しました！';
+            $message = 'メール認証完了。新しいメールアドレスが登録されました。';
             
             return view('emails.notificationChangeEmail', ['message' => $message]);
             
