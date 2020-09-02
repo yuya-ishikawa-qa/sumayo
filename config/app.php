@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'SUMAYO'),
+    'key_name' => env('API_KEY'),
 
     /*
     |--------------------------------------------------------------------------
@@ -229,7 +230,5 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
     ],
-
-    'key_name' => env('API_KEY'),
 
 ];
