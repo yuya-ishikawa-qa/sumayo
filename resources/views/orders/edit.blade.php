@@ -24,10 +24,10 @@
                     <dd>
                         <select name="order_status" class="custom-select my-1 mr-sm-2 col-sm-10 " id="">
                         @foreach($order_status_list as $key => $value)
-                        @if((!empty($request->order_status) && $request->order_status == $key) || old('value') == $key )
-                        <option value = "{{ $key }}" selected>{{ $value }}</option>
+                        @if((!empty($order->order_status) && $order->order_status == $key) || old('value') == $key )
+                        <option value="{{ $key }}" selected>{{ $value }}</option>
                         @else
-                        <option value = "{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}">{{ $value }}</option>
                         @endif
                         @endforeach
                         </select>
@@ -98,8 +98,13 @@
                 </dl>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">更新</button>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">更新</button>
+        </div>
     </form>
-    <a href="{{route('orders.show',['id' => $order->id])}}"><button class="btn btn-primary" type="submit">戻る</button></a>
+    <div class="text-center mt-2">
+        <a href="{{route('orders.show',['id' => $order->id])}}"><button class="btn btn-secondary" type="submit">戻る</button></a>
+    </div>
+
 </div>
 @endsection
