@@ -32,7 +32,7 @@
                 @php
                 $search_date->modify('+ 2 days');
                 @endphp
-                <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $today->format('Y-m-d') }}">次</button>
+                <button name="date_btn" class="btn btn-primary date_btn" type="submit" value="{{ $search_date->format('Y-m-d') }}">次</button>
             </div>
         </div>
         {{csrf_field()}}
